@@ -1,5 +1,5 @@
-<%@page import="logic.ControlAutobus"%>
-<%@page import="entidades.Astrobus"%>
+<%@page import="entidades.Planeta"%>
+<%@page import="logic.PlanetaControler"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.*"%>
 <html>
@@ -13,23 +13,16 @@
 	<th>COORDENADA</th><th>ESTADO</th>
 </tr>
 <% 
-	try{
-		%> 
-		<tr>
-		<th>ID</th><th>NOMBRE</th>
-		<th>COORDENADA</th><th>ESTADO</th>
-		</tr>		
-		<%
-		ArrayList<Astrobus> buses=new ControlAutobus().getAll();
+	try{	
+		ArrayList<Planeta> planetas=new PlanetaControler().getAll();
 		
-			for(Astrobus a:buses){
+			for(Planeta p:planetas){
 			%>
 			<tr>
-				<th>entro</th>
-				<th><%=a.getMarca() %></th>	
-				<th><% %></th>
-				<th><% %></th>
-				<th><% %></th>
+				<th><%=p.getIdPlaneta()%></th>	
+				<th><%=p.getNombrePlaneta()%></th>
+				<th><%=p.getCoordenada()%></th>
+				<th><%=p.getEstado()%></th>
 			</tr><%
 			} 
 	}catch(Exception e) {}
