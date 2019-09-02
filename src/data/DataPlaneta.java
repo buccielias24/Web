@@ -11,7 +11,7 @@ public class DataPlaneta {
 		//DataRol dr=new DataRol();
 		Statement stmt=null;
 		ResultSet rs=null;
-		ArrayList<Planeta> pers= new ArrayList<>();
+		ArrayList<Planeta> planetas= new ArrayList<>();
 		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
@@ -24,9 +24,8 @@ public class DataPlaneta {
 					p.setNombrePlaneta(rs.getString("nombrePlaneta"));
 					p.setCoordenada(rs.getString("coordenada"));
 					p.setEstado(rs.getBoolean("estadoPlaneta"));
-					 // dr.setRoles(p);
-					
-					pers.add(p);
+					// dr.setRoles(p);
+					planetas.add(p);
 				}
 			}
 			
@@ -44,7 +43,42 @@ public class DataPlaneta {
 		}
 		
 		
-		return pers;
+		return planetas;
 	}
+	
+	public void add(Planeta p) {
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=Conectar.getInstancia().getConn().
+					prepareStatement(
+							"insert into planeta(nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?)",
+							PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, p.getNombrePlaneta());
+			stmt.setString(2, p.getCoordenada());
+			stmt.setBoolean(3, p.getEstado());
+			stmt.executeUpdate();
+			
+			keyResultSet=stmt.getGeneratedKeys();
+            if(keyResultSet!=null && keyResultSet.next()){
+                p.setIdPlaneta((keyResultSet.getInt(1)));
+            }
+
+			
+		}  catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                Conectar.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+    }
+
+	
 }
+
 	
