@@ -52,11 +52,12 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planeta(nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?)",
+							"insert into planeta(idPlaneta,nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, p.getNombrePlaneta());
-			stmt.setString(2, p.getCoordenada());
-			stmt.setBoolean(3, p.getEstado());
+			stmt.setInt(1, p.getIdPlaneta());
+			stmt.setString(2, p.getNombrePlaneta());
+			stmt.setString(3, p.getCoordenada());
+			stmt.setBoolean(4, p.getEstado());
 			stmt.executeUpdate();
 			
 			keyResultSet=stmt.getGeneratedKeys();

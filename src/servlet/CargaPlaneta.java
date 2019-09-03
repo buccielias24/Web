@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import data.DataPlaneta;
-import entidades.*;
-import logic.*;
+import entidades.Planeta;
 
 /**
- * Servlet implementation class Signin
+ * Servlet implementation class CargaPlaneta
  */
-@WebServlet({ "/Cargaplaneta", "/cargaPlaneta", "/cargaPlaneta", "/CargaPlaneta", "/CARGAPLANETA" })
+@WebServlet("/CargaPlaneta")
 public class CargaPlaneta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
     public CargaPlaneta() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -32,33 +34,23 @@ public class CargaPlaneta extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Planeta planeta=new Planeta();
-		PlanetaControler plaCtrl= new PlanetaControler();
-		String id=request.getParameter("idPlaneta");
-        String nombrePlaneta=request.getParameter("nombrePlanta");
-        String coordenada=request.getParameter("coordenada");
-        String estadoPlaneta=request.getParameter("estadoPlaneta");
-        System.out.println(id+"|"+nombrePlaneta+"|"+coordenada+"|"+estadoPlaneta);
-        
-        Planeta p = new Planeta();
-        p.setIdPlaneta(Integer.parseInt(id));
-        p.setNombrePlaneta(nombrePlaneta);
-        p.setCoordenada(coordenada);
-        p.setEstado(Boolean.parseBoolean(estadoPlaneta));
-        DataPlaneta dp=new DataPlaneta();
-        dp.add(p);
-       
-       // p = planeta.validate(p);
-       /* 
-        request.getSession().setAttribute("usuario", p);
-        request.getSession().setAttribute("listaPersonas", perCtrl.getAll());
-        System.out.println(p);
-        request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
-        */
+		// TODO Auto-generated method stub
+		Planeta p=new Planeta();
+		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
+		p.setCoordenada(request.getParameter("coordenada"));
+		p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
+		p.setNombrePlaneta(request.getParameter("nombre"));
+		DataPlaneta dp=new DataPlaneta();
+		dp.add(p);
+		response.setContentType("text/html;Charset=UTF-8");
+				PrintWriter out =response.getWriter();
+				out.println("llego");
+	
 	}
 
 }

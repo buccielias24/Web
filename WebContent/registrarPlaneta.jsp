@@ -3,22 +3,19 @@
 <body>
 <h1>Alta Planetas</h1>
 <h2>Ingrese los datos del planeta</h2>
+<label for="inputId" class="sr-only">Id</label>
 <table>
 <tr>
 	<th>ID</th><th>NOMBRE</th>
 	<th>COORDENADA</th><th>ESTADO</th>
 </tr>
 </table>
-<form action="registrarPlaneta" method="post">
-  Planeta ID: <input type="text" name="fname"><br>
-  Nombre Planeta: <input type="text" name="lname"><br>
-  Coordenada: <input type="text" name="lname"><br>
-  Estado: <input type="text" name="lname"><br>
+<form action="CargaPlaneta" method="post">
+  Planeta ID: <input type="text" name="id"><br>
+  Nombre Planeta: <input type="text" name="nombre"><br>
+  Coordenada: <input type="text" name="coordenada"><br>
+  Estado: <input type="text" name="estado"><br>
   <input type="submit" value="Agregar">
 </form>
-<%
-
-
-%>
 </body>
 </html>
