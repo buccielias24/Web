@@ -7,14 +7,20 @@ import entidades.*;
 
 public class PlanetaControler {
 
-	DataPlaneta dp;
+			DataPlaneta dp;
 	
 	public PlanetaControler() {
 		dp=new DataPlaneta();
-		
 	}
 	
 	public ArrayList<Planeta> getAll(){
 		return dp.getAll();
+	}
+	
+	public void add(Planeta p) {
+		dp.add(p); 
+	}
+	public void delete(int id) {
+		dp.delete(id);
 	}
 }

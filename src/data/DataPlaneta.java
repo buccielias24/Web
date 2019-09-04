@@ -48,7 +48,7 @@ public class DataPlaneta {
 	
 	public void add(Planeta p) {
 		PreparedStatement stmt= null;
-		ResultSet keyResultSet=null;
+		
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
@@ -58,28 +58,25 @@ public class DataPlaneta {
 			stmt.setString(2, p.getNombrePlaneta());
 			stmt.setString(3, p.getCoordenada());
 			stmt.setBoolean(4, p.getEstado());
-			stmt.executeUpdate();
-			
-			keyResultSet=stmt.getGeneratedKeys();
-            if(keyResultSet!=null && keyResultSet.next()){
-                p.setIdPlaneta((keyResultSet.getInt(1)));
-            }
-
-			
-		}  catch (SQLException e) {
-            e.printStackTrace();
-		} finally {
-            try {
-                if(keyResultSet!=null)keyResultSet.close();
-                if(stmt!=null)stmt.close();
-                Conectar.getInstancia().releaseConn();
-            } catch (SQLException e) {
-            	e.printStackTrace();
-            }
-		}
+			stmt.executeUpdate();			
+	    	}catch (SQLException e) {
+            e.printStackTrace();} 	
     }
 
-	
+//DELETE	
+	public void delete(int id) {
+		PreparedStatement stmt= null;
+		//ResultSet keyResultSet=null;
+		try {
+			stmt=Conectar.getInstancia().getConn().
+					prepareStatement(
+							"UPDATE planeta set estadoPlaneta = '"+0+"'Where idPlaneta="+id+";",
+							PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.executeUpdate();			
+            } catch (SQLException e) {
+            e.printStackTrace();
+		} 	
+    }
 }
 
 	
