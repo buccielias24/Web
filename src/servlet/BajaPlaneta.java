@@ -44,6 +44,6 @@ public class BajaPlaneta extends HttpServlet {
 		//dp.delete(id);
 		PlanetaControler pc=new PlanetaControler();
 		pc.delete(id);
-		response.sendRedirect("http://localhost:8081/BajaPlaneta.jsp");
+		response.sendRedirect("BajaPlaneta.jsp");
 		}
 }

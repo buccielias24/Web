@@ -16,6 +16,7 @@ public class DataPlaneta {
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta");
+			// ver con el profe si podemos traer el estado del planeta con un nombre con la funcion if() de sql
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {

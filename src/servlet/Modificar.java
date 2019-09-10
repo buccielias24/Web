@@ -1,28 +1,23 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Planeta;
-import logic.PlanetaControler;
-
 /**
- * Servlet implementation class CargaPlaneta
+ * Servlet implementation class Modificar
  */
-@WebServlet("/CargaPlaneta")
-public class CargaPlaneta extends HttpServlet {
+@WebServlet("/Modificar")
+public class Modificar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CargaPlaneta() {
+    public Modificar() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,17 +35,7 @@ public class CargaPlaneta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Planeta p=new Planeta();
-		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
-		p.setCoordenada(request.getParameter("coordenada"));
-		p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
-		p.setNombrePlaneta(request.getParameter("nombre"));
-		//DataPlaneta dp=new DataPlaneta();
-		//dp.add(p);
-		PlanetaControler pc=new PlanetaControler();
-		pc.add(p);
-		response.sendRedirect("registrarPlaneta.jsp");
-	
+		doGet(request, response);
 	}
 
 }

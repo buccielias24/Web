@@ -3,8 +3,8 @@
 <%@page import="java.util.ArrayList"%>
 <html>
 <body>
-<h1>Modificar Planeta</h1>
-<h1> LISTADO DE PLANETAS </h1>
+<h1>BAJA DE PLANETAS</h1>
+<h2> LISTADO DE PLANETAS</h2>
 <table>
 <tr>
 	<th>ID</th><th>NOMBRE</th>
@@ -13,7 +13,7 @@
 <% 
 	try{	
 		ArrayList<Planeta> planetas=new PlanetaControler().getAll();
-		
+					
 			for(Planeta p:planetas){
 			%>
 			<tr>
@@ -29,8 +29,8 @@
 <br>
 <br>
 <form action="BajaPlaneta" method="post">
-  ID: <input type="text" name="id"><br>
-  <input type="submit" value="Seleccionar">
+  <label>ID Planeta</label> <input type="text" name="id">
+  <input type="submit" value="Aceptar">
 </form>
 </body>
 </html>

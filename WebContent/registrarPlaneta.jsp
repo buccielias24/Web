@@ -3,7 +3,6 @@
 <body>
 <h1>Alta Planetas</h1>
 <h2>Ingrese los datos del planeta</h2>
-<label for="inputId" class="sr-only">Id</label>
 <table>
 <tr>
 	<th>ID</th><th>NOMBRE</th>
