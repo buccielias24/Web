@@ -12,8 +12,8 @@
 </tr>
 <% 
 	try{	
-		ArrayList<Planeta> planetas=new PlanetaControler().getAll();
-					
+		if (request.getAttribute("a")==null){
+			ArrayList<Planeta> planetas=new PlanetaControler().getAll();				
 			for(Planeta p:planetas){
 			%>
 			<tr>
@@ -21,16 +21,31 @@
 				<th><%=p.getNombrePlaneta()%></th>
 				<th><%=p.getCoordenada()%></th>
 				<th><%=p.getEstado()%></th>
-			</tr><%
-			} 
-	}catch(Exception e) {}
+			</tr>
+			<%
+			}%>
+			<form action="Modificar" method="post">
+  			<label>ID Planeta</label> <input type="text" name="id">
+  			<label>Nombre</label> <input type="text" name="nombre">
+  			<label>Coordenada</label> <input type="text" name="coordenada">
+  			<input type="submit" value="Aceptar">
+			</form>
+			<%			
+		}else {
+			int id=(Integer)request.getAttribute("a");
+			ArrayList<Planeta> planetas=new PlanetaControler().getById(id);				
+			for(Planeta p:planetas){
+			%>
+			<tr>
+				<th><%=p.getIdPlaneta()%></th>	
+				<th><%=p.getNombrePlaneta()%></th>
+				<th><%=p.getCoordenada()%></th>
+				<th><%=p.getEstado()%></th>
+			</tr>
+			<%
+			}
+		}}catch(Exception e) {}
 %>
 </table>
-<br>
-<br>
-<form action="Modificar" method="post">
-  <label>ID Planeta</label> <input type="text" name="id">
-  <input type="submit" value="Aceptar">
-</form>
 </body>
 </html>

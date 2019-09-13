@@ -1,11 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import logic.PlanetaControler;
 
 /**
  * Servlet implementation class Modificar
@@ -35,7 +39,15 @@ public class Modificar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		int id=Integer.parseInt(request.getParameter("id"));		
+		String nombre=request.getParameter("nombre");		
+		String coordenada=request.getParameter("coordenada");
+		PlanetaControler pc=new PlanetaControler();
+		pc.modify(id,nombre,coordenada);
+		request.setAttribute("a", id);
+		RequestDispatcher rd=request.getRequestDispatcher("modificarPlaneta.jsp");
+		rd.forward(request,response);
+		
 	}
 
 }

@@ -16,11 +16,17 @@ public class PlanetaControler {
 	public ArrayList<Planeta> getAll(){
 		return dp.getAll();
 	}
+	public ArrayList<Planeta> getById(int id){
+		return dp.getById(id);
+	}
 	
 	public void add(Planeta p) {
 		dp.add(p); 
 	}
 	public void delete(int id) {
 		dp.delete(id);
+	}
+	public void modify(int id, String nombre, String coordenada)
+		{dp.modify(id,nombre,coordenada);
 	}
 }
