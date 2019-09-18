@@ -1,15 +1,19 @@
 <html>
+<head>
+<title>Menu</title>
+</head>
 <body>
-
-<h1>MENU</h1>
-<h2>Seleccione una opcion</h2>
-<form action="Menu" method="post">
-<select id="abm" width="130" name="abmMenu">
-<option value="registrarPlaneta.jsp" >Alta</option>
-<option value="BajaPlaneta.jsp">Baja</option>
-<option value="modificarPlaneta.jsp">Modificacion</option>
-<input type="submit" value="Aceptar">
-</select>
-</form>
+	<div id="abmPlanetas" align="left">
+		<h1>Planetas</h1>		
+		<a href="registrarPlaneta.jsp">Alta</a>
+		<a href="BajaPlaneta.jsp">Baja</a>
+		<a href="lista.jsp">Modificar</a>
+	</div>
+	<div id="abmViajes" align="center">
+		<h1>Viajes</h1>
+		<a href="" >Alta</a>
+		<a href="" >Baja</a>
+		<a href=""> Modificar</a>
+	</div>
 </body>
 </html>

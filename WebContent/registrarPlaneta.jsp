@@ -1,3 +1,4 @@
+  
 <%@page import="entidades.Planeta"%>
 <html>
 <body>
@@ -10,7 +11,6 @@
 </tr>
 </table>
 <form action="CargaPlaneta" method="post">
-  Planeta ID: <input type="text" name="id"><br>
   Nombre Planeta: <input type="text" name="nombre"><br>
   Coordenada: <input type="text" name="coordenada"><br>
   Estado: <input type="text" name="estado"><br>

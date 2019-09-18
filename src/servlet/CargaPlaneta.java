@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,16 +42,11 @@ public class CargaPlaneta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Planeta p=new Planeta();
-		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
 		p.setCoordenada(request.getParameter("coordenada"));
 		p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
 		p.setNombrePlaneta(request.getParameter("nombre"));
-		//DataPlaneta dp=new DataPlaneta();
-		//dp.add(p);
 		PlanetaControler pc=new PlanetaControler();
 		pc.add(p);
 		response.sendRedirect("registrarPlaneta.jsp");
-	
 	}
-
 }

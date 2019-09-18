@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import entidades.Planeta;
 import logic.PlanetaControler;
 
 /**
@@ -31,7 +34,11 @@ public class Modificar extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Planeta p=new Planeta();
+		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("planeta", p);
+		RequestDispatcher rd=request.getRequestDispatcher("modificarPlaneta.jsp");
+		rd.forward(request,response);
 	}
 
 	/**
@@ -39,15 +46,19 @@ public class Modificar extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id=Integer.parseInt(request.getParameter("id"));		
+		int id=Integer.parseInt(request.getParameter("id"));
 		String nombre=request.getParameter("nombre");		
 		String coordenada=request.getParameter("coordenada");
+		Boolean estado=Boolean.parseBoolean(request.getParameter("estado"));
 		PlanetaControler pc=new PlanetaControler();
-		pc.modify(id,nombre,coordenada);
-		request.setAttribute("a", id);
-		RequestDispatcher rd=request.getRequestDispatcher("modificarPlaneta.jsp");
+		Planeta p=new Planeta();
+		p.setIdPlaneta(id);
+		p.setCoordenada(coordenada);
+		p.setNombrePlaneta(nombre);
+		p.setEstado(estado);
+		pc.modify(p);
+		RequestDispatcher rd=request.getRequestDispatcher("lista.jsp");
 		rd.forward(request,response);
-		
 	}
 
 }

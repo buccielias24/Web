@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import entidades.Planeta;
 import logic.PlanetaControler;
 
 /**
@@ -39,11 +39,12 @@ public class BajaPlaneta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Planeta p= new Planeta();
 		int id=Integer.parseInt(request.getParameter("id"));
-		//DataPlaneta dp=new DataPlaneta();
-		//dp.delete(id);
+		p.setIdPlaneta(id);
+		//p=pc.getById(id);
 		PlanetaControler pc=new PlanetaControler();
-		pc.delete(id);
+		pc.delete(p);
 		response.sendRedirect("BajaPlaneta.jsp");
 		}
 }

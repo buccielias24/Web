@@ -3,22 +3,24 @@ package entidades;
 public class Viaje {
 
 	private int idViaje;
-	private String diaSalida;
-	private String horaSalida;
-	private String horaLlegada;
-	private String fechaSalida;
+	private String salida;
+	private String llegada;
 	private boolean estado;
+	private Planeta origen;
+	private Planeta destino;
+	private Astrobus astrobus;
+	private Pasajero pasajero;
 	
 	public Viaje() {}
 	
-	public Viaje(int idViaje, String diaSalida, String horaSalida, String horaLlegada, String fechaSalida,
-			boolean estado) {
-		super();
+	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Pasajero pasaj, int idViaje, String salida, String llegad,boolean estado) {
+		this.origen= oriGen;
+		this.destino=desTino;
+		this.astrobus=astro;
+		this.pasajero=pasaj;
 		this.idViaje = idViaje;
-		this.diaSalida = diaSalida;
-		this.horaSalida = horaSalida;
-		this.horaLlegada = horaLlegada;
-		this.fechaSalida = fechaSalida;
+		this.salida=salida;
+		this.llegada=llegad;
 		this.estado = estado;
 	}
 	
@@ -29,36 +31,60 @@ public class Viaje {
 	public void setIdViaje(int idViaje) {
 		this.idViaje = idViaje;
 	}
-	public String getDiaSalida() {
-		return diaSalida;
-	}
-	public void setDiaSalida(String diaSalida) {
-		this.diaSalida = diaSalida;
-	}
-	public String getHoraSalida() {
-		return horaSalida;
-	}
-	public void setHoraSalida(String horaSalida) {
-		this.horaSalida = horaSalida;
-	}
-	public String getHoraLlegada() {
-		return horaLlegada;
-	}
-	public void setHoraLlegada(String horaLlegada) {
-		this.horaLlegada = horaLlegada;
-	}
-	public String getFechaSalida() {
-		return fechaSalida;
-	}
-	public void setFechaSalida(String fechaSalida) {
-		this.fechaSalida = fechaSalida;
-	}
-	public boolean isEstado() {
+	
+	public boolean getEstado() {
 		return estado;
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
-	
+
+	public Planeta getOrigen() {
+		return origen;
+	}
+
+	public void setOrigen(Planeta origen) {
+		this.origen = origen;
+	}
+
+	public Planeta getDestino() {
+		return destino;
+	}
+
+	public void setDestino(Planeta destino) {
+		this.destino = destino;
+	}
+
+	public Astrobus getAstrobus() {
+		return astrobus;
+	}
+
+	public void setAstrobus(Astrobus astrobus) {
+		this.astrobus = astrobus;
+	}
+
+	public Pasajero getPasajero() {
+		return pasajero;
+	}
+
+	public void setPasajero(Pasajero pasajero) {
+		this.pasajero = pasajero;
+	}
+
+	public String getSalida() {
+		return salida;
+	}
+
+	public void setSalida(String salida) {
+		this.salida = salida;
+	}
+
+	public String getLlegada() {
+		return llegada;
+	}
+
+	public void setLlegada(String llegada) {
+		this.llegada = llegada;
+	}
+		
 }

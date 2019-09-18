@@ -1,22 +1,19 @@
 package data;
-//orig
+
 import entidades.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DataPlaneta {
 	
 	public ArrayList<Planeta> getAll(){
-		//DataRol dr=new DataRol();
 		Statement stmt=null;
 		ResultSet rs=null;
-		ArrayList<Planeta> planetas= new ArrayList<>();
-		
+		ArrayList<Planeta> planetas= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta");
-			// ver con el profe si podemos traer el estado del planeta con un nombre con la funcion if() de sql
-			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
 					Planeta p=new Planeta();
@@ -24,83 +21,86 @@ public class DataPlaneta {
 					p.setNombrePlaneta(rs.getString("nombrePlaneta"));
 					p.setCoordenada(rs.getString("coordenada"));
 					p.setEstado(rs.getBoolean("estadoPlaneta"));
-					// dr.setRoles(p);
 					planetas.add(p);
 				}
-			}
-			
+			}			
 		} catch (SQLException e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				Conectar.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
+				e.printStackTrace();}
+		}		
 		return planetas;
 	}
 	
 	public void add(Planeta p) {
 		PreparedStatement stmt= null;
-		
+		ResultSet keyResultSet=null;
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planeta(idPlaneta,nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?,?)",
+							"insert into planeta(nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?)",
+							PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, p.getNombrePlaneta());
+			stmt.setString(2, p.getCoordenada());
+			stmt.setBoolean(3, p.getEstado());
+			stmt.executeUpdate();	
+			keyResultSet=stmt.getGeneratedKeys();
+			  if(keyResultSet!=null && keyResultSet.next()){
+	                p.setIdPlaneta(keyResultSet.getInt(1));}
+	    	}catch (SQLException e) {
+            e.printStackTrace();}	finally {
+                try {
+                    if(keyResultSet!=null)keyResultSet.close();
+                    if(stmt!=null)stmt.close();
+                    Conectar.getInstancia().releaseConn();
+                } catch (SQLException e) {
+                	e.printStackTrace();
+                }
+    		}
+   } 	
+	
+	public void delete(Planeta p) { 
+		PreparedStatement stmt= null;
+		try {
+			stmt=Conectar.getInstancia().getConn().
+					prepareStatement(
+							"UPDATE planeta set estadoPlaneta = false Where idPlaneta=?",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, p.getIdPlaneta());
-			stmt.setString(2, p.getNombrePlaneta());
-			stmt.setString(3, p.getCoordenada());
-			stmt.setBoolean(4, p.getEstado());
-			stmt.executeUpdate();			
-	    	}catch (SQLException e) {
-            e.printStackTrace();} 	
-    }
-
-//DELETE	
-	public void delete(int id) {
-		PreparedStatement stmt= null;
-		//ResultSet keyResultSet=null;
-		try {
-			stmt=Conectar.getInstancia().getConn().
-					prepareStatement(
-							"UPDATE planeta set estadoPlaneta = '"+0+"'Where idPlaneta="+id+";",
-							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();
-		} 	
+		}finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
     }
 	
-	public ArrayList<Planeta> getById(int id){
-		//DataRol dr=new DataRol();
-		Statement stmt=null;
+	public Planeta getById(Planeta pla){
+		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		ArrayList<Planeta> planetas= new ArrayList<>();
-		
+		Planeta p=null;	
 		try {
-			stmt= Conectar.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta where idPlaneta='"+id+"'");
-			// ver con el profe si podemos traer el estado del planeta con un nombre con la funcion if() de sql
-			//intencionalmente no se recupera la password
-			if(rs!=null) {
-				while(rs.next()) {
-					Planeta p=new Planeta();
+			stmt= Conectar.getInstancia().getConn().
+					prepareStatement("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta where idPlaneta=?");
+				stmt.setInt(1,pla.getIdPlaneta());
+				rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+					p=new Planeta();
 					p.setIdPlaneta(rs.getInt("idPlaneta"));
 					p.setNombrePlaneta(rs.getString("nombrePlaneta"));
 					p.setCoordenada(rs.getString("coordenada"));
-					p.setEstado(rs.getBoolean("estadoPlaneta"));
-					// dr.setRoles(p);
-					planetas.add(p);
-				}
-			}
-			
+					p.setEstado(rs.getBoolean("estadoPlaneta"));			
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -112,33 +112,21 @@ public class DataPlaneta {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		
-		return planetas;
+		}	
+		return p;
 	}
 	
-	public void modify(int id, String nombre, String coordenada) {
+	public void modify(Planeta pla) {
 		PreparedStatement stmt= null;
-		//ResultSet keyResultSet=null;
 		try {
-			String query=null;
-			if (nombre=="" && coordenada!="") {
-			query="UPDATE planeta set coordenada= '"+coordenada+"' Where idPlaneta="+id+";";
-			}
-			else if(coordenada=="" & nombre!="")
-			{
-			query="UPDATE planeta set nombrePlaneta= '"+nombre+"' Where idPlaneta="+id+";";	
-			}
-			else if(coordenada!="" && nombre!="")
-			{
-			query="UPDATE planeta set nombrePlaneta= '"+nombre+"', coordenada= '"+coordenada+"' Where idPlaneta="+id+";";	
-			}
-			stmt=Conectar.getInstancia().getConn().
-					prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETA SET nombrePlaneta=?,coordenada=?,estadoPlaneta=? where idPlaneta=?");
+			stmt.setString(1,pla.getNombrePlaneta());
+			stmt.setString(2,pla.getCoordenada());
+			stmt.setBoolean(3,pla.getEstado());
+			stmt.setInt(4,pla.getIdPlaneta());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
-            System.out.println("No ingreso ningun dato");
+            e.printStackTrace();
 		} 	
     }
 }

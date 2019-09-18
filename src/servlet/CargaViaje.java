@@ -9,17 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Planeta;
+import entidades.Viaje;
+import logic.PlanetaControler;
+import logic.ViajeControler;
+
 /**
- * Servlet implementation class Menu
+ * Servlet implementation class CargaViaje
  */
-@WebServlet({"/Menu","/menu"})
-public class Menu extends HttpServlet {
+@WebServlet("/CargaViaje")
+public class CargaViaje extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Menu() {
+    public CargaViaje() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +34,28 @@ public class Menu extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.sendRedirect("menu.jsp");
+		int origen=Integer.parseInt(request.getParameter("origen"));
+		int destino=Integer.parseInt(request.getParameter("destino"));
+		String fechaS=request.getParameter("fechaSalida");
+		String fechaL=request.getParameter("fechaLlegada");
+		
+		Planeta p1=new Planeta();
+		Planeta p2=new Planeta();
+		PlanetaControler pc=new PlanetaControler();
+		p1.setIdPlaneta(origen);
+		p2.setIdPlaneta(destino);
+		p1=pc.getById(p1);
+		p2=pc.getById(p2);
+		
+		Viaje v=new Viaje();
+		v.setOrigen(p1);
+		v.setDestino(p2);
+		v.setSalida(fechaS);
+		v.setLlegada(fechaL);
+		
+		ViajeControler vc=new ViajeControler();
+		vc.add(v);
+
 	}
 
 	/**
@@ -37,9 +63,7 @@ public class Menu extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response)
-		String e=request.getParameter("abmMenu");
-		response.sendRedirect(e);	
+		doGet(request, response);
 	}
 
 }
