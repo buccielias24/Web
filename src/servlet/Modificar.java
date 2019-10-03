@@ -8,16 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import entidades.Planeta;
 import logic.PlanetaControler;
 
 /**
  * Servlet implementation class Modificar
  */
-@WebServlet("/Modificar")
+@WebServlet({"/Modificar","/modificar"})
 public class Modificar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

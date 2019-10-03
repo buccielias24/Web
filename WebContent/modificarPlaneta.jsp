@@ -23,11 +23,12 @@
 			<%				
 %>
 </table>
-<form action="Modificar" method="post" >
+<form action="Planetas" method="post" >
   ID		: <input type="text" name="id" value="<%=p.getIdPlaneta()%>" readonly="readonly"><br>
   Nombre	: <input type="text" name="nombre"><br>
   Coordenada: <input type="text" name="coordenada"><br>
   Estado	: <input type="text" name="estado" ><br>
+  			  <input type="hidden" name="accion" value="modificar">
   <input type="submit" value="Modificar">
 </form>
 </body>

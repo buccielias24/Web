@@ -13,13 +13,19 @@ public class DataViaje {
 					prepareStatement(
 							"insert into viaje(planetaOrigen,planetaDestino,fechaSalida,fechaLlegada,estadoViaje) values(?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setObject(1,v.getOrigen().getIdPlaneta());
-			stmt.setObject(2,v.getDestino().getIdPlaneta());
+			stmt.setInt(1,v.getOrigen().getIdPlaneta());
+			stmt.setInt(2,v.getDestino().getIdPlaneta());
 			stmt.setString(3, v.getSalida());
 			stmt.setString(4, v.getLlegada());
 			stmt.setBoolean(5, v.getEstado());
 			stmt.executeUpdate();			
 	    	}catch (SQLException e) {
-            e.printStackTrace();} 	
-    }
+            e.printStackTrace();}finally {
+    			try {
+    				if(stmt!=null) {stmt.close();}
+    				Conectar.getInstancia().releaseConn();
+    				} catch (SQLException e) {
+    				e.printStackTrace();}
+    				}
+			}
 }

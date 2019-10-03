@@ -12,27 +12,64 @@
 <body>
 <form action="CargaViaje" method="get">
 		<h3>Seleccione Origen</h3>
-<select id="elegirOrigen"  name="origen">
+<select id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
+		<option disabled selected> -- select an option -- </option>
 <% ArrayList<Planeta> planetas=new PlanetaControler().getAll();
 		for(Planeta p:planetas)
 		{%>
-		<option value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				
+		<option id="lala" value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				
 		<%}%>
 </select>
+
+
+	<script>
+	function seleccion(value)
+	{
+		var select=document.getElementById("elegirDestino");
+ 
+		// Cogemos el listado de opciones en un array de valores
+		var op=select.getElementsByTagName("option")
+ 
+		// Seleccionamos la primera opción
+		select.options[0].selected=true;
+ 
+		// Recorremos todas las opciones del segundo select
+		for (var i = 1; i < op.length; i++) {
+ 
+			if(op[i].value == value)
+			{
+				// Si coincide, lo desmarcamos o escondemos 
+				//(selecciona una de las dos opciones) 
+				//op[i].disabled = true;
+				op[i].style.display="none";
+			}else{
+				// Si no coincide, lo marcamos o mostramos
+ 
+				//(selecciona una de las dos opciones)
+ 
+// 				op[i].disabled = false;
+				op[i].style.display="block";
+			}
+		}
+	}
+	</script>
+	
 		<h3>Seleccione Destino</h3>
-<select id="elegirDestino"  name="destino">
+<select id="elegirDestino" name="destino">
+		<option disabled selected> -- select an option -- </option>
 <% 	for(Planeta p:planetas)
 		{%>
 		<option value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				
 		<%}%>
 </select> <br><br>
 <label for="start">Fecha de Salida:</label>
-<input type="date" id="start" name="fechaSalida"
+
+<input type="datetime-local" id="start" name="fechaSalida"
        value="2019-09-17"
        min="2019-01-01" max="2020-12-31">
 <br><br>
 <label for="start">Fecha de Llegada:</label>
-<input type="date" id="start" name="fechaLlegada"
+<input type="datetime-local" id="finish" name="fechaLlegada"
        value="2019-09-17"
        min="2019-01-01" max="2020-12-31">
  <br><br><br>      

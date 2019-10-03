@@ -1,26 +1,29 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Planeta;
-import logic.PlanetaControler;
+import entidades.Ciudadano;
+import logic.UserController;
+import sun.rmi.server.Dispatcher;
 
 /**
- * Servlet implementation class CargaPlaneta
+ * Servlet implementation class Login
  */
-@WebServlet("/CargaPlaneta")
-public class CargaPlaneta extends HttpServlet {
+@WebServlet({"/Login","/login"})
+public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CargaPlaneta() {
+    public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,12 +41,16 @@ public class CargaPlaneta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Planeta p=new Planeta();
-		p.setCoordenada(request.getParameter("coordenada"));
-		p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
-		p.setNombrePlaneta(request.getParameter("nombre"));
-		PlanetaControler pc=new PlanetaControler();
-		pc.add(p);
-		response.sendRedirect("registrarPlaneta.jsp");
+		UserController uc=new UserController();
+		Ciudadano ciud=new Ciudadano();
+		ciud.setUser(request.getParameter("user"));
+		ciud.setPassword(request.getParameter("password"));
+		if(uc.getById(ciud).getUser().equals(ciud.getUser())&&uc.getById(ciud).getPassword().equals(ciud.getPassword()))
+		{	
+			request.setAttribute("usuario",uc.getById(ciud).getApellido()+", "+uc.getById(ciud).getNombre() );
+			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
+			rd.forward(request,response);
+		}
 	}
+
 }

@@ -126,9 +126,15 @@ public class DataPlaneta {
 			stmt.setInt(4,pla.getIdPlaneta());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
-            e.printStackTrace();
-		} 	
-    }
+            e.printStackTrace();}finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+				} catch (SQLException e) {
+				e.printStackTrace();} 	
+				}
+		}
 }
+
 
 	

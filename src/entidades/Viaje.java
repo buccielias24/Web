@@ -9,11 +9,11 @@ public class Viaje {
 	private Planeta origen;
 	private Planeta destino;
 	private Astrobus astrobus;
-	private Pasajero pasajero;
+	private Ciudadano pasajero;
 	
 	public Viaje() {}
 	
-	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Pasajero pasaj, int idViaje, String salida, String llegad,boolean estado) {
+	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Ciudadano pasaj, int idViaje, String salida, String llegad,boolean estado) {
 		this.origen= oriGen;
 		this.destino=desTino;
 		this.astrobus=astro;
@@ -63,11 +63,11 @@ public class Viaje {
 		this.astrobus = astrobus;
 	}
 
-	public Pasajero getPasajero() {
+	public Ciudadano getPasajero() {
 		return pasajero;
 	}
 
-	public void setPasajero(Pasajero pasajero) {
+	public void setPasajero(Ciudadano pasajero) {
 		this.pasajero = pasajero;
 	}
 

@@ -36,7 +36,7 @@ public class Planeta {
 	public void setCoordenada(String coordenada) {
 		this.coordenada = coordenada;
 	}
-	public boolean getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 	public void setEstado(boolean estado) {
