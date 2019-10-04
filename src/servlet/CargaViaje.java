@@ -11,7 +11,8 @@ import entidades.Planeta;
 import entidades.Viaje;
 import logic.PlanetaControler;
 import logic.ViajeControler;
-
+import entidades.Astrobus;
+import logic.AstrobusController;
 /**
  * Servlet implementation class CargaViaje
  */
@@ -36,7 +37,9 @@ public class CargaViaje extends HttpServlet {
 		int destino=Integer.parseInt(request.getParameter("destino"));
 		String fechaS=request.getParameter("fechaSalida");
 		String fechaL=request.getParameter("fechaLlegada");
-		
+		int astro=1;//Integer.parseInt(request.getParameter("Astrobus"));
+		double dist;
+		double distanciadelviaje;
 		Planeta p1=new Planeta();
 		Planeta p2=new Planeta();
 		PlanetaControler pc=new PlanetaControler();
@@ -51,9 +54,15 @@ public class CargaViaje extends HttpServlet {
 		v.setSalida(fechaS);
 		v.setLlegada(fechaL);
 		
+		Astrobus a=new Astrobus();
+		AstrobusController AC=new AstrobusController();
+		a.setIdNave(astro);
+		a=AC.getById(a);
+		dist=a.getDistRecorrida();//+distanciadelviaje;
+		
 		ViajeControler vc=new ViajeControler();
 		vc.add(v);
-
+//https://programandoointentandolo.com/2014/09/ejecutar-metodo-a-hora-especifica-java.html
 	}
 
 	/**
