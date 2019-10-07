@@ -11,13 +11,14 @@ public class DataViaje {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(planetaOrigen,planetaDestino,fechaSalida,fechaLlegada,estadoViaje) values(?,?,?,?,?)",
+							"insert into viaje(planetaOrigen,planetaDestino,fechaSalida,fechaLlegada,estadoViaje,IdNave) values(?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());
 			stmt.setString(3, v.getSalida());
 			stmt.setString(4, v.getLlegada());
 			stmt.setBoolean(5, v.getEstado());
+			stmt.setInt(6, v.getAstrobus().getIdNave());
 			stmt.executeUpdate();			
 	    	}catch (SQLException e) {
             e.printStackTrace();}finally {

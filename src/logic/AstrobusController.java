@@ -25,8 +25,8 @@ public class AstrobusController {
 		return da.getById(a);
 		
 	}
-	public void updateAstroviaje(int id) {
-		da.updateAstroviaje(id, id);
+	public void updateAstroviaje(int id,double dr) {
+		da.updateAstroviaje(id, dr);
 	}
 
 }

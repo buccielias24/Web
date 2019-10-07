@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import entidades.Astrobus;
-import entidades.Planeta;
+
 
 
 
@@ -127,7 +127,7 @@ public class DataAstrobus {
 			stmt=Conectar.getInstancia().getConn().prepareStatement(
 							
 							"UPDATE astrobus set distRecorrida+="+dr+" where IdNave="+id+";"
-							+"UPDATE astrobus set tiempoDesdeSinUso=now();"+"UPDATE astrobus set estado=true;",
+							+"UPDATE astrobus set tiempoDesdeSinUso=now() where IdNave="+id+";"+"UPDATE astrobus set estado=true where IdNave="+id+";",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
             } catch (SQLException e) {
