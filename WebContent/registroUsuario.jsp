@@ -60,6 +60,7 @@
           </div>
         </div>
 
+		
         <div class="mb-3">
           <label for="username">Username</label>
           <div class="input-group">
@@ -73,13 +74,7 @@
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="email">Email <span class="text-muted"></span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
-          <div class="invalid-feedback">
-            Please enter a valid email address.
-          </div>
-        </div>
+      
          
      
       <div class="mb-3">
@@ -96,6 +91,15 @@
           <div class="invalid-feedback">
           </div> <span id="error2"></span>
         </div>  
+        
+        	  <div class="mb-3">
+          <label for="email">Email <span class="text-muted"></span></label>
+          <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+          <div class="invalid-feedback">
+            Please enter a valid email address.
+          </div>
+        </div>
+		
         
           <div class="row">
           <div class="col-md-5 mb-3">
