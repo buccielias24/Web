@@ -13,31 +13,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/grid/">
 
     <!-- Bootstrap core CSS -->
-<link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-	
-	    <script>
-function filtrar() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue ;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTbody");
-  tr=	table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-<script src="/Web/js/popup-center.js"></script>	
+<link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
+<script src="/Web/js/filtrar.js"></script>  <!-- Filtro Planetas -->
+<script src="/Web/js/popup-center.js"></script>	 <!-- Ventana emergente -->
     <style>
     .linea
 {
