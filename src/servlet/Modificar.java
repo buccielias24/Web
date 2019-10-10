@@ -34,7 +34,7 @@ public class Modificar extends HttpServlet {
 		Planeta p=new Planeta();
 		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("planeta", p);
-		RequestDispatcher rd=request.getRequestDispatcher("modificarPlaneta.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("Planetas/modificarPlaneta.jsp");
 		rd.forward(request,response);
 	}
 

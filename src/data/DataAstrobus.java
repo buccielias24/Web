@@ -8,12 +8,8 @@ import java.util.ArrayList;
 
 import entidades.Astrobus;
 
-
-
-
 public class DataAstrobus {
 	public ArrayList<Astrobus> getAll(){
-		//DataRol dr=new DataRol();
 		Statement stmt=null;
 		ResultSet rs=null;
 		ArrayList<Astrobus> astrobuses= new ArrayList<>();

@@ -50,9 +50,9 @@ public class Planetas extends HttpServlet {
 		case "alta": 
 		{
 			Planeta p=new Planeta();
-			p.setCoordenada(request.getParameter("coordenada"));
-			p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
-			p.setNombrePlaneta(request.getParameter("nombre"));
+			p.setCoordenada(request.getParameter("inAlta2"));
+			p.setEstado(Boolean.parseBoolean(request.getParameter("inAlta3")));
+			p.setNombrePlaneta(request.getParameter("inAlta1"));
 			PlanetaControler pc=new PlanetaControler();
 			pc.add(p);	
 		} break;
@@ -80,7 +80,6 @@ public class Planetas extends HttpServlet {
 			pc.delete(p);
 		}break;			
 		}
-		response.sendRedirect("home.jsp");
 	}
 	
 }

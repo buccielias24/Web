@@ -28,7 +28,7 @@
 </table>
 <br>
 <br>
-<form action="Planetas" method="post">
+<form action="/Web/Planetas" method="post">
   <label>ID Planeta</label> <input type="text" name="id">
   							<input type="hidden" name="accion" value="baja">
   <input type="submit" value="Aceptar">
