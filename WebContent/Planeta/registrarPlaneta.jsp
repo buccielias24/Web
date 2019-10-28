@@ -26,7 +26,7 @@
 	<th>COORDENADA</th><th>ESTADO</th>
 </tr>
 </table>
-<form action="/Web/Planetas" method="post" id="form">
+<form action="/Web/CargaPlaneta" method="post" id="form">
   Nombre Planeta: <input type="text" id="inAlta1" name="inAlta1" value="" onKeyUp="habilitar('form')" ><br>
   Coordenada: <input type="text" id="inAlta2" name="inAlta2" value="" onKeyUp="habilitar('form')"><br>
   Estado: <input type="text" id="inAlta3" name="inAlta3" value="true" onKeyUp="habilitar('form')" disabled><br>

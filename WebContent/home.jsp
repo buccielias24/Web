@@ -1,3 +1,4 @@
+<%@page import="entidades.Ciudadano"%>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,7 +35,7 @@
   <body>
     <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Carousel</a>
+    <a class="navbar-brand" href="login.jsp">Login</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,7 +48,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+        <% Ciudadano c=new Ciudadano();	
+	c=(Ciudadano)session.getAttribute("user");
+	%> 
+          <a class="nav-link disabled" href="#"><%=c.getUser()%></a>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">

@@ -39,7 +39,7 @@ public class CargaAstrobus extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Astrobus a=new Astrobus();
-		
+		a.setMarca(request.getParameter("marca"));
 		a.setCantAsientos(Integer.parseInt(request.getParameter("cantAsientos")));
 		a.setDistLimite(Float.parseFloat(request.getParameter("distLimite")));
 		a.setDistService(Float.parseFloat(request.getParameter("distService")));

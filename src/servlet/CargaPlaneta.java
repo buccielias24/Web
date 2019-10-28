@@ -39,11 +39,10 @@ public class CargaPlaneta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Planeta p=new Planeta();
-		p.setCoordenada(request.getParameter("coordenada"));
-		p.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
-		p.setNombrePlaneta(request.getParameter("nombre"));
+		p.setCoordenada(request.getParameter("inAlta2"));
+		p.setEstado(Boolean.parseBoolean(request.getParameter("inAlta3")));
+		p.setNombrePlaneta(request.getParameter("inAlta1"));
 		PlanetaControler pc=new PlanetaControler();
 		pc.add(p);
-		response.sendRedirect("registrarPlaneta.jsp");
 	}
 }

@@ -23,8 +23,8 @@
 			<%				
 %>
 </table>
-<form action="/Web/Planetas" method="post" >
-  ID		: <input type="text" name="id" value="<%=p.getIdPlaneta()%>" readonly="readonly"><br>
+<form action="/Web/Modificar" method="post" >
+ // ID		: <input type="text" name="id" value="<%=p.getIdPlaneta()%>" readonly="readonly"><br>
   Nombre	: <input type="text" name="nombre"><br>
   Coordenada: <input type="text" name="coordenada"><br>
   Estado	: <input type="text" name="estado" ><br>

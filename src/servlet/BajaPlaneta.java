@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,10 @@ public class BajaPlaneta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Planeta p=new Planeta();
+		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
+		this.doPost(request, response);
+		
 	}
 
 	/**
@@ -42,9 +46,8 @@ public class BajaPlaneta extends HttpServlet {
 		Planeta p= new Planeta();
 		int id=Integer.parseInt(request.getParameter("id"));
 		p.setIdPlaneta(id);
-		//p=pc.getById(id);
 		PlanetaControler pc=new PlanetaControler();
 		pc.delete(p);
-		response.sendRedirect("BajaPlaneta.jsp");
+		response.sendRedirect("/Web/Planeta/vistaPrincipal.jsp");
 		}
 }

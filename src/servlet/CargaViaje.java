@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Planeta;
 import entidades.Viaje;
 import logic.PlanetaControler;
-import logic.ViajeControler;
+import logic.ViajeController;
 import entidades.Astrobus;
 import logic.AstrobusController;
 /**
@@ -37,9 +37,9 @@ public class CargaViaje extends HttpServlet {
 		int destino=Integer.parseInt(request.getParameter("destino"));
 		String fechaS=request.getParameter("fechaSalida");
 		String fechaL=request.getParameter("fechaLlegada");
-		int astro = Integer.parseInt(request.getParameter("IdNave"));//Integer.parseInt(request.getParameter("Astrobus"));
-		double dist=0;
-		double distViaje = 0;//distancia entre planeta origen y planeta destino
+	//	int astro = Integer.parseInt(request.getParameter("IdNave"));//Integer.parseInt(request.getParameter("Astrobus"));
+	//	double dist=0;
+	//	double distViaje = 0;//distancia entre planeta origen y planeta destino
 		
 		Planeta p1=new Planeta();
 		Planeta p2=new Planeta();
@@ -48,25 +48,25 @@ public class CargaViaje extends HttpServlet {
 		p2.setIdPlaneta(destino);
 		p1=pc.getById(p1);
 		p2=pc.getById(p2);
-		distViaje= 5; //tenemos que asignar una formula vectorial para calcular la distancia entre planetas;
+	//	distViaje= 5; //tenemos que asignar una formula vectorial para calcular la distancia entre planetas;
 		
 		
-		Astrobus a=new Astrobus();
+	/*	Astrobus a=new Astrobus();
 		AstrobusController AC=new AstrobusController();
 		a.setIdNave(astro);
 		a=AC.getById(a);
 		dist=a.getDistRecorrida();// se asigna el kilometraje actual de la nave
-		dist+=distViaje;//se suma el kilometraje actual de la nave y la distancia que ira a recorrer.
+		dist+=distViaje;//se suma el kilometraje actual de la nave y la distancia que ira a recorrer.*/
 		
 		Viaje v=new Viaje();
 		v.setOrigen(p1);
 		v.setDestino(p2);
 		v.setSalida(fechaS);
 		v.setLlegada(fechaL);
-		v.setAstrobus(a);		
+	//	v.setAstrobus(a);		
 		
 		
-		ViajeControler vc=new ViajeControler();
+		ViajeController vc=new ViajeController();
 		vc.add(v);
 		
 		

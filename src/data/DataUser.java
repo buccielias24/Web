@@ -14,7 +14,7 @@ public class DataUser {
 		Ciudadano c=null;	
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select nombre,apellido,dgu,user,password from ciudadanos where user=?");
+					prepareStatement("select nombre,apellido,dgu,usuario,password from usuarios where usuario=?");
 				stmt.setString(1,ciud.getUser());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
@@ -22,8 +22,9 @@ public class DataUser {
 					c.setNombre(rs.getString("nombre"));
 					c.setApellido(rs.getString("apellido"));
 					c.setDgu(rs.getInt("dgu"));	
-					c.setUser(rs.getString("user"));
+					c.setUser(rs.getString("usuario"));
 					c.setPassword(rs.getString("password"));
+			
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -42,20 +42,6 @@ public class Planeta {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-
-	public void cargaDatos() {
-		Scanner scan=new Scanner(System.in);
-		System.out.println("Ingrese ID del planeta");
-		this.setIdPlaneta(Integer.parseInt(scan.nextLine()));
-		System.out.println("Ingrese nombre del planeta");
-		this.setNombrePlaneta(scan.nextLine());
-		System.out.println("Ingrese coordenada del planeta");
-		this.setCoordenada(scan.nextLine());
-		System.out.println("Ingrese estado del planeta");
-		this.setEstado(scan.hasNextBoolean());
-		scan.close();
-	}
-	
 	@Override
 	public String toString() {
 		return

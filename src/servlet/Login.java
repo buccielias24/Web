@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import entidades.Ciudadano;
 import logic.UserController;
@@ -46,8 +48,10 @@ public class Login extends HttpServlet {
 		ciud.setUser(request.getParameter("user"));
 		ciud.setPassword(request.getParameter("password"));
 		if(uc.getById(ciud).getUser().equals(ciud.getUser())&&uc.getById(ciud).getPassword().equals(ciud.getPassword()))
-		{	
-			request.setAttribute("usuario",uc.getById(ciud).getApellido()+", "+uc.getById(ciud).getNombre() );
+		{
+			ciud=uc.getById(ciud);
+			HttpSession misession= request.getSession(true);
+			misession.setAttribute("user",ciud);
 			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
 			rd.forward(request,response);
 		}

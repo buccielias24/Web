@@ -82,19 +82,32 @@ public class DataAstrobus {
 	
 	public void add(Astrobus a) {
 		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
 		
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into astrobus(cantAsientos,distRecorrida,distLimite,distService,tiempoDesdeSinUso,estado) values(?,0,?,?,now(),true)",
+							"insert into astrobus(marca,cantAsientos,distRecorrida,distLimite,distService,tiempoDesdeSinUso,estado) values(?,?,0,?,?,now(),true)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, a.getCantAsientos());
+			stmt.setString(1, a.getMarca());
+			stmt.setInt(2, a.getCantAsientos());
 			stmt.setDouble(3, a.getDistLimite());
 			stmt.setDouble(4, a.getDistService());
 			stmt.executeUpdate();			
+			keyResultSet=stmt.getGeneratedKeys();
+			  if(keyResultSet!=null && keyResultSet.next()){
+	                a.setIdNave(keyResultSet.getInt(1));}
 	    	}catch (SQLException e) {
-            e.printStackTrace();} 	 
-    }
+          e.printStackTrace();}	finally {
+              try {
+                  if(keyResultSet!=null)keyResultSet.close();
+                  if(stmt!=null)stmt.close();
+                  Conectar.getInstancia().releaseConn();
+              } catch (SQLException e) {
+              	e.printStackTrace();
+              }
+  		}
+ } 	
 
 	
 //DAR DE BAJA ASTROBUS

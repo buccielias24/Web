@@ -1,7 +1,8 @@
 
-<%@page import="entidades.Ciudadano"%>
-<%@page import="entidades.Planeta"%>
 <%@page import="logic.PlanetaControler"%>
+<%@page import="entidades.Planeta"%>
+<%@page import="logic.ViajeController"%>
+<%@page import="entidades.Viaje"%>
 <%@page import="java.util.ArrayList"%>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -9,14 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Listado de Planetas</title>
+    <title>Viajes</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/grid/">
 
     <!-- Bootstrap core CSS -->
 <link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
-<script src="/Web/js/filtrar.js"></script>  <!-- Filtro Planetas -->
-<script src="/Web/js/popup-center.js"></script>	 <!-- Ventana emergente -->
+<script src="/Web/js/popup-center.js"></script>
     <style>
     .linea
 {
@@ -46,47 +46,34 @@
   <body class="py-4">
     <div class="container">
 
-  <h1>Listado de Planetas</h1>
- <%  Ciudadano c=(Ciudadano)session.getAttribute("user");
-    	if (c.getUser().equals("elbucci"))
-    		{%>
-    		<p class="lead">Desde aqui podra realizar la alta baja o modificacion de los planetas.</p>
-    		<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Planeta/registrarPlaneta.jsp', 'test', window, 500, 250)" role="button">Nuevo Planeta</a></p>	
-<%}%>
-<input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets..">
+  <h1>Gestion de Viajes</h1>
+  <p class="lead">Desde aqui podra realizar la alta baja o modificacion de los viajes.</p>
+ 	<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Viaje/registrarViaje.jsp', 'test', window, 600, 300)" role="button">Nuevo Viaje</a></p>	
+<!--  <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets.."> -->
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Ubicacion</th>
-      <th scope="col">Estado</th>
+      <th scope="col">Origen</th>
+      <th scope="col">Destino</th>
     </tr>
   </thead>
   <tbody id="myTbody">
   	<% 
 		try{	
-			ArrayList<Planeta> planetas=new PlanetaControler().getAll();				
-			for(Planeta p:planetas){
+			Planeta p=new Planeta();
+			PlanetaControler pc=new PlanetaControler();
+			ArrayList<Viaje> viajes=new ViajeController().getAll();				
+			for(Viaje v:viajes){
+			
 			%>
     <tr>
-      <th scope="row"><%=p.getIdPlaneta()%></th>
-      <td><%=p.getNombrePlaneta()%></td>
-      <td><%=p.getCoordenada()%></td>
-      <% String r=null;
-      	if(p.getEstado()==true){r="Disponible";}else{r="No disponible";}
-      %>
-      <td><%=r %></td>
-      
-      
-     <% 
-     	if(c.getUser().equals("elbucci"))
-     	{
-     %>
-     <th><a href="/Web/Modificar?id=<%=p.getIdPlaneta()%>">Modificar</a></th>
-     <th><a href="/Web/BajaPlaneta?id=<%=p.getIdPlaneta()%>">Dar de Baja</a></th>
-    </tr>   
-  	<%}
+      <th scope="row"><%=v.getIdViaje()%></th>
+      <td><%=pc.getById(v.getOrigen())%></td>  <!-- Muestra el objeto entero Planeta ver para arreglar la vista -->
+      <td><%=v.getDestino()%></td>
+    </tr>    
+  	<%
   	  	
 			}					
 		}catch(Exception e) {}

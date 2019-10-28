@@ -10,9 +10,9 @@
 <title>Alta Viaje</title>
 </head>
 <body>
-<form action="CargaViaje" method="get">
+<form action="/Web/CargaViaje" method="get">
 		<h3>Seleccione Origen</h3>
-<select id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
+<select required type="text" id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
 		<option disabled selected> -- select an option -- </option>
 <% ArrayList<Planeta> planetas=new PlanetaControler().getAll();
 		for(Planeta p:planetas)
