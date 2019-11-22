@@ -19,15 +19,13 @@
 				<th><%=p.getNombrePlaneta()%></th>
 				<th><%=p.getCoordenada()%></th>
 				<th><%=p.getEstado()%></th>
-			</tr>
-			<%				
-%>
+			</tr>	
 </table>
 <form action="/Web/Modificar" method="post" >
  // ID		: <input type="text" name="id" value="<%=p.getIdPlaneta()%>" readonly="readonly"><br>
-  Nombre	: <input type="text" name="nombre"><br>
-  Coordenada: <input type="text" name="coordenada"><br>
-  Estado	: <input type="text" name="estado" ><br>
+  Nombre	: <input type="text" name="nombre" value="<%=p.getNombrePlaneta()%>"><br>
+  Coordenada: <input type="text" name="coordenada" value="<%=p.getCoordenada()%>"><br>
+  Estado	: <input type="text" name="estado" value="<%=p.getEstado()%>" ><br>
   			  <input type="hidden" name="accion" value="modificar">
   <input type="submit" value="Modificar">
 </form>

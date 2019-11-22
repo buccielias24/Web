@@ -1,4 +1,4 @@
-  <%@page import="entidades.Planeta"%>
+ <%@page import="entidades.Planeta"%>
 <html>
 <head>
 
@@ -26,11 +26,11 @@
 	<th>COORDENADA</th><th>ESTADO</th>
 </tr>
 </table>
-<form action="/Web/CargaPlaneta" method="post" id="form">
-  Nombre Planeta: <input type="text" id="inAlta1" name="inAlta1" value="" onKeyUp="habilitar('form')" ><br>
-  Coordenada: <input type="text" id="inAlta2" name="inAlta2" value="" onKeyUp="habilitar('form')"><br>
-  Estado: <input type="text" id="inAlta3" name="inAlta3" value="true" onKeyUp="habilitar('form')" disabled><br>
-	  <input type="submit" value="Agregar" id="altaSubmit" onclick="form.submit();alert('Planeta Agregado');window.close()" disabled='disabled'>
+<form action="/Web/Planetas" method="post" id="form">
+  Nombre: <input type="text" id="inAlta1" name="inAlta1" value="" onKeyUp="habilitar('form')" ><br>
+  Ubicacion: <input type="text" id="inAlta2" name="inAlta2" value="" onKeyUp="habilitar('form')"><br>
+  Fecha Alta: <input type="Date" id="inAlta3" name="inAlta3" value="" onKeyUp="habilitar('form')"><br>
+    <input type="submit" value="Agregar" id="altaSubmit" onclick="form.submit();alert('Planeta Agregado');window.close()" disabled='disabled'>
   	  <input type="hidden" id="accion" name="accion" value="alta">
 </form>
 </body>

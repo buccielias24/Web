@@ -7,15 +7,16 @@ import java.sql.SQLException;
 import entidades.Ciudadano;
 
 public class DataUser {
-
+//seria getByUser
 	public Ciudadano getById(Ciudadano ciud){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Ciudadano c=null;	
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select nombre,apellido,dgu,usuario,password from usuarios where usuario=?");
+					prepareStatement("select nombre,apellido,dgu,usuario,password,rol from usuarios where usuario=? or dgu=? ");
 				stmt.setString(1,ciud.getUser());
+				stmt.setInt(2, ciud.getDgu());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 					c=new Ciudadano();
@@ -24,6 +25,7 @@ public class DataUser {
 					c.setDgu(rs.getInt("dgu"));	
 					c.setUser(rs.getString("usuario"));
 					c.setPassword(rs.getString("password"));
+					c.setRol(rs.getInt("rol"));
 			
 			}			
 		} catch (SQLException e) {
@@ -40,3 +42,4 @@ public class DataUser {
 		}	return c;
 	}
 }
+

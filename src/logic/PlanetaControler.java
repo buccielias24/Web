@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.ArrayList;
-
 import data.DataPlaneta;
 import entidades.*;
 
@@ -20,9 +19,20 @@ public class PlanetaControler {
 		return dp.getById(pla);
 	}
 	
-	public void add(Planeta p) {
-		dp.add(p); 
+	public Boolean add(Planeta p, Ciudadano c) {
+		
+		if(c!=null && c.getRol()==1)
+		{
+		p.setEstado(true);
+		dp.add(p);
+		return true;
+		}
+		else {
+		 	return false;
+		}
+		
 	}
+	
 	public void delete(Planeta p) {
 		dp.delete(p);
 	}

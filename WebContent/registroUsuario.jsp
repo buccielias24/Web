@@ -29,7 +29,8 @@
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>    
-        <script src="js/pass-validation.js"></script>
+        <script src="js/pass-validation.js"-> 
+        </script>
   </head>
   <body class="bg-light">
     <div class="container">
@@ -40,7 +41,7 @@
     <div class="py-5 text-center">
   
       <h4 class="mb-3">Complete los datos</h4>
-      <form class="needs-validation" novalidate="" action="#">
+      <form class="needs-validation"  action="#">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>

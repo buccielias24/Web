@@ -22,15 +22,16 @@ public class DataViaje {
 			if(rs!=null) {
 				while(rs.next()) {
 					Viaje v=new Viaje();
-					Planeta p=new Planeta();
+					Planeta p1=new Planeta();
+					Planeta p2=new Planeta();
 					v.setIdViaje(rs.getInt("idViaje"));
 					v.setSalida(rs.getString("fechaSalida"));
 					v.setLlegada(rs.getString("fechaLlegada"));
 					v.setEstado(rs.getBoolean("estadoViaje"));
-					p.setIdPlaneta(rs.getInt("planetaOrigen"));
-					v.setOrigen(p);
-					p.setIdPlaneta(rs.getInt("planetaDestino"));
-					v.setDestino(p);					
+					p1.setIdPlaneta(rs.getInt("planetaOrigen"));
+					v.setOrigen(p1);
+					p2.setIdPlaneta(rs.getInt("planetaDestino"));
+					v.setDestino(p2);					
 					viajes.add(v);
 				}
 			}			

@@ -35,7 +35,12 @@
   <body>
     <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <% if(session.getAttribute("user")==null)
+    	{%>
     <a class="navbar-brand" href="login.jsp">Login</a>
+    	<% }else {%>
+    <a class="navbar-brand" href="logout">Logout</a>    
+    	<%} %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,10 +53,12 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
-        <% Ciudadano c=new Ciudadano();	
-	c=(Ciudadano)session.getAttribute("user");
-	%> 
-          <a class="nav-link disabled" href="#"><%=c.getUser()%></a>
+       <% try{ 
+    	Ciudadano c=new Ciudadano();	
+		c=(Ciudadano)session.getAttribute("user");
+	    %> 
+          <a class="nav-link disabled" href="#"><%=c.getUser()%></a><%}catch(Exception e){ %>
+          <a class="nav-link disabled" href="#">-</a><%}%>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
@@ -75,9 +82,9 @@
         <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
         <div class="container">
           <div class="carousel-caption text-left">
-            <h1>Example headline.</h1>
-            <p>Cras justo odi o, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            <h1>Registrate .</h1>
+            <p>Al registrarse podra ver y realizar comentarios en los Planetas, asi como puntuar el viaje y la nave con la cual se ha trasladado. Hace click en el icono abajo</p>
+            <p><a class="btn btn-lg btn-primary" href="registroUsuario.jsp" role="button">Registrarse</a></p>
           </div>
         </div>
       </div>
@@ -124,7 +131,7 @@
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Planetas</title><rect width="100%" height="100%" fill="#"></rect><image xlink:href="img/planeta.jpg" width=150% height=100%>></svg>
         <h2>Planetas</h2>
-        <p>Aqui podra gestionar los planetas de la galaxia</p>
+        <p>Puede ver los planetas y sus estados para viajar. Comentar que le ha parecido el planeta en su visita y puntuarlo para otras personas que deseen viajar a este destino.</p>
         <p><a class="btn btn-secondary" href="Planeta/vistaPrincipal.jsp" role="button">Acceder</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">

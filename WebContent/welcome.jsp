@@ -6,10 +6,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Welcome</title>
+<meta http-equiv="Refresh" content="2 ; url=home.jsp"/>
 </head>
 <body>
 	<h1> Welcome <% Ciudadano c=new Ciudadano();	
 	c=(Ciudadano)session.getAttribute("user");
-	%> <%=c.getApellido()+", "+c.getNombre() %></h1>
+	%> <%=c.getUser()%></h1>
+	
 </body>
 </html>

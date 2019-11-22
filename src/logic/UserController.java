@@ -2,7 +2,7 @@ package logic;
 
 import data.DataUser;
 import entidades.Ciudadano;
-import entidades.Viaje;
+
 
 public class UserController {
 	DataUser du;
@@ -15,6 +15,21 @@ public class UserController {
 	{
 		return du.getById(ciud);	
 	}
+		
+	public Boolean userExist(Ciudadano ciud)
+	{
+		try {
+		Ciudadano c=new Ciudadano();
+	    c=getById(ciud);
+		if(c.getUser().equals(ciud.getUser())&&c.getPassword().equals(ciud.getPassword()))
+	    {	
+	    	return true;
+	    }
+	    else
+	    	return false;
+		}catch(Exception e){return false;}	
+		
+	}
 	
-
-}
+		
+	}

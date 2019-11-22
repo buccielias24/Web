@@ -8,9 +8,18 @@ public class Ciudadano {
 	private Raza raza;
 	private String user;
 	private String password;
+	private int rol;
 	
 	
 	
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+
 	public String getApellido() {
 		return apellido;
 	}

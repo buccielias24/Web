@@ -13,14 +13,17 @@ public class DataPlaneta {
 		ArrayList<Planeta> planetas= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta");
+			rs= stmt.executeQuery("select * from planetas");
 			if(rs!=null) {
 				while(rs.next()) {
 					Planeta p=new Planeta();
-					p.setIdPlaneta(rs.getInt("idPlaneta"));
-					p.setNombrePlaneta(rs.getString("nombrePlaneta"));
-					p.setCoordenada(rs.getString("coordenada"));
-					p.setEstado(rs.getBoolean("estadoPlaneta"));
+					p.setIdPlaneta(rs.getInt("id"));
+					p.setNombrePlaneta(rs.getString("nombre"));
+					p.setCoordenada(rs.getString("ubicacion"));
+					p.setEstado(rs.getBoolean("estado"));
+					p.setMotivo(rs.getInt("motivo_baja"));
+					p.setFecha_alta("fecha_alta");
+					p.setFecha_baja("fecha_baja");
 					planetas.add(p);
 				}
 			}			
@@ -43,11 +46,14 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planeta(nombrePlaneta, coordenada, estadoPlaneta) values(?,?,?)",
+							"insert into planetas(nombre, ubicacion, estado,puntaje,motivo_baja,fecha_alta,fecha_baja) values(?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombrePlaneta());
 			stmt.setString(2, p.getCoordenada());
 			stmt.setBoolean(3, p.getEstado());
+			stmt.setInt(4, p.getMotivo());
+			stmt.setString(5, p.getFecha_alta());
+			stmt.setString(6, p.getFecha_baja());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
@@ -69,7 +75,7 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"UPDATE planeta set estadoPlaneta = false Where idPlaneta=?",
+							"UPDATE planetas set estado = false Where id=?",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, p.getIdPlaneta());
 			stmt.executeUpdate();			
@@ -91,15 +97,15 @@ public class DataPlaneta {
 		Planeta p=null;	
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select idPlaneta,nombrePlaneta,coordenada,estadoPlaneta from planeta where idPlaneta=?");
+					prepareStatement("select * from planetas where id=?");
 				stmt.setInt(1,pla.getIdPlaneta());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 					p=new Planeta();
-					p.setIdPlaneta(rs.getInt("idPlaneta"));
-					p.setNombrePlaneta(rs.getString("nombrePlaneta"));
-					p.setCoordenada(rs.getString("coordenada"));
-					p.setEstado(rs.getBoolean("estadoPlaneta"));			
+					p.setIdPlaneta(rs.getInt("id"));
+					p.setNombrePlaneta(rs.getString("nombre"));
+					p.setCoordenada(rs.getString("ubicacion"));
+					p.setEstado(rs.getBoolean("estado"));			
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();

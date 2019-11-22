@@ -57,6 +57,9 @@
       <th scope="col">ID</th>
       <th scope="col">Origen</th>
       <th scope="col">Destino</th>
+       <th scope="col">Fecha y Hora Salida</th>
+        <th scope="col">Fecha Y Hora Llegada</th>
+         <th scope="col">Estado</th>
     </tr>
   </thead>
   <tbody id="myTbody">
@@ -70,8 +73,11 @@
 			%>
     <tr>
       <th scope="row"><%=v.getIdViaje()%></th>
-      <td><%=pc.getById(v.getOrigen())%></td>  <!-- Muestra el objeto entero Planeta ver para arreglar la vista -->
-      <td><%=v.getDestino()%></td>
+      <td><%=pc.getById(v.getOrigen()).getNombrePlaneta()%></td>  <!-- Muestra el objeto entero Planeta ver para arreglar la vista -->
+      <td><%=pc.getById(v.getDestino()).getNombrePlaneta()%></td>
+      <td><%=v.getSalida()%></td>
+      <td><%=v.getLlegada()%></td>
+      <td><%=v.getEstado()%></td>
     </tr>    
   	<%
   	  	

@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
 
+import entidades.Ciudadano;
 import entidades.Planeta;
 import logic.PlanetaControler;
 
@@ -50,35 +53,18 @@ public class Planetas extends HttpServlet {
 		case "alta": 
 		{
 			Planeta p=new Planeta();
+			p.setNombrePlaneta(request.getParameter("inAlta1"));			
 			p.setCoordenada(request.getParameter("inAlta2"));
-			p.setEstado(Boolean.parseBoolean(request.getParameter("inAlta3")));
-			p.setNombrePlaneta(request.getParameter("inAlta1"));
+			p.setFecha_alta(request.getParameter("inAlta3"));
+			
+			HttpSession session=request.getSession(false);  
+			
 			PlanetaControler pc=new PlanetaControler();
-			pc.add(p);	
+			pc.add(p,(Ciudadano)session.getAttribute("user"));
+			Ciudadano c=(Ciudadano)session.getAttribute("user");
+			System.out.println(c);
 		} break;
-		case "modificar":{
-			int id=Integer.parseInt(request.getParameter("id"));
-			String nombre=request.getParameter("nombre");		
-			String coordenada=request.getParameter("coordenada");
-			Boolean estado=Boolean.parseBoolean(request.getParameter("estado"));
-			PlanetaControler pc=new PlanetaControler();
-			Planeta p=new Planeta();
-			p.setIdPlaneta(id);
-			p.setCoordenada(coordenada);
-			p.setNombrePlaneta(nombre);
-			p.setEstado(estado);
-			pc.modify(p);
-			RequestDispatcher rd=request.getRequestDispatcher("lista.jsp");
-			rd.forward(request,response);
-		}break;
-		case "baja":{
-			Planeta p= new Planeta();
-			int id=Integer.parseInt(request.getParameter("id"));
-			p.setIdPlaneta(id);
-			//p=pc.getById(id);
-			PlanetaControler pc=new PlanetaControler();
-			pc.delete(p);
-		}break;			
+					
 		}
 	}
 	

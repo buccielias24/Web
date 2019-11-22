@@ -1,4 +1,6 @@
 
+<%@page import="logic.reseniaController"%>
+<%@page import="entidades.Resenia"%>
 <%@page import="entidades.Ciudadano"%>
 <%@page import="entidades.Planeta"%>
 <%@page import="logic.PlanetaControler"%>
@@ -15,9 +17,15 @@
 
     <!-- Bootstrap core CSS -->
 <link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="/Web/js/filtrar.js"></script>  <!-- Filtro Planetas -->
 <script src="/Web/js/popup-center.js"></script>	 <!-- Ventana emergente -->
     <style>
+    
+    .checked {
+  color: orange;
+}
     .linea
 {
     display: inline-block;
@@ -45,15 +53,25 @@
   </head>
   <body class="py-4">
     <div class="container">
-
+    
+    <!-- LLAMAR AL CERRAR SESION  -->
+    <form action="/Web/logout" method="post">
+    <input id="logout" type="submit" value="logout"/> 
+    </form>
+    
   <h1>Listado de Planetas</h1>
- <%  Ciudadano c=(Ciudadano)session.getAttribute("user");
-    	if (c.getUser().equals("elbucci"))
+ <% 
+ 	Ciudadano c=null;
+ if((Ciudadano)session.getAttribute("user")==null)
+ {
+ }else {c=(Ciudadano)session.getAttribute("user");}
+    	if (c!=null && c.getRol()==1)
     		{%>
-    		<p class="lead">Desde aqui podra realizar la alta baja o modificacion de los planetas.</p>
+	    		<p class="lead">Desde aqui podra realizar la alta baja o modificacion de los planetas.</p>
     		<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Planeta/registrarPlaneta.jsp', 'test', window, 500, 250)" role="button">Nuevo Planeta</a></p>	
 <%}%>
 <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets..">
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -61,6 +79,8 @@
       <th scope="col">Nombre</th>
       <th scope="col">Ubicacion</th>
       <th scope="col">Estado</th>
+      <th scope="col">Puntaje</th> 
+      <th scope="col">Cant Votos</th>
     </tr>
   </thead>
   <tbody id="myTbody">
@@ -77,16 +97,27 @@
       	if(p.getEstado()==true){r="Disponible";}else{r="No disponible";}
       %>
       <td><%=r %></td>
+      <td>
+      <%reseniaController rc=new reseniaController(); %>
+	<% for(int i=0;i<Math.round(rc.getPuntaje(p));i++){ %>    
+      <span class="fa fa-star checked"></span><%}
       
-      
+    	  for(int j=0;j<5-Math.round(rc.getPuntaje(p));j++)
+    		  	{%>     
+					<span class="fa fa-star"></span><%}%>
+    	  					
+      </td>
+     <th><a href="/Web/resenia?id=<%=p.getIdPlaneta()%>"><%=rc.getAll(p).size()%></a></th>
+     
      <% 
-     	if(c.getUser().equals("elbucci"))
+     	if(c!=null && c.getRol()==1)
      	{
-     %>
-     <th><a href="/Web/Modificar?id=<%=p.getIdPlaneta()%>">Modificar</a></th>
-     <th><a href="/Web/BajaPlaneta?id=<%=p.getIdPlaneta()%>">Dar de Baja</a></th>
+     %>	
+     <th><a class="btn btn-secondary" onclick="popupWindow('/Web/Modificar?id=<%=p.getIdPlaneta()%>', 'test', window, 500, 250)">Modificar</a></th>
+     <th><a class="btn btn-secondary" onclick="popupWindow('/Web/BajaPlaneta?id=<%=p.getIdPlaneta()%>', 'test', window, 500, 250)">Dar de Baja</a></th>
+         
     </tr>   
-  	<%}
+  	<%} 
   	  	
 			}					
 		}catch(Exception e) {}
