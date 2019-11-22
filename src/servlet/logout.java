@@ -1,31 +1,23 @@
 package servlet;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
-import entidades.Ciudadano;
-import logic.UserController;
-import sun.rmi.server.Dispatcher;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class logout
  */
-@WebServlet({"/Login","/login"})
-public class Login extends HttpServlet {
+@WebServlet("/logout")
+public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +27,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getSession().invalidate(); 
+	    response.sendRedirect("login.jsp");
+
 	}
 
 	/**
@@ -43,24 +37,9 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			
-		UserController uc=new UserController();
-		Ciudadano ciud=new Ciudadano();
-		ciud.setUser(request.getParameter("user"));
-		ciud.setPassword(request.getParameter("password"));
-		
-		if (uc.userExist(ciud))		
-		{
-			HttpSession misession= request.getSession();
-			misession.setAttribute("user",uc.getById(ciud));
-			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
-			rd.forward(request,response);
-		}
-		else {
-		    RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
-		    rd.forward(request,response);
-		
-	  }
-		}
+		request.getSession().invalidate(); 
+	    response.sendRedirect("login.jsp");
+
+	}
 
 }

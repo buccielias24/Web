@@ -4,9 +4,8 @@ $(document).ready(function () {
 		var pass1 = $('#password').val();
 		var pass2 = $('#password2').val();
 
-		if ( pass1 == pass2 ) {
-			$('#error2').text("coincide");
-		} else {
+		if ( pass1 != pass2 ) 
+		{
 			alert("Las contraseñas deben ser iguales");
 			(document).getElementById("password").value="";
 			(document).getElementById("password2").value="";
