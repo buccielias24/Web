@@ -34,8 +34,9 @@ public class BajaPlaneta extends HttpServlet {
 		// TODO Auto-generated method stub
 		Planeta p=new Planeta();
 		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
-		this.doPost(request, response);
-		
+		request.setAttribute("planeta", p);
+		RequestDispatcher rd=request.getRequestDispatcher("Planeta/BajaPlaneta.jsp");
+		rd.forward(request,response);
 	}
 
 	/**
