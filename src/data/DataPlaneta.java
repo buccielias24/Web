@@ -19,7 +19,8 @@ public class DataPlaneta {
 					Planeta p=new Planeta();
 					p.setIdPlaneta(rs.getInt("id"));
 					p.setNombrePlaneta(rs.getString("nombre"));
-					p.setCoordenada(rs.getString("ubicacion"));
+					p.setCoordenadaX(rs.getInt("coordenadaX"));
+					p.setCoordenadaY(rs.getInt("coordenadaY"));
 					p.setEstado(rs.getBoolean("estado"));
 					p.setMotivo(rs.getInt("motivo_baja"));
 					p.setFecha_alta("fecha_alta");
@@ -46,14 +47,15 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planetas(nombre, ubicacion, estado,puntaje,motivo_baja,fecha_alta,fecha_baja) values(?,?,?,?,?,?)",
+							"insert into planetas(nombre, coordenadaX,coordenadaY, estado,puntaje,motivo_baja,fecha_alta,fecha_baja) values(?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombrePlaneta());
-			stmt.setString(2, p.getCoordenada());
-			stmt.setBoolean(3, p.getEstado());
-			stmt.setInt(4, p.getMotivo());
-			stmt.setString(5, p.getFecha_alta());
-			stmt.setString(6, p.getFecha_baja());
+			stmt.setInt(2, p.getCoordenadaX());
+			stmt.setInt(3, p.getCoordenadaY());
+			stmt.setBoolean(4, p.getEstado());
+			stmt.setInt(5, p.getMotivo());
+			stmt.setString(6, p.getFecha_alta());
+			stmt.setString(7, p.getFecha_baja());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
@@ -104,7 +106,8 @@ public class DataPlaneta {
 					p=new Planeta();
 					p.setIdPlaneta(rs.getInt("id"));
 					p.setNombrePlaneta(rs.getString("nombre"));
-					p.setCoordenada(rs.getString("ubicacion"));
+					p.setCoordenadaX(rs.getInt("coordenadaX"));
+					p.setCoordenadaY(rs.getInt("coordenadaY"));
 					p.setEstado(rs.getBoolean("estado"));			
 			}			
 		} catch (SQLException e) {
@@ -125,9 +128,8 @@ public class DataPlaneta {
 	public void modify(Planeta pla) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETAS SET nombre=?,ubicacion=?,estado=? where id=?");
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETAS SET nombre=?,estado=? where id=?");
 			stmt.setString(1,pla.getNombrePlaneta());
-			stmt.setString(2,pla.getCoordenada());
 			stmt.setBoolean(3,pla.getEstado());
 			stmt.setInt(4,pla.getIdPlaneta());
 			stmt.executeUpdate();			

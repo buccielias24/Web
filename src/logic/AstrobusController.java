@@ -26,7 +26,8 @@ public class AstrobusController {
 		
 	}
 	public void updateAstroviaje(int id,double dr) {
-		da.updateAstroviaje(id, dr);
+		da.updateAstrobus(id, dr);
 	}
+	
 
 }

@@ -5,7 +5,8 @@ public class Planeta {
 
 	private int idPlaneta;
 	private String nombrePlaneta;
-	private String coordenada;
+	private int coordenadaX;
+	private int coordenadaY;
 	private boolean estado;
 	private String fecha_alta;
 	private String fecha_baja;
@@ -22,11 +23,17 @@ public class Planeta {
 	public void setNombrePlaneta(String nombrePlaneta) {
 		this.nombrePlaneta = nombrePlaneta;
 	}
-	public String getCoordenada() {
-		return coordenada;
+	public int getCoordenadaX() {
+		return coordenadaX;
 	}
-	public void setCoordenada(String coordenada) {
-		this.coordenada = coordenada;
+	public void setCoordenadaX(int coordenadaX) {
+		this.coordenadaX = coordenadaX;
+	}
+	public int getCoordenadaY() {
+		return coordenadaY;
+	}
+	public void setCoordenadaY(int coordenadaY) {
+		this.coordenadaY = coordenadaY;
 	}
 	public boolean getEstado() {
 		return estado;
@@ -57,8 +64,8 @@ public class Planeta {
 	}
 	@Override
 	public String toString() {
-		return "Planeta [idPlaneta=" + idPlaneta + ", nombrePlaneta=" + nombrePlaneta + ", coordenada=" + coordenada
-				+ ", estado=" + estado + ", fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", motivo="
+		return "Planeta [idPlaneta=" + idPlaneta + ", nombrePlaneta=" + nombrePlaneta + ", coordenadaX=" + coordenadaX
+				+",coordenadaY= "+coordenadaY+", estado=" + estado + ", fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", motivo="
 				+ motivo + "]";
 	}
 	
