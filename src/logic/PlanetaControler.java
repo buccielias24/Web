@@ -37,6 +37,11 @@ public class PlanetaControler {
 		dp.delete(p);
 	}
 	public void modify(Planeta p)
-		{dp.modify(p);
+		{
+			if(p.getEstado()!=true || p.getEstado()!=false)
+				{
+					
+				}
+			   		dp.modify(p);
 	}
 }

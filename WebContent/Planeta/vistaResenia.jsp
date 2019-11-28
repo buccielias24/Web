@@ -29,7 +29,8 @@
 					<th><%=res.getComentario()%></th>
 					<%if (c!=null && c.getDgu()==res.getDgu()){%>
 						<th>Editar</th>
-					<%}}%>
+					<% }
+				}%>
 				</tr>	
 </table>											
 </body>
