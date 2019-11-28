@@ -107,8 +107,7 @@
 					<span class="fa fa-star"></span><%}%>
     	  					
       </td>
-     <th><a href="/Web/resenia?id=<%=p.getIdPlaneta()%>"><%=rc.getAll(p).size()%></a></th>
-     
+     <th><a href="/Web/resenia?id=<%=p.getIdPlaneta()%>&accion=view"><%=rc.getAll(p).size()%></a></th>  
      <% 
      	if(c!=null && c.getRol()==1)
      	{

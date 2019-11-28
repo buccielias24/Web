@@ -3,7 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 import data.DataResenia;
-
+import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Resenia;
 
@@ -32,5 +32,22 @@ public class reseniaController {
 			}
 			return tot/i;
 	}	
+	
+	public int existResenia(Ciudadano ciud, Planeta p)
+	{
+		if(ciud.getRol()==0 || ciud.getRol()==1)
+		{
+			ArrayList<Resenia> resenias=dr.getAll(p);
+				for(Resenia res:resenias)						
+					{
+					if(res.getIdPlaneta()==p.getIdPlaneta() && res.getDgu()==ciud.getDgu())
+					{
+					return 1;	
+					}else
+					{return 2;}
+					}
+			}
+		return 3;
+	}
 	
 }

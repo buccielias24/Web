@@ -125,7 +125,7 @@ public class DataPlaneta {
 	public void modify(Planeta pla) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETA SET nombrePlaneta=?,coordenada=?,estadoPlaneta=? where idPlaneta=?");
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETAS SET nombre=?,ubicacion=?,estado=? where id=?");
 			stmt.setString(1,pla.getNombrePlaneta());
 			stmt.setString(2,pla.getCoordenada());
 			stmt.setBoolean(3,pla.getEstado());

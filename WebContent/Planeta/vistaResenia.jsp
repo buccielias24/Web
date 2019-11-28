@@ -20,13 +20,16 @@
 </tr>
 		<% reseniaController rc=new reseniaController();
 			ArrayList<Resenia> resenias=rc.getAll((Planeta)request.getAttribute("planeta"));				
-				for(Resenia res:resenias)
+			Ciudadano c=(Ciudadano)session.getAttribute("user");	
+			for(Resenia res:resenias)
 				{
 				%>
 				<tr>
 					<th><%=res.getDgu()%></th>
 					<th><%=res.getComentario()%></th>
-					<%}%>
+					<%if (c!=null && c.getDgu()==res.getDgu()){%>
+						<th>Editar</th>
+					<%}}%>
 				</tr>	
 </table>											
 </body>

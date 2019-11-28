@@ -28,9 +28,9 @@ public class DataViaje {
 					v.setSalida(rs.getString("fechaSalida"));
 					v.setLlegada(rs.getString("fechaLlegada"));
 					v.setEstado(rs.getBoolean("estadoViaje"));
-					p1.setIdPlaneta(rs.getInt("planetaOrigen"));
+					p1.setIdPlaneta(rs.getInt("origen"));
 					v.setOrigen(p1);
-					p2.setIdPlaneta(rs.getInt("planetaDestino"));
+					p2.setIdPlaneta(rs.getInt("destino"));
 					v.setDestino(p2);					
 					viajes.add(v);
 				}
@@ -53,7 +53,7 @@ public class DataViaje {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(planetaOrigen,planetaDestino,fechaSalida,fechaLlegada,estadoViaje) values(?,?,?,?,?)",
+							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje) values(?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());

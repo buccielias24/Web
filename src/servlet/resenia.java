@@ -8,8 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.sun.org.apache.xerces.internal.util.DraconianErrorHandler;
+
+import entidades.Ciudadano;
 import entidades.Planeta;
+import logic.UserController;
+import logic.reseniaController;
 
 /**
  * Servlet implementation class resenia
@@ -33,10 +39,38 @@ public class resenia extends HttpServlet {
 		// TODO Auto-generated method stub
 		Planeta p=new Planeta();
 		p.setIdPlaneta(Integer.parseInt(request.getParameter("id")));
-		request.setAttribute("planeta", p);
+	
+		if(request.getParameter("accion").equals("new"))
+		{
+			try {
+			HttpSession session=request.getSession(false);  
+				reseniaController rc=new reseniaController();
+					switch(rc.existResenia((Ciudadano)session.getAttribute("user"), p))
+					{
+					case 1:{
+							
+					}break;
+					case 2:{
+						System.out.println("caso 2");
+					}break;
+					case 3:{
+						RequestDispatcher rd=request.getRequestDispatcher("/nologged.jsp");
+						rd.forward(request, response);
+					}break;
+			 	/*	RequestDispatcher rd=request.getRequestDispatcher("/Planeta/BajaPlaneta.jsp");
+			 		rd.forward(request, response);*/
+					}
+			}
+			catch(Exception e) {
+				RequestDispatcher rd=request.getRequestDispatcher("/nologged.jsp");
+				rd.forward(request, response);
+			}
+		}else
+		{			
+		request.setAttribute("planeta", p);		
 		RequestDispatcher rd=request.getRequestDispatcher("Planeta/vistaResenia.jsp");
 		rd.forward(request,response);
-
+		}
 	}
 
 	/**
