@@ -128,7 +128,7 @@ public class DataAstrobus {
 	
 //ACTUALIZAR total distancia recorrida
 	public void updateAstrobus(int id,double dr) {
-			
+		
 		PreparedStatement stmt= null;
 		//ResultSet keyResultSet=null;
 		try {

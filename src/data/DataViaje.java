@@ -47,7 +47,45 @@ public class DataViaje {
 		}		
 		return viajes;
 	}
-	
+	public Viaje getById(Viaje via) {
+			DataPlaneta dp=new DataPlaneta();
+			Planeta origen=null;
+			Planeta destino=null;
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			Viaje v=null;	
+			
+			try {
+				stmt= Conectar.getInstancia().getConn().
+						prepareStatement("select * from viajes where id=?");
+					stmt.setInt(1,via.getIdViaje());
+					rs=stmt.executeQuery();
+				
+				if(rs!=null && rs.next()) {
+						origen.setIdPlaneta(rs.getInt("origen"));
+						destino.setIdPlaneta(rs.getInt("destino"));
+						v=new Viaje();
+						v.setIdViaje(rs.getInt("id"));
+						v.setOrigen(dp.getById(origen));
+						v.setDestino(dp.getById(destino));
+						v.setEstado(rs.getBoolean("estado"));			
+				}			
+			} catch (SQLException e) {
+				e.printStackTrace();
+				
+			} finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					Conectar.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}	
+			return v;
+		}
+
+
 	public void add(Viaje v) {
 		PreparedStatement stmt= null;	
 		try {
