@@ -126,25 +126,6 @@ public class DataAstrobus {
     }
 	
 	
-//ACTUALIZAR total distancia recorrida
-	public void updateAstrobus(int id,double dr) {
-		
-		PreparedStatement stmt= null;
-		//ResultSet keyResultSet=null;
-		try {
-			
-			stmt=Conectar.getInstancia().getConn().prepareStatement(
-							
-							"UPDATE astrobus set distRecorrida+="+dr+" where IdNave="+id+";"
-							+"UPDATE astrobus set tiempoDesdeSinUso=now() where IdNave="+id+";"
-							+"UPDATE astrobus set estado=true where IdNave="+id+";",
-							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.executeUpdate();
-            } catch (SQLException e) {
-            e.printStackTrace();
-		} 	
-    }
-	
 }
 
 
