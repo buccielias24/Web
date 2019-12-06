@@ -29,7 +29,7 @@
     <!-- Custom styles for this template -->
     <link href="css/form-validation.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>    
-        <script src="js/pass-validation.js"-> 
+        <script src="js/pass-validation.js"> 
         </script>
   </head>
   <body class="bg-light">

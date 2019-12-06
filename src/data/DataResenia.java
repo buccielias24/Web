@@ -8,13 +8,21 @@ import java.util.ArrayList;
 import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Resenia;
+import logic.PlanetaControler;
+import logic.UserController;
 
 public class DataResenia {
 
+	Ciudadano c=null;
+	Planeta pl=null;
+	
+	PlanetaControler pc=new PlanetaControler();
+	UserController uc=new UserController();
+	
 	public ArrayList<Resenia> getAll(Planeta p){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		Resenia r=null;	
+		Resenia r=null;
 		ArrayList<Resenia> reseñas=new ArrayList<>();
 		
 		try {
@@ -25,10 +33,14 @@ public class DataResenia {
 				if(rs!=null) {
 					while(rs.next()) {		
 					r=new Resenia();
-					r.setComentario(rs.getString("comentario"));
-					r.setDgu(rs.getInt("idUsuario"));
+					r.setComentario(rs.getString("comentario"));		
+					c.setDgu(rs.getInt("idUsuario"));
+					c=uc.getById(c);
+					r.setUsuario(c);
+					p.setIdPlaneta(rs.getInt("idPlaneta"));
+					p=pc.getById(p);
+					r.setPlaneta(p);
 					r.setFecha(rs.getString("fecha"));
-					r.setIdPlaneta(p.getIdPlaneta());
 					r.setPuntaje(rs.getFloat("puntaje"));
 					reseñas.add(r);
 				}
@@ -58,13 +70,16 @@ public class DataResenia {
 			stmt.setString(1,r.getFecha());
 			stmt.setString(2, r.getComentario());
 			stmt.setFloat(3, r.getPuntaje());
-			stmt.setInt(4, r.getIdPlaneta());
-			stmt.setInt(5, r.getDgu());
+			stmt.setInt(4, r.getPlaneta().getIdPlaneta());
+			stmt.setInt(5, r.getUsuario().getDgu());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
-	                r.setIdPlaneta(keyResultSet.getInt(4));
-	                r.setDgu(keyResultSet.getInt(5));
+				  	Planeta p=new Planeta();
+				  	p.setIdPlaneta(keyResultSet.getInt(4));
+				  	r.setPlaneta(p);
+				  	Ciudadano ciud=new Ciudadano();
+				  	ciud.setDgu(keyResultSet.getInt(5));				  	
 	                r.setFecha(keyResultSet.getString(1));}
 	    	}catch (SQLException e) {
             e.printStackTrace();}	finally {
@@ -85,8 +100,8 @@ public class DataResenia {
 			stmt.setString(1,res.getFecha());
 			stmt.setString(2,res.getComentario());
 			stmt.setFloat(3,res.getPuntaje());
-			stmt.setInt(4,res.getIdPlaneta());
-			stmt.setInt(5,res.getDgu());
+			stmt.setInt(4,res.getPlaneta().getIdPlaneta());
+			stmt.setInt(5,res.getUsuario().getDgu());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {
@@ -109,9 +124,10 @@ public class DataResenia {
 				stmt.setInt(2,c.getDgu());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
+					p.setIdPlaneta(rs.getInt("idPlaneta"));					
 					r=new Resenia();
-				    r.setIdPlaneta(rs.getInt("idPlaneta"));
-					r.setDgu(rs.getInt("idUsuario"));
+				    r.setPlaneta(p);					
+				    r.setUsuario(c);
 					r.setFecha(rs.getString("fecha"));
 					r.setPuntaje(rs.getFloat("puntaje"));
 					r.setComentario(rs.getString("comentario"));

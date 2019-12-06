@@ -1,3 +1,4 @@
+
 package data;
 
 import java.sql.PreparedStatement;
@@ -65,7 +66,7 @@ public class DataViaje {
 						prepareStatement("select * from viajes where id=?");
 					stmt.setInt(1,via.getIdViaje());
 					rs=stmt.executeQuery();
-				
+
 				if(rs!=null && rs.next()) {
 						origen.setIdPlaneta(rs.getInt("origen"));
 						destino.setIdPlaneta(rs.getInt("destino"));
@@ -96,7 +97,7 @@ public class DataViaje {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje,distancia) values(?,?,?,?,?,?)",
+							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje,distancia,astrobus) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());
@@ -104,7 +105,7 @@ public class DataViaje {
 			stmt.setString(4, v.getLlegada());
 			stmt.setBoolean(5, v.getEstado());
 			stmt.setDouble(6, v.getDistancia());
-		//	stmt.setInt(6, v.getAstrobus().getIdNave());
+            stmt.setInt(7, v.getAstrobus().getIdNave());
 			stmt.executeUpdate();			
 	    	}catch (SQLException e) {
             e.printStackTrace();}finally {

@@ -27,7 +27,6 @@
 			<tr>
 				<th><%=p.getIdPlaneta()%></th>	
 				<th><%=p.getNombrePlaneta()%></th>
-				<th><%=p.getCoordenada()%></th>
 				<th><%=p.getEstado()%></th>
 			</tr><%
 			} 

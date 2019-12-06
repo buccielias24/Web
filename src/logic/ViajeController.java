@@ -14,7 +14,11 @@ public class ViajeController {
 	}
 	
 	public void add(Viaje v)
-	{
+	{	
+		double x=v.getDestino().getCoordenadaX()-v.getOrigen().getCoordenadaX();	
+		double y=v.getDestino().getCoordenadaY()-v.getOrigen().getCoordenadaY();
+		v.setDistancia(Math.sqrt(x*x+y*y));
+		System.out.println(v.getDistancia());
 		dv.add(v);	
 	}
 	

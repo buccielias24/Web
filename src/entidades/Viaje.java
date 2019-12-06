@@ -10,6 +10,7 @@ public class Viaje {
 	private Planeta destino;
 	private Astrobus astrobus;
 	private Ciudadano pasajero;
+	private double distancia;
 	
 	public Viaje() {}
 	
@@ -24,7 +25,14 @@ public class Viaje {
 		this.estado = estado;
 	}
 	
-	
+	public double getDistancia() {
+		return distancia;
+	}
+
+	public void setDistancia(double distancia) {
+		this.distancia = distancia;
+	}
+
 	public int getIdViaje() {
 		return idViaje;
 	}

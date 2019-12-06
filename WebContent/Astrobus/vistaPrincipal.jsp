@@ -57,34 +57,32 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Origen</th>
-      <th scope="col">Destino</th>
-       <th scope="col">Fecha y Hora Salida</th>
-        <th scope="col">Fecha Y Hora Llegada</th>
-         <th scope="col">Estado</th>
-   		      <th scope="col">Distancia</th> 	
+      <th scope="col">Marca</th>
+      <th scope="col">Asientos</th>
+       <th scope="col">Distancia Limite</th>
+        <th scope="col">Tiempo sin uso</th>
+         <th scope="col">Distancia recorrida</th>
     </tr>
   </thead>
   <tbody id="myTbody">
   	<% 
 		try{	
-			Planeta p=new Planeta();
+			Astrobus a=new Astrobus();
 			
-			PlanetaControler pc=new PlanetaControler();
+			AstrobusController ac=new AstrobusController();
 			
-			ArrayList<Viaje> viajes=new ViajeController().getAll();				
-			for(Viaje v:viajes){
+			ArrayList<Astrobus> astrobuses=new AstrobusController().getAll();				
+			for(Astrobus astro:astrobuses){
 			
 			%>
     <tr>
-      <th scope="row"><%=v.getIdViaje()%></th>
-      <td><%=pc.getById(v.getOrigen()).getNombrePlaneta()%></td>  <!-- Muestra el objeto entero Planeta ver para arreglar la vista -->
-      <td><%=pc.getById(v.getDestino()).getNombrePlaneta()%></td>
-      <td><%=v.getSalida()%></td>
-      <td><%=v.getLlegada()%></td>
-      <td><%=v.getEstado()%></td>
-      <td><%=v.getDistancia()%></td>
-	</tr>    
+      <th scope="row"><%=astro.getIdNave()%></th>
+      <td><%=astro.getMarca() %></td>
+      <td><%=astro.getCantAsientos() %></td>
+      <td><%=astro.getDistLimite() %></td>
+      <td><%=astro.getTiempoLibre() %></td>   
+      <td><%=ac.getDistancia(astro)%></td>  
+    </tr>    
   	<%
   	  	
 			}					

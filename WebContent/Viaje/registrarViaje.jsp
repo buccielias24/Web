@@ -1,3 +1,5 @@
+<%@page import="logic.AstrobusController"%>
+<%@page import="entidades.Astrobus"%>
 <%@page import="logic.PlanetaControler"%>
 <%@page import="entidades.Planeta"%>
 <%@page import="java.util.ArrayList"%>
@@ -69,10 +71,24 @@
        min="2019-01-01" max="2020-12-31">
 <br><br>
 <label for="start">Fecha de Llegada:</label>
-<input type="datetime-local" id="finish" name="fechaLlegada"
+<input type="datetime-local" id="finish" name="fechaLlegada" 
        value="2019-09-17"
        min="2019-01-01" max="2020-12-31">
- <br><br><br>      
+ <br><br>      
+ <h3>Astrobus definido para el viaje</h3>
+<select required type="text" id="elegirAstrobus"  name="elegirAstrobus">
+		<option disabled selected> -- select an option -- </option>
+<% 
+		AstrobusController ac=new AstrobusController();
+		ArrayList<Astrobus> astrobuses=ac.getAll();
+		for(Astrobus a:astrobuses)
+		{%>
+		<option id="lala" value="<%=a.getIdNave()%>"><%=a.getMarca()%></option>				
+		<%}%>
+</select>
+<br><br><br>
+
+
 <input type="submit" value="Aceptar">
 </form>
 </body>

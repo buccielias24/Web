@@ -16,19 +16,21 @@ public class DataAstrobus {
 		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idNave,cantAsientos,distLimite,distService,estado from astrobus");
+			rs= stmt.executeQuery("select * from astrobus");
 			// ver con el profe si podemos traer el estado del planeta con un nombre con la funcion if() de sql
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
-					Astrobus p=new Astrobus();
-					p.setIdNave(rs.getInt("idNave"));
-					p.setCantAsientos(rs.getInt("cantAsientos"));
-					p.setDistLimite(rs.getDouble("distLimite"));
-					p.setDistService(rs.getDouble("distService"));
-					p.setEstado(rs.getBoolean("estadoPlaneta"));
+					Astrobus a=new Astrobus();
+					a.setIdNave(rs.getInt("id"));
+					a.setMarca(rs.getString("marca"));
+					a.setCantAsientos(rs.getInt("cantAsientos"));
+					a.setDistLimite(rs.getDouble("distLimite"));
+					a.setDistService(rs.getDouble("distService"));
+					a.setEstado(rs.getBoolean("estado"));
+					a.setTiempoLibre(rs.getString("tiempoDesdeSinUso"));
 					// dr.setRoles(p);
-					astrobuses.add(p);
+					astrobuses.add(a);
 				}
 			}
 			
@@ -51,19 +53,19 @@ public class DataAstrobus {
 	public Astrobus getById(Astrobus a){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		Astrobus p=null;	
+		Astrobus a1=new Astrobus();
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select idNave,cantAsientos,distLimite,distService,estado from astrobus where idNave=?");
+					prepareStatement("select * from astrobus where id=?");
 			stmt.setInt(1,a.getIdNave());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				Astrobus a1=new Astrobus();
-				a1.setIdNave(rs.getInt("idNave"));
+				a1.setIdNave(rs.getInt("id"));
+				a1.setMarca(rs.getString("marca"));
 				a1.setCantAsientos(rs.getInt("cantAsientos"));
 				a1.setDistLimite(rs.getDouble("distLimite"));
 				a1.setDistService(rs.getDouble("distService"));
-				a1.setEstado(rs.getBoolean("estadoPlaneta"));			
+				a1.setEstado(rs.getBoolean("estado"));			
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +79,7 @@ public class DataAstrobus {
 				e.printStackTrace();
 			}
 		}	
-		return p;
+		return a1;
 	}
 	
 	public void add(Astrobus a) {

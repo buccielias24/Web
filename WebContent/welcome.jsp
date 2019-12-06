@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Welcome</title>
-<meta http-equiv="Refresh" content="2 ; url=home.jsp"/>
+<meta http-equiv="Refresh" content="2 ; url=index.jsp"/>
 </head>
 <body>
 	<h1> Welcome <% Ciudadano c=new Ciudadano();	

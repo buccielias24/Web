@@ -54,7 +54,6 @@ public class Planetas extends HttpServlet {
 		{
 			Planeta p=new Planeta();
 			p.setNombrePlaneta(request.getParameter("inAlta1"));			
-			p.setCoordenada(request.getParameter("inAlta2"));
 			p.setFecha_alta(request.getParameter("inAlta3"));
 			
 			HttpSession session=request.getSession(false);  

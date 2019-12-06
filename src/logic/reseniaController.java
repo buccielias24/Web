@@ -40,7 +40,7 @@ public class reseniaController {
 			ArrayList<Resenia> resenias=dr.getAll(p);
 				for(Resenia res:resenias)						
 					{
-					if(res.getIdPlaneta()==p.getIdPlaneta() && res.getDgu()==ciud.getDgu())
+					if(res.getPlaneta().getIdPlaneta()==p.getIdPlaneta() && res.getUsuario().getDgu()==ciud.getDgu())
 					{
 					return 1;	
 					}else

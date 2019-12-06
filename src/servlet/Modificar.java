@@ -50,7 +50,7 @@ public class Modificar extends HttpServlet {
 		PlanetaControler pc=new PlanetaControler();
 		Planeta p=new Planeta();
 		p.setIdPlaneta(id);
-		p.setCoordenada(coordenada);
+
 		p.setNombrePlaneta(nombre);
 		p.setEstado(estado);
 		pc.modify(p);

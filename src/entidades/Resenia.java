@@ -5,8 +5,8 @@ public class Resenia {
 	
 	private float puntaje;
 	private String comentario;
-	private int dgu;
-	private int idPlaneta;
+	private Ciudadano usuario;
+	private Planeta planeta;
 	private String fecha;
 	
 	public Resenia() {}
@@ -23,22 +23,26 @@ public class Resenia {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	public int getDgu() {
-		return dgu;
-	}
-	public void setDgu(int dgu) {
-		this.dgu = dgu;
-	}
-	public int getIdPlaneta() {
-		return idPlaneta;
-	}
-	public void setIdPlaneta(int idPlaneta) {
-		this.idPlaneta = idPlaneta;
-	}
 	public String getFecha() {
 		return fecha;
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public Ciudadano getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Ciudadano usuario) {
+		this.usuario = usuario;
+	}
+
+	public Planeta getPlaneta() {
+		return planeta;
+	}
+
+	public void setPlaneta(Planeta planeta) {
+		this.planeta = planeta;
 	}
 }

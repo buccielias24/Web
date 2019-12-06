@@ -2,8 +2,12 @@ package logic;
 
 import java.util.ArrayList;
 
+import com.sun.org.apache.xerces.internal.impl.dv.DVFactoryException;
+
 import data.DataAstrobus;
+import data.DataViaje;
 import entidades.Astrobus;
+import entidades.Viaje;
 
 
 public class AstrobusController {
@@ -25,9 +29,20 @@ public class AstrobusController {
 		return da.getById(a);
 		
 	}
-	public void updateAstroviaje(int id,double dr) {
-		da.updateAstrobus(id, dr);
-	}
 	
+	public double getDistancia(Astrobus a)
+
+	{
+			double total=0;
+				ArrayList<Viaje> viajes=new ViajeController().getAll();
+					for(Viaje v:viajes)
+					{
+							if(v.getAstrobus().getIdNave()==a.getIdNave())
+							{
+								total=total+v.getDistancia();
+							}
+					}
+		return total;
+	}		
 
 }
