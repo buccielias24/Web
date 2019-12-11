@@ -138,7 +138,7 @@
         <svg class="bd-placeholder-img rounded-circle" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Viajes</title><rect width="100%" height="100%" fill="#777"></rect><image xlink:href="img/viaje.jpg" width=181% height=100%></svg>
         <h2>Viajes</h2>
         <p>Gestion de Viajes galacticos</p>
-        <p><a class="btn btn-secondary" href="Viaje/vistaPrincipal.jsp" role="button">View details »</a></p>
+        <p><a class="btn btn-secondary" href="/Web/viaje" role="button">View details »</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"></rect><image xlink:href="img/nave.jpg" width=150% height=100%></svg>
