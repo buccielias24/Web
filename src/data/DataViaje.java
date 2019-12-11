@@ -119,4 +119,27 @@ public class DataViaje {
     				}
 			}
 	
+	public void modify(Viaje v) {
+		PreparedStatement stmt= null;
+		try {
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE viaje SET fechaSalida=?,fechaLlegada=?,estadoViaje=?,origen=?,destino=?,distancia=?,astrobus=? where idViaje=?");
+			stmt.setString(1,v.getSalida());
+			stmt.setString(2,v.getLlegada());
+			stmt.setBoolean(3,v.getEstado());
+			stmt.setInt(4,v.getOrigen().getIdPlaneta());
+			stmt.setInt(5, v.getDestino().getIdPlaneta());
+			stmt.setDouble(6, v.getDistancia());
+			stmt.setInt(7, v.getAstrobus().getIdNave());
+			stmt.setInt(8,v.getIdViaje());
+			stmt.executeUpdate();			
+            } catch (SQLException e) {
+            e.printStackTrace();}finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+				} catch (SQLException e) {
+				e.printStackTrace();} 	
+				}
+		}
+	
 }

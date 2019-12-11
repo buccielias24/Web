@@ -13,6 +13,21 @@ public class ViajeController {
 		dv=new DataViaje();
 	}
 	
+	public void actualizarEstados()
+	{
+		LocalDateTime localDate=LocalDateTime.now();
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		ArrayList<Viaje> viajes=dv.getAll();
+			for(Viaje v:viajes)
+			{
+				if(v.getLlegada().compareTo(localDate.format(formatter))<=0)
+				{
+					v.setEstado(true);
+					this.modify(v);					
+				}
+			}
+	}
+	
 	public void add(Viaje v)
 	{	
 		
@@ -43,5 +58,9 @@ public class ViajeController {
 		return dv.getAll();
 	}
 	
+	public void modify(Viaje v)
+	{
+		dv.modify(v);
+	}
 	
 }

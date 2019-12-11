@@ -1,5 +1,6 @@
 package entidades;
 
+
 public class Viaje {
 
 	private int idViaje;
