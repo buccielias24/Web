@@ -30,6 +30,10 @@ public class AstrobusController {
 		
 	}
 	
+	public void modify(Astrobus a)
+	{
+		da.modify(a);
+	}
 	public double getDistancia(Astrobus a)
 
 	{

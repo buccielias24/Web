@@ -20,10 +20,10 @@ public class reseniaController {
 			return dr.getAll(p);
 			
 		}
-	public float getPuntaje(Planeta p)
+	public double getPuntaje(Planeta p)
 	{
 		ArrayList<Resenia>resenias=dr.getAll(p);
-		float tot=0;
+		double tot=0;
 		int i=0;
 			for(Resenia res:resenias)
 			{

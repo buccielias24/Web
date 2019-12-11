@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import entidades.Astrobus;
+import entidades.Planeta;
 
 public class DataAstrobus {
 	public ArrayList<Astrobus> getAll(){
@@ -29,7 +30,10 @@ public class DataAstrobus {
 					a.setDistService(rs.getDouble("distService"));
 					a.setEstado(rs.getBoolean("estado"));
 					a.setTiempoLibre(rs.getString("tiempoDesdeSinUso"));
-					// dr.setRoles(p);
+					a.setFecha_alta(rs.getString("fecha_alta"));
+					a.setFecha_baja(rs.getString("fecha_baja"));
+					a.setMotivo(rs.getInt("motivo"));
+					a.setComentario(rs.getString("comentario"));
 					astrobuses.add(a);
 				}
 			}
@@ -65,7 +69,12 @@ public class DataAstrobus {
 				a1.setCantAsientos(rs.getInt("cantAsientos"));
 				a1.setDistLimite(rs.getDouble("distLimite"));
 				a1.setDistService(rs.getDouble("distService"));
+				a1.setTiempoLibre(rs.getString("tiempoDesdeSinUso"));
 				a1.setEstado(rs.getBoolean("estado"));			
+				a1.setFecha_alta(rs.getString("fecha_alta"));
+				a1.setFecha_baja(rs.getString("fecha_baja"));
+				a1.setMotivo(rs.getInt("motivo"));
+				a1.setComentario(rs.getString("comentario"));			
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,21 +122,31 @@ public class DataAstrobus {
 
 	
 //DAR DE BAJA ASTROBUS
-	public void update(int id) {
+	public void modify(Astrobus a) {
 		PreparedStatement stmt= null;
-		//ResultSet keyResultSet=null;
 		try {
-			stmt=Conectar.getInstancia().getConn().
-					prepareStatement(
-							"UPDATE astrobus set estado= '"+0+"'Where idNave="+id+";",
-							PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE astrobus SET marca=?,cantAsientos=?,distService=?,distLimite=?,tiempoDesdeSinUso=?,estado=?,fecha_alta=?,fecha_baja=?,motivo=?,comentario=? where id=?");
+			stmt.setString(1, a.getMarca());
+			stmt.setInt(2,a.getCantAsientos());
+			stmt.setDouble(3,a.getDistService());
+			stmt.setDouble(4, a.getDistLimite());
+			stmt.setString(5, a.getTiempoLibre());
+			stmt.setBoolean(6, a.getEstado());
+			stmt.setString(7,a.getFecha_alta());
+			stmt.setString(8, a.getFecha_baja());
+			stmt.setInt(9,a.getMotivo());
+			stmt.setString(10, a.getComentario());
+			stmt.setInt(11, a.getIdNave());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
-            e.printStackTrace();
-		} 	
-    }
-	
-	
+            e.printStackTrace();}finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+				} catch (SQLException e) {
+				e.printStackTrace();} 	
+				}
+		}
 }
-
-
+	
+	

@@ -3,7 +3,7 @@ package entidades;
 
 public class Resenia {
 	
-	private float puntaje;
+	private int puntaje;
 	private String comentario;
 	private Ciudadano usuario;
 	private Planeta planeta;
@@ -11,10 +11,10 @@ public class Resenia {
 	
 	public Resenia() {}
 	
-	public float getPuntaje() {
+	public int getPuntaje() {
 		return puntaje;
 	}
-	public void setPuntaje(float puntaje) {
+	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 	}
 	public String getComentario() {
@@ -23,6 +23,7 @@ public class Resenia {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+
 	public String getFecha() {
 		return fecha;
 	}

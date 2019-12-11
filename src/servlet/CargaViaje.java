@@ -63,7 +63,6 @@ public class CargaViaje extends HttpServlet {
         v.setAstrobus(a);		
 		
  
-		System.out.println(v.getAstrobus().getIdNave());
 		ViajeController vc=new ViajeController();
 		vc.add(v);
 		

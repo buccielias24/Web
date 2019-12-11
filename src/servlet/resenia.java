@@ -68,7 +68,7 @@ public class resenia extends HttpServlet {
 		}else
 		{			
 		request.setAttribute("planeta", p);		
-		RequestDispatcher rd=request.getRequestDispatcher("Planeta/vistaResenia.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("Planeta/NewFile.jsp");
 		rd.forward(request,response);
 		}
 	}

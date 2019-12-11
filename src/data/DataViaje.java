@@ -13,6 +13,8 @@ import entidades.Viaje;
 
 public class DataViaje {
 
+
+	DataAstrobus da=new DataAstrobus();
 	
 	public ArrayList<Viaje> getAll(){
 		Statement stmt=null;
@@ -37,7 +39,7 @@ public class DataViaje {
 					v.setDestino(p2);
 					v.setDistancia(rs.getDouble("distancia"));
 				    a.setIdNave(rs.getInt("astrobus")); 
-					v.setAstrobus(a);
+					v.setAstrobus(da.getById(a));
 					viajes.add(v);
 				}
 			}			
@@ -116,4 +118,5 @@ public class DataViaje {
     				e.printStackTrace();}
     				}
 			}
+	
 }

@@ -13,9 +13,7 @@ import logic.UserController;
 
 public class DataResenia {
 
-	Ciudadano c=null;
-	Planeta pl=null;
-	
+
 	PlanetaControler pc=new PlanetaControler();
 	UserController uc=new UserController();
 	
@@ -31,17 +29,20 @@ public class DataResenia {
 				stmt.setInt(1,p.getIdPlaneta());
 				rs=stmt.executeQuery();
 				if(rs!=null) {
-					while(rs.next()) {		
+					while(rs.next()) {
+					Ciudadano c=new Ciudadano();
+					Planeta pl=new Planeta();
+						
 					r=new Resenia();
 					r.setComentario(rs.getString("comentario"));		
 					c.setDgu(rs.getInt("idUsuario"));
 					c=uc.getById(c);
 					r.setUsuario(c);
-					p.setIdPlaneta(rs.getInt("idPlaneta"));
-					p=pc.getById(p);
-					r.setPlaneta(p);
+					pl.setIdPlaneta(rs.getInt("idPlaneta"));
+					pl=pc.getById(pl);
+					r.setPlaneta(pl);
 					r.setFecha(rs.getString("fecha"));
-					r.setPuntaje(rs.getFloat("puntaje"));
+					r.setPuntaje(rs.getInt("puntaje"));
 					reseñas.add(r);
 				}
 			}			
@@ -69,7 +70,7 @@ public class DataResenia {
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,r.getFecha());
 			stmt.setString(2, r.getComentario());
-			stmt.setFloat(3, r.getPuntaje());
+			stmt.setInt(3, r.getPuntaje());
 			stmt.setInt(4, r.getPlaneta().getIdPlaneta());
 			stmt.setInt(5, r.getUsuario().getDgu());
 			stmt.executeUpdate();	
@@ -99,7 +100,7 @@ public class DataResenia {
 			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE resenia SET fecha=?,comentario=?,puntaje=?,idPlaneta=?,idUsuario=? where id=?");
 			stmt.setString(1,res.getFecha());
 			stmt.setString(2,res.getComentario());
-			stmt.setFloat(3,res.getPuntaje());
+			stmt.setInt(3,res.getPuntaje());
 			stmt.setInt(4,res.getPlaneta().getIdPlaneta());
 			stmt.setInt(5,res.getUsuario().getDgu());
 			stmt.executeUpdate();			
@@ -129,7 +130,7 @@ public class DataResenia {
 				    r.setPlaneta(p);					
 				    r.setUsuario(c);
 					r.setFecha(rs.getString("fecha"));
-					r.setPuntaje(rs.getFloat("puntaje"));
+					r.setPuntaje(rs.getInt("puntaje"));
 					r.setComentario(rs.getString("comentario"));
 				}			
 		} catch (SQLException e) {

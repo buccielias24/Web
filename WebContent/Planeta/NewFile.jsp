@@ -1,4 +1,3 @@
-<%@page import="oracle.jrockit.jfr.tools.ConCatRepository"%>
 <%@page import="entidades.Ciudadano"%>
 <%@page import="entidades.Planeta"%>
 <%@page import="entidades.Resenia"%>
@@ -20,12 +19,14 @@ Email  : manirujjamanakash@gmail.com
 <div class="container">
 	<h2 class="text-center">Comentarios</h2>
 
-<% 
+<% 	
 		reseniaController rc=new reseniaController();
 			ArrayList<Resenia> resenias=rc.getAll((Planeta)request.getAttribute("planeta"));				
-				Ciudadano c=(Ciudadano)session.getAttribute("user");	
-					for(Resenia res:resenias)
-						{%>	
+			for(Resenia res:resenias)
+					{
+							System.out.println(res.getUsuario().getApellido());
+				
+					%>	
 	<div class="card">
 	    <div class="card-body">
 	        <div class="row">
@@ -35,7 +36,7 @@ Email  : manirujjamanakash@gmail.com
         	    </div>
         	    <div class="col-md-10">
         	        <p>
-        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong><%=res.getUsuario().getApellido()%>, <%=res.getUsuario().getNombre()%></strong></a>
+        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong><%=res.getUsuario().getApellido()%>,<%=res.getUsuario().getNombre()%></strong></a>
         	           <% for(int i=0;i<res.getPuntaje();i++){%>
         	            <span class="float-right"><i class="text-warning fa fa-star"></i></span>
 				<%}%>

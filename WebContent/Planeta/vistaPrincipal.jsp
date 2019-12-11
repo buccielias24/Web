@@ -1,4 +1,5 @@
 
+<%@page import="data.DataResenia"%>
 <%@page import="logic.reseniaController"%>
 <%@page import="entidades.Resenia"%>
 <%@page import="entidades.Ciudadano"%>
@@ -11,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Listado de Planetas</title>
+    <title>Planetas</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/grid/">
 
@@ -138,7 +139,8 @@
       	if(p.getEstado()==true){r="Disponible";}else{r="No disponible";}
       %>
       <td><%=r %></td>
-      <td>
+ 	
+ 	<td>
       <%reseniaController rc=new reseniaController(); %>
 	<% for(int i=0;i<Math.round(rc.getPuntaje(p));i++){ %>    
       
@@ -149,6 +151,7 @@
 					<span class="fa fa-star"></span><%}%>
     	  (<a href="/Web/resenia?id=<%=p.getIdPlaneta()%>&accion=view"><%=rc.getAll(p).size()%></a>)					
       </td>
+  	
   			    
      <% 
      	if(c!=null && c.getRol()==1)

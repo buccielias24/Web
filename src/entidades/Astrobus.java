@@ -2,6 +2,10 @@ package entidades;
 
 public class Astrobus {
 	
+	private String fecha_alta;
+	private String fecha_baja;
+	private int motivo;
+	private String comentario;
 	private int idNave;
 	private int cantAsientos;
 	private double distRecorrida;
@@ -70,6 +74,45 @@ public class Astrobus {
 	}
 	public void setTiempoLibre(String tiempoLibre) {
 		this.tiempoLibre = tiempoLibre;
+	}
+	public String getFecha_alta() {
+		return fecha_alta;
+	}
+
+	public void setFecha_alta(String fecha_alta) {
+		this.fecha_alta = fecha_alta;
+	}
+
+	public String getFecha_baja() {
+		return fecha_baja;
+	}
+
+	public void setFecha_baja(String fecha_baja) {
+		this.fecha_baja = fecha_baja;
+	}
+
+	public int getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(int motivo) {
+		this.motivo = motivo;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+	@Override
+	public String toString() {
+		return "Astrobus [fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", motivo=" + motivo
+				+ ", comentario=" + comentario + ", idNave=" + idNave + ", cantAsientos=" + cantAsientos
+				+ ", distRecorrida=" + distRecorrida + ", distService=" + distService + ", distLimite=" + distLimite
+				+ ", tiempoLibre=" + tiempoLibre + ", marca=" + marca + ", estado=" + estado + "]";
 	}
 	
 
