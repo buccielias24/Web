@@ -25,6 +25,7 @@ public class DataPlaneta {
 					p.setMotivo(rs.getInt("motivo_baja"));
 					p.setFecha_alta("fecha_alta");
 					p.setFecha_baja("fecha_baja");
+					p.setUrl(rs.getString("url"));
 					planetas.add(p);
 				}
 			}			
@@ -47,7 +48,7 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planetas(nombre, coordenadaX,coordenadaY, estado,puntaje,motivo_baja,fecha_alta,fecha_baja) values(?,?,?,?,?,?)",
+							"insert into planetas(nombre, coordenadaX,coordenadaY, estado,motivo_baja,fecha_alta,fecha_baja,url) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombrePlaneta());
 			stmt.setInt(2, p.getCoordenadaX());
@@ -56,6 +57,7 @@ public class DataPlaneta {
 			stmt.setInt(5, p.getMotivo());
 			stmt.setString(6, p.getFecha_alta());
 			stmt.setString(7, p.getFecha_baja());
+			stmt.setString(8, p.getUrl());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
@@ -109,6 +111,38 @@ public class DataPlaneta {
 					p.setCoordenadaX(rs.getInt("coordenadaX"));
 					p.setCoordenadaY(rs.getInt("coordenadaY"));
 					p.setEstado(rs.getBoolean("estado"));			
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				Conectar.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
+		return p;
+	}
+	
+	public Planeta getLast(){
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Planeta p=null;	
+		try {
+			stmt= Conectar.getInstancia().getConn().
+					prepareStatement("select * from planetas where fecha_alta =(select max(fecha_alta)from planetas )");
+				rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+					p=new Planeta();
+					p.setIdPlaneta(rs.getInt("id"));
+					p.setNombrePlaneta(rs.getString("nombre"));
+					p.setCoordenadaX(rs.getInt("coordenadaX"));
+					p.setCoordenadaY(rs.getInt("coordenadaY"));
+					p.setEstado(rs.getBoolean("estado"));			
+					p.setUrl(rs.getString("url"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();

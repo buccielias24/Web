@@ -1,17 +1,20 @@
+
 package servlet;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 
-import javax.servlet.RequestDispatcher;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
-import org.apache.jasper.tagplugins.jstl.core.Out;
+import javax.servlet.http.Part;
 
 import entidades.Ciudadano;
 import entidades.Planeta;
@@ -21,6 +24,7 @@ import logic.PlanetaControler;
  * Servlet implementation class Planetas
  */
 @WebServlet({"/Planetas","/planetas"})
+@MultipartConfig
 public class Planetas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,13 +56,27 @@ public class Planetas extends HttpServlet {
 		{
 		case "alta": 
 		{
+			 String txtDir = request.getParameter("txtDir");
+			    // ...
+			    // Obtiene <input type="file" name="logo">
+			    Part filePart = request.getPart("inputImagen");
+			    // MSIE fix.
+			    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+			    InputStream fileContent = filePart.getInputStream();
+			    System.out.println("name "+fileName+" Content: "+fileContent+"text dire : "+txtDir);
+			    BufferedImage imBuff=ImageIO.read(fileContent);
+			    // ... código
+		
+			    
+			PlanetaControler pc=new PlanetaControler();
 			Planeta p=new Planeta();
+			p.setUrl(pc.encodeToString(imBuff, "JPG"));
 			p.setNombrePlaneta(request.getParameter("inAlta1"));			
-			p.setFecha_alta(request.getParameter("inAlta3"));
-			
+			p.setFecha_alta(request.getParameter("inAlta4"));
+			p.setCoordenadaX(Integer.parseInt(request.getParameter("inAlta2")));
+			p.setCoordenadaY(Integer.parseInt(request.getParameter("inAlta3")));
 			HttpSession session=request.getSession(false);  
 			
-			PlanetaControler pc=new PlanetaControler();
 			pc.add(p,(Ciudadano)session.getAttribute("user"));
 			Ciudadano c=(Ciudadano)session.getAttribute("user");
 			System.out.println(c);

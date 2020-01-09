@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class logout
  */
@@ -39,7 +40,7 @@ public class logout extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.getSession().invalidate(); 
 	    response.sendRedirect("login.jsp");
-
+	    
 	}
 
 }

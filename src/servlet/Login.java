@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import entidades.Ciudadano;
+import logic.AutomaticUpdate;
 import logic.UserController;
-import sun.rmi.server.Dispatcher;
 
 /**
  * Servlet implementation class Login
@@ -43,11 +43,13 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			
 		UserController uc=new UserController();
+		//uc.correo();
 		Ciudadano ciud=new Ciudadano();
 		ciud.setUser(request.getParameter("user"));
 		ciud.setPassword(request.getParameter("password"));
+		AutomaticUpdate au=new AutomaticUpdate();
+		au.beepForAnHour();
 		
 		if (uc.userExist(ciud))		
 		{
@@ -62,5 +64,7 @@ public class Login extends HttpServlet {
 		
 	  }
 		}
+	
+	
 
 }

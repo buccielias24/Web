@@ -6,16 +6,17 @@ public class Viaje {
 	private int idViaje;
 	private String salida;
 	private String llegada;
-	private boolean estado;
+	private int estado;
 	private Planeta origen;
 	private Planeta destino;
 	private Astrobus astrobus;
 	private Ciudadano pasajero;
 	private double distancia;
+	private int motivo;
 	
 	public Viaje() {}
 	
-	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Ciudadano pasaj, int idViaje, String salida, String llegad,boolean estado) {
+	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Ciudadano pasaj, int idViaje, String salida, String llegad,int estado) {
 		this.origen= oriGen;
 		this.destino=desTino;
 		this.astrobus=astro;
@@ -41,10 +42,10 @@ public class Viaje {
 		this.idViaje = idViaje;
 	}
 	
-	public boolean getEstado() {
+	public int getEstado() {
 		return estado;
 	}
-	public void setEstado(boolean estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
@@ -95,5 +96,22 @@ public class Viaje {
 	public void setLlegada(String llegada) {
 		this.llegada = llegada;
 	}
+	
+	
 		
+	public int getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(int motivo) {
+		this.motivo = motivo;
+	}
+
+	@Override
+	public String toString() {
+		return "Viaje [idViaje=" + idViaje + ", salida=" + salida + ", llegada=" + llegada + ", estado=" + estado
+				+ ", origen=" + origen + ", destino=" + destino + ", astrobus=" + astrobus + ", pasajero=" + pasajero
+				+ ", distancia=" + distancia + "]";
+	}
+
 }

@@ -13,54 +13,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    
-    <title>Viajes</title>
+    <title>Naves</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/grid/">
 
     <!-- Bootstrap core CSS -->
 <link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
-<script type="text/javascript">
-	var auto=setInterval(function refresh()
-	{
-		$("#refresh").load("tabla.jsp");},5000);
-	refresh();
-</script>
-
 <script src="/Web/js/popup-center.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-<style>
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 50px;
-  text-align: center;
-  font-size: 25px;
-  cursor: pointer;
-  color: white;
-}
-
-.containerTab {
-  padding: 20px;
-  color: white;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Closable button inside the image */
-.closebtn {
-  float: right;
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-}
-
+    <style>
     .linea
 {
     display: inline-block;
@@ -80,11 +40,6 @@
           font-size: 3.5rem;
         }
       }
-      
-p.partiendo{
-  font-size:2rem;
-  margin: 45px;
-}
     </style>
 
     
@@ -127,28 +82,58 @@ p.partiendo{
     </div>
   </nav>
 </header>
-  
+
   <body class="py-4">
+    <div class="container">
 
-<h1>PRUEBA</h1>
-<form action="/Web/vistaViaje" method="get">
-<select id="origen" name="origen" >
-		<option disabled selected> -- select an option -- </option>
-<% ArrayList<Planeta> planetas=new PlanetaControler().getAll();
-		for(Planeta p:planetas)
-		{%>
-		<option value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				
-		<%}%>
-</select>
-<input type="submit" value="Aceptar">
-</form>
-<%
-session.setAttribute("idPlaneta", request.getAttribute("idPlaneta"));
+  <p class="lead">Astrobuses</p>
+ 	<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Viaje/registrarViaje.jsp', 'test', window, 600, 300)" role="button">Nuevo Viaje</a></p>	
+<!--  <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets.."> -->
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Asientos</th>
+       <th scope="col">Distancia Limite</th>
+       <th scope="col">Tiempo sin uso</th>
+       <th scope="col">Distancia recorrida</th>
+       <th scope="col">Estado</th>
+       <th scope="col">Fecha Alta</th>
+       <th scope="col">Fecha Baja</th>
+       <th scope="col">Motivo</th>
+       <th scope="col">Comentario</th>    
+    </tr>
+  </thead>
+  <tbody id="myTbody">
+  	<% 
+		try{	
+			Astrobus astro=(Astrobus)request.getAttribute("astrobus");
+			AstrobusController ac=new AstrobusController();
+			%>
+    <tr>
+      <th scope="row"><%=astro.getIdNave()%></th>
+      <td><%=astro.getMarca() %></td>
+      <td><%=astro.getCantAsientos() %></td>
+      <td><%=astro.getDistLimite() %></td>
+      <td><%=astro.getTiempoLibre() %></td>   
+      <td><%=ac.getDistancia(astro)%></td>        
+      <td><%=astro.getEstado()%></td>  
+   	  <td><%=astro.getFecha_alta()%></td>
+   	  <td><%=astro.getFecha_baja()%></td>
+   	  <td><%=astro.getMotivo()%></td>
+   	  <td><%=astro.getComentario()%></td>	
+    </tr>    
+  	<%
+  	  	
+					
+		}catch(Exception e) {}
 %>
-<input type="submit" value="">
-   <div class="container" id="refresh">
-		<jsp:include page="tabla.jsp"/>
-	
-</div> <!-- /container -->
-</body></html>
+ </tbody>
+</table>	
 
+
+</div> <!-- /container -->
+
+</body></html>

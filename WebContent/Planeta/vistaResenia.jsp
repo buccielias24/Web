@@ -25,9 +25,9 @@
 				{
 				%>
 				<tr>
-					<th><%=res.getDgu()%></th>
+					<th><%=res.getUsuario().getDgu()%></th>
 					<th><%=res.getComentario()%></th>
-					<%if (c!=null && c.getDgu()==res.getDgu()){%>
+					<%if (c!=null && c.getDgu()==res.getUsuario().getDgu()){%>
 						<th>Editar</th>
 					<% }
 				}%>

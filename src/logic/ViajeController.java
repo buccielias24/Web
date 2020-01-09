@@ -13,20 +13,6 @@ public class ViajeController {
 		dv=new DataViaje();
 	}
 	
-	public void actualizarEstados()
-	{
-		LocalDateTime localDate=LocalDateTime.now();
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		ArrayList<Viaje> viajes=dv.getAll();
-			for(Viaje v:viajes)
-			{
-				if(v.getLlegada().compareTo(localDate.format(formatter))<=0)
-				{
-					v.setEstado(true);
-					this.modify(v);					
-				}
-			}
-	}
 	
 	public void add(Viaje v)
 	{	
@@ -36,16 +22,13 @@ public class ViajeController {
 		v.setDistancia(Math.sqrt(x*x+y*y));
 			if (v.getAstrobus().getDistService()<=v.getDistancia())
 					{
-					 //ver si va aca o en controlador de astrobus o si debe haber un controlador que controle a los demas
 					 LocalDateTime localDate=LocalDateTime.now();
 					 DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");					 
 					 AstrobusController ac=new AstrobusController();
-					 System.out.println(v.getAstrobus());
 					 v.getAstrobus().setEstado(false);
 					 v.getAstrobus().setFecha_baja(localDate.format(formatter));
 					 v.getAstrobus().setMotivo(3);
 					 v.getAstrobus().setComentario("En service");
-					 System.out.println(v.getAstrobus());
 					 ac.modify(v.getAstrobus());
 					}
 			else { 

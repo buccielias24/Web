@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import logic.AutomaticUpdate;
 import logic.ViajeController;
 
 /**
@@ -31,8 +32,8 @@ public class viaje extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		ViajeController vc=new ViajeController();
-		vc.actualizarEstados();
+		//AutomaticUpdate au=new AutomaticUpdate();
+		//au.beepForAnHour();
 		response.sendRedirect("/Web/Viaje/vistaPrincipal.jsp");
 	}
 

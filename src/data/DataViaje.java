@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import entidades.Astrobus;
 import entidades.Planeta;
 import entidades.Viaje;
+import logic.AstrobusController;
+import logic.PlanetaControler;
 
 public class DataViaje {
 
 
-	DataAstrobus da=new DataAstrobus();
+	PlanetaControler pc=new PlanetaControler();
+	AstrobusController ac=new AstrobusController();
+	
 	
 	public ArrayList<Viaje> getAll(){
 		Statement stmt=null;
@@ -32,14 +36,15 @@ public class DataViaje {
 					v.setIdViaje(rs.getInt("idViaje"));
 					v.setSalida(rs.getString("fechaSalida"));
 					v.setLlegada(rs.getString("fechaLlegada"));
-					v.setEstado(rs.getBoolean("estadoViaje"));
+					v.setEstado(rs.getInt("estadoViaje"));
 					p1.setIdPlaneta(rs.getInt("origen"));
-					v.setOrigen(p1);
+					v.setOrigen(pc.getById(p1));
 					p2.setIdPlaneta(rs.getInt("destino"));
-					v.setDestino(p2);
+					v.setDestino(pc.getById(p2));
 					v.setDistancia(rs.getDouble("distancia"));
 				    a.setIdNave(rs.getInt("astrobus")); 
-					v.setAstrobus(da.getById(a));
+					v.setAstrobus(ac.getById(a));
+					v.setMotivo(rs.getInt("motivo"));
 					viajes.add(v);
 				}
 			}			
@@ -56,9 +61,9 @@ public class DataViaje {
 		return viajes;
 	}
 	public Viaje getById(Viaje via) {
-			DataPlaneta dp=new DataPlaneta();
 			Planeta origen=null;
 			Planeta destino=null;
+			Astrobus a=new Astrobus();
 			PreparedStatement stmt=null;
 			ResultSet rs=null;
 			Viaje v=null;	
@@ -73,10 +78,17 @@ public class DataViaje {
 						origen.setIdPlaneta(rs.getInt("origen"));
 						destino.setIdPlaneta(rs.getInt("destino"));
 						v=new Viaje();
-						v.setIdViaje(rs.getInt("id"));
-						v.setOrigen(dp.getById(origen));
-						v.setDestino(dp.getById(destino));
-						v.setEstado(rs.getBoolean("estado"));			
+						v.setSalida(rs.getString("fechaSalida"));
+						v.setLlegada(rs.getString("fechaLlegada"));
+						v.setEstado(rs.getInt("estadoViaje"));
+						origen.setIdPlaneta(rs.getInt("origen"));
+						v.setOrigen(pc.getById(origen));
+						destino.setIdPlaneta(rs.getInt("destino"));
+						v.setDestino(pc.getById(destino));
+						v.setDistancia(rs.getDouble("distancia"));
+					    a.setIdNave(rs.getInt("astrobus")); 
+						v.setAstrobus(ac.getById(a));
+						v.setMotivo(rs.getInt("motivo"));
 				}			
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -99,15 +111,16 @@ public class DataViaje {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje,distancia,astrobus) values(?,?,?,?,?,?,?)",
+							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje,distancia,astrobus,motivo) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());
 			stmt.setString(3, v.getSalida());
 			stmt.setString(4, v.getLlegada());
-			stmt.setBoolean(5, v.getEstado());
+			stmt.setInt(5, v.getEstado());
 			stmt.setDouble(6, v.getDistancia());
             stmt.setInt(7, v.getAstrobus().getIdNave());
+            stmt.setInt(8,v.getMotivo());
 			stmt.executeUpdate();			
 	    	}catch (SQLException e) {
             e.printStackTrace();}finally {
@@ -122,15 +135,16 @@ public class DataViaje {
 	public void modify(Viaje v) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE viaje SET fechaSalida=?,fechaLlegada=?,estadoViaje=?,origen=?,destino=?,distancia=?,astrobus=? where idViaje=?");
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE viaje SET fechaSalida=?,fechaLlegada=?,estadoViaje=?,origen=?,destino=?,distancia=?,astrobus=?,motivo=? where idViaje=?");
 			stmt.setString(1,v.getSalida());
 			stmt.setString(2,v.getLlegada());
-			stmt.setBoolean(3,v.getEstado());
+			stmt.setInt(3,v.getEstado());
 			stmt.setInt(4,v.getOrigen().getIdPlaneta());
 			stmt.setInt(5, v.getDestino().getIdPlaneta());
 			stmt.setDouble(6, v.getDistancia());
 			stmt.setInt(7, v.getAstrobus().getIdNave());
-			stmt.setInt(8,v.getIdViaje());
+			stmt.setInt(8, v.getMotivo());
+			stmt.setInt(9,v.getIdViaje());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {

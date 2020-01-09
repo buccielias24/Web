@@ -116,6 +116,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
+      <th scope="col">Imagen</th>
       <th scope="col">Nombre</th>
       <th scope="col">Coordenada X</th>
       <th scope="col">Coordenada Y</th>
@@ -132,6 +133,7 @@
 			%>
     <tr>
       <th scope="row"><%=p.getIdPlaneta()%></th>
+      <td><img alt="" src="<%=p.getUrl()%>" height="62" width="62"></td>
       <td><%=p.getNombrePlaneta()%></td>
       <td><%=p.getCoordenadaX()%></td>
       <td><%=p.getCoordenadaY()%></td>

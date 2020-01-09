@@ -4,25 +4,27 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import entidades.Astrobus;
-import logic.AstrobusController;
+import entidades.Planeta;
 
 /**
- * Servlet implementation class CargaAstrobus
+ * Servlet implementation class vistaViaje
  */
-@WebServlet({"/CargaAstrobus","/cargaastrobus"})
-public class CargaAstrobus extends HttpServlet {
+@WebServlet("/vistaViaje")
+public class vistaViaje extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CargaAstrobus() {
+    public vistaViaje() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +34,11 @@ public class CargaAstrobus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		AstrobusController ac=new AstrobusController();
-		Astrobus a=new Astrobus();
-		a.setIdNave(Integer.parseInt(request.getParameter("id")));	
-		request.setAttribute("astrobus",ac.getById(a));
-		RequestDispatcher rd=request.getRequestDispatcher("/Astrobus/astrobus.jsp");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Planeta p=new Planeta();
+		p.setIdPlaneta(Integer.parseInt(request.getParameter("origen")));
+		request.setAttribute("idPlaneta", p.getIdPlaneta());
+		RequestDispatcher rd=request.getRequestDispatcher("Viaje/vistaPrincipal.jsp");
 		rd.forward(request,response);
 	}
 
@@ -45,21 +47,7 @@ public class CargaAstrobus extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Astrobus a=new Astrobus();
-		a.setMarca(request.getParameter("marca"));
-		a.setCantAsientos(Integer.parseInt(request.getParameter("cantAsientos")));
-		a.setDistLimite(Float.parseFloat(request.getParameter("distLimite")));
-		a.setDistService(Float.parseFloat(request.getParameter("distService")));
-		
-		a.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
-		
-		AstrobusController ac=new AstrobusController();
-		ac.add(a);
-		response.sendRedirect("registrarAstrobus.jsp");
-		
-		
-		//doGet(request, response);
+		doGet(request, response);
 	}
 
 }
-

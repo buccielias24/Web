@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Planeta"%>
+<%@page import="logic.PlanetaControler"%>
+<%@page import="logic.AutomaticUpdate"%>
 <%@page import="entidades.Ciudadano"%>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -7,10 +11,10 @@
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Home</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/carousel/">
+
 
     <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
 
     <style>
@@ -34,7 +38,7 @@
   </head>
   <body>
     <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">  
     <% if(session.getAttribute("user")==null)
     	{%>
     <a class="navbar-brand" href="login.jsp">Login</a>
@@ -79,11 +83,14 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+      <!--     <%//PlanetaControler pc=new PlanetaControler();
+                 //Planeta p=pc.getUltimo();
+            %>
+            <img alt="" src="<%//=p.getUrl()%>" height="100" width="100">
+  			-->       
         <div class="container">
           <div class="carousel-caption text-left">
-            <h1>Registrate .</h1>
-            <p>Al registrarse podra ver y realizar comentarios en los Planetas, asi como puntuar el viaje y la nave con la cual se ha trasladado. Hace click en el icono abajo</p>
+            <h1>Ultimo Planeta Agregado .</h1>
             <p><a class="btn btn-lg btn-primary" href="registroUsuario.jsp" role="button">Registrarse</a></p>
           </div>
         </div>

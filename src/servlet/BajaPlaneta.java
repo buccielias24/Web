@@ -48,7 +48,7 @@ public class BajaPlaneta extends HttpServlet {
 		int id=Integer.parseInt(request.getParameter("id"));
 		p.setIdPlaneta(id);
 		PlanetaControler pc=new PlanetaControler();
-		pc.delete(p);
+		pc.delete(pc.getById(p));
 		response.sendRedirect("/Web/Planeta/vistaPrincipal.jsp");
 		}
 }

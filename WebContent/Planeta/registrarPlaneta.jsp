@@ -29,11 +29,12 @@
 	<th>COORDENADA</th><th>ESTADO</th>
 </tr>
 </table>
-<form action="/Web/Planetas" method="post" id="form">
+<form action="/Web/Planetas" method="post" id="form" enctype="multipart/form-data">
   Nombre: <input type="text" id="inAlta1" name="inAlta1" value="" onKeyUp="habilitar('form')" ><br>
   Coordenada X: <input type="text" id="inAlta2" name="inAlta2" value="" onKeyUp="habilitar('form')"><br>
   Coordenada Y: <input type="text" id="inAlta3" name="inAlta3" value="" onKeyUp="habilitar('form')"><br>  
   Fecha Alta: <input type="Date" id="inAlta4" name="inAlta4" value="" onKeyUp="habilitar('form')"><br>
+  Imagen: <input type="File" id="inputImagen" name="inputImagen" value=""><br> 
     <input type="submit" value="Agregar" id="altaSubmit" onclick="form.submit();alert('Planeta Agregado');window.close()" disabled='disabled'>
   	  <input type="hidden" id="accion" name="accion" value="alta">
 </form>
