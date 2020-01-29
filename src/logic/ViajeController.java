@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+
 import data.DataViaje;
+
 import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Viaje;
 
 public class ViajeController {
-	DataViaje dv; 
+	DataViaje dv;
 
 	public ViajeController() {
 		dv=new DataViaje();
@@ -25,12 +28,8 @@ public class ViajeController {
 		{
 		return false;
 		}else
-		{
-			v.setDistancia(this.getDistancia(v));
-			dv.add(v);				
-			return true;
-		}
-	}			
+			dv.add(v);
+			return true;}	
 
 	public ArrayList<Viaje> getAll(){
 		return dv.getAll();
@@ -74,41 +73,47 @@ public class ViajeController {
 	public Date[] determinarFecha(String desde, String hasta, boolean[] frecuencia, String horaS) {
 		
 		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		//String fechaActual = formatter.format(new Date());
+		String fechaActual = formatter.format(new Date());
 		List<Date>dates=new ArrayList<Date>();
 		Calendar cini=Calendar.getInstance();
 		Calendar cfin=Calendar.getInstance();
-
+		Calendar cactu=Calendar.getInstance();
 		try {
 			
 			cini.setTime(formatter.parse(desde.concat(" ").concat(horaS)));
 			cfin.setTime(formatter.parse(hasta.concat(" ").concat("23:59")));
+			cactu.setTime(formatter.parse(fechaActual));
 			System.out.println("fecha salida: "+cini);
 			System.out.println("fecha llegada "+cfin);
+			System.out.println("fecha actual "+cactu);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		while(!cfin.before(cini)) {
-		if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && frecuencia[0]==true) {
-				dates.add(cini.getTime());
-			}else			
-			if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && frecuencia[1]==true) {
-				dates.add((cini.getTime()));
-			}else
-				if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && frecuencia[2]==true) {
-					dates.add((cini.getTime()));}else
-						if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && frecuencia[3]==true) {
-							dates.add((cini.getTime()));}else
-								if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && frecuencia[4]==true) {
-									dates.add((cini.getTime()));}else
-										if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && frecuencia[5]==true) {
-											dates.add((cini.getTime()));}else
-												if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && frecuencia[6]==true) {
-													dates.add((cini.getTime()));}
-			
-			cini.add(Calendar.DATE,1);
-		}
+				if(cini.before(cactu))
+					{
+			 		System.out.println("No se pueden agregar viajes anteriores a la fecha actual");
+					}
+					else {		
+											while(!cfin.before(cini)) {
+													if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && frecuencia[0]==true) {
+															dates.add(cini.getTime());}else			
+													if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.TUESDAY && frecuencia[1]==true) {
+														    dates.add((cini.getTime()));}else
+												    if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.WEDNESDAY && frecuencia[2]==true) {
+												    	    dates.add((cini.getTime()));}else
+												    if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.THURSDAY && frecuencia[3]==true) {
+												    	    dates.add((cini.getTime()));}else
+							                    	if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.FRIDAY && frecuencia[4]==true) {
+								                        	dates.add((cini.getTime()));}else
+									            	if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY && frecuencia[5]==true) {
+										                	dates.add((cini.getTime()));}else
+											    	if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY && frecuencia[6]==true) {
+											    		    dates.add((cini.getTime()));}
+													cini.add(Calendar.DATE,1);
+													}
+					}
+		
 		System.out.println("a ver :"+dates.size());
 		Date[] arreglo=new Date[dates.size()];
 		return (dates.toArray(arreglo));
