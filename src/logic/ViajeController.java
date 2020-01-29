@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-
 import data.DataViaje;
-
 import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Viaje;
