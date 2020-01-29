@@ -20,6 +20,7 @@ public class DataViaje {
 	AstrobusController ac=new AstrobusController();
 	
 	
+	
 	public ArrayList<Viaje> getAll(){
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -34,8 +35,8 @@ public class DataViaje {
 					Planeta p2=new Planeta();
 					Astrobus a=new Astrobus();
 					v.setIdViaje(rs.getInt("idViaje"));
-					v.setSalida(rs.getString("fechaSalida"));
-					v.setLlegada(rs.getString("fechaLlegada"));
+					v.setSalida(rs.getString("salida"));
+					v.setLlegada(rs.getString("llegada"));
 					v.setEstado(rs.getInt("estadoViaje"));
 					p1.setIdPlaneta(rs.getInt("origen"));
 					v.setOrigen(pc.getById(p1));
@@ -106,12 +107,14 @@ public class DataViaje {
 		}
 
 
+	
 	public void add(Viaje v) {
 		PreparedStatement stmt= null;	
+		ResultSet keyResultSet=null;
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(origen,destino,fechaSalida,fechaLlegada,estadoViaje,distancia,astrobus,motivo) values(?,?,?,?,?,?,?,?)",
+							"insert into viaje(origen,destino,salida,llegada,estadoViaje,distancia,astrobus,motivo) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());
@@ -121,7 +124,10 @@ public class DataViaje {
 			stmt.setDouble(6, v.getDistancia());
             stmt.setInt(7, v.getAstrobus().getIdNave());
             stmt.setInt(8,v.getMotivo());
-			stmt.executeUpdate();			
+			stmt.executeUpdate();
+			keyResultSet=stmt.getGeneratedKeys();
+			  if(keyResultSet!=null && keyResultSet.next()){
+	                v.setIdViaje((keyResultSet.getInt(1)));}
 	    	}catch (SQLException e) {
             e.printStackTrace();}finally {
     			try {

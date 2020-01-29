@@ -18,8 +18,6 @@ public class DataAstrobus {
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
 			rs= stmt.executeQuery("select * from astrobus");
-			// ver con el profe si podemos traer el estado del planeta con un nombre con la funcion if() de sql
-			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {
 					Astrobus a=new Astrobus();

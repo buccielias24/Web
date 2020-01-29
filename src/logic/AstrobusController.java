@@ -1,11 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
-
-import com.sun.org.apache.xerces.internal.impl.dv.DVFactoryException;
-
 import data.DataAstrobus;
-import data.DataViaje;
 import entidades.Astrobus;
 import entidades.Viaje;
 

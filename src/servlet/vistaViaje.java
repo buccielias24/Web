@@ -1,18 +1,18 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entidades.Planeta;
+import entidades.Viaje;
+import logic.ViajeController;
 
 /**
  * Servlet implementation class vistaViaje
@@ -35,11 +35,17 @@ public class vistaViaje extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		Planeta p=new Planeta();
-		p.setIdPlaneta(Integer.parseInt(request.getParameter("origen")));
-		request.setAttribute("idPlaneta", p.getIdPlaneta());
-		RequestDispatcher rd=request.getRequestDispatcher("Viaje/vistaPrincipal.jsp");
-		rd.forward(request,response);
+		ViajeController vc=new ViajeController();
+		try{ArrayList<Viaje> arribos=vc.getArribos(Integer.parseInt(request.getParameter("origen")),Integer.parseInt(request.getParameter("destino")));
+		request.setAttribute("arribos", arribos);
+		RequestDispatcher rd=request.getRequestDispatcher("Viaje/tabla.jsp");
+		rd.forward(request,response);		
+		}catch(Exception e) {
+			ArrayList<Viaje> arribos=vc.getArribos(Integer.parseInt(request.getParameter("origen")),0);
+			request.setAttribute("arribos", arribos);
+			RequestDispatcher rd=request.getRequestDispatcher("Viaje/tabla.jsp");
+			rd.forward(request,response);				
+		}
 	}
 
 	/**

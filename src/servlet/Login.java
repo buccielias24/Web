@@ -48,8 +48,8 @@ public class Login extends HttpServlet {
 		Ciudadano ciud=new Ciudadano();
 		ciud.setUser(request.getParameter("user"));
 		ciud.setPassword(request.getParameter("password"));
-		AutomaticUpdate au=new AutomaticUpdate();
-		au.beepForAnHour();
+		//AutomaticUpdate au=new AutomaticUpdate();
+		//au.beepForAnHour();
 		
 		if (uc.userExist(ciud))		
 		{

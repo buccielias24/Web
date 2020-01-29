@@ -12,19 +12,17 @@ public class Viaje {
 	private Astrobus astrobus;
 	private Ciudadano pasajero;
 	private double distancia;
-	private int motivo;
+	private int motivo;		
+	private boolean frecuencia[]=new boolean[6];
 	
 	public Viaje() {}
-	
-	public Viaje(Planeta oriGen, Planeta desTino, Astrobus astro, Ciudadano pasaj, int idViaje, String salida, String llegad,int estado) {
-		this.origen= oriGen;
-		this.destino=desTino;
-		this.astrobus=astro;
-		this.pasajero=pasaj;
-		this.idViaje = idViaje;
-		this.salida=salida;
-		this.llegada=llegad;
-		this.estado = estado;
+		
+	public boolean[] getFrecuencia() {
+		return frecuencia;
+	}
+
+	public void setFrecuencia(boolean[] frecuencia) {
+		this.frecuencia = frecuencia;
 	}
 	
 	public double getDistancia() {
@@ -85,8 +83,8 @@ public class Viaje {
 		return salida;
 	}
 
-	public void setSalida(String salida) {
-		this.salida = salida;
+	public void setSalida(String horaS) {
+		this.salida = horaS;
 	}
 
 	public String getLlegada() {

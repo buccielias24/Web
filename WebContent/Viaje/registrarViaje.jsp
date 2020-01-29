@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="logic.AstrobusController"%>
 <%@page import="entidades.Astrobus"%>
 <%@page import="logic.PlanetaControler"%>
@@ -64,16 +65,12 @@
 		<option value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				
 		<%}%>
 </select> <br><br>
-<label for="start">Fecha de Salida:</label>
+<label for="start">Hora de Salida:</label>
 
-<input type="datetime-local" id="start" name="fechaSalida"
-       value="2019-09-17"
-       min="2019-01-01" max="2020-12-31">
+<input type="time" id="start" name="horaSalida"
+       value="00:00"
+       min="00:00" max="23:59">
 <br><br>
-<label for="start">Fecha de Llegada:</label>
-<input type="datetime-local" id="finish" name="fechaLlegada" 
-       value="2019-09-17"
-       min="2019-01-01" max="2020-12-31">
  <br><br>      
  <h3>Astrobus definido para el viaje</h3>
 <select required type="text" id="elegirAstrobus"  name="elegirAstrobus">
@@ -86,9 +83,22 @@
 		<option id="lala" value="<%=a.getIdNave()%>"><%=a.getMarca()%></option>				
 		<%}%>
 </select>
-<br><br><br>
+<br>
+<h3>Que dias realizara los viajes</h3>
+<input type="checkbox" name="Lunes" value="true">Lunes<br>
+<input type="checkbox" name="Martes" value="true">Martes<br>
+<input type="checkbox" name="Miercoles" value="true">Miercoles<br>
+<input type="checkbox" name="Jueves" value="true">Jueves<br>
+<input type="checkbox" name="Viernes" value="true">Viernes<br>
+<input type="checkbox" name="Sabado" value="true">Sabado<br>
+<input type="checkbox" name="Domingo" value="true">Domingo<br>
 
-
+<br>
+<h3>Durante cuanto tiempo se realizara este viaje</h3>
+<%LocalDate today=LocalDate.now(); %>
+<input type="date" id="desde" name="desde" value="" min="<%=today%>" max="2020-12-31">
+<input type="date" id="hasta" name="hasta" value="" min="<%=today%>" max="2020-12-31">
+<br>
 <input type="submit" value="Aceptar">
 </form>
 </body>
