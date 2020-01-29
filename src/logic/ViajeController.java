@@ -9,13 +9,13 @@ import java.util.List;
 
 
 import data.DataViaje;
-import entidades.Astrobus;
+
 import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Viaje;
 
 public class ViajeController {
-	DataViaje dv;
+	DataViaje dv; 
 
 	public ViajeController() {
 		dv=new DataViaje();
@@ -24,10 +24,16 @@ public class ViajeController {
 	
 	public boolean add(Viaje v, Ciudadano user)
 	{		
-		v.setDistancia(this.getDistancia(v));
-		dv.add(v);				
-		return true;
-	}	
+		if(user==null || user.getRol()!=1)
+		{
+		return false;
+		}else
+		{
+			v.setDistancia(this.getDistancia(v));
+			dv.add(v);				
+			return true;
+		}
+	}			
 
 	public ArrayList<Viaje> getAll(){
 		return dv.getAll();
