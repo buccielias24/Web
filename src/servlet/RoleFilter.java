@@ -19,7 +19,7 @@ import logic.UserController;
 /**
  * Servlet Filter implementation class RoleFilter
  */
-@WebFilter({"/Planeta/registrarPlaneta.jsp","/cargaViaje","/Planeta/modificarPlaneta.jsp","/Planeta/BajaPlaneta.jsp","/Viaje/registrarViaje.jsp"})
+@WebFilter({"/Planeta/registrarPlaneta.jsp","/cargaviaje","/CargaViaje","/Planeta/modificarPlaneta.jsp","/Planeta/BajaPlaneta.jsp","/Viaje/registrarViaje.jsp"})
 public class RoleFilter implements Filter {
 
     /**
@@ -59,11 +59,11 @@ public class RoleFilter implements Filter {
 					}else 
 					{
 						System.out.println("usuario sin permisos");
-						resp.sendRedirect("vistaPrincipal.jsp");
+						resp.sendRedirect("/Web/index.jsp");
 					}
 		} else
 		{
-			resp.sendRedirect("vistaPrincipal.jsp");
+			resp.sendRedirect("/Web/index.jsp");
 			System.out.println("usuario no logeado");			
 		}
 	}
