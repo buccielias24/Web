@@ -13,11 +13,11 @@
 <title>Alta Viaje</title>
 </head>
 <body>
-<form action="/Web/CargaViaje" method="get">
+<form action="/Web/CargaViaje" method="post">
 		<h3>Seleccione Origen</h3>
 <select required type="text" id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
 		<option disabled selected> -- select an option -- </option>
-<% ArrayList<Planeta> planetas=new PlanetaControler().getAll();
+<% 		ArrayList<Planeta> planetas=(ArrayList<Planeta>)request.getAttribute("planetasDisponibles");
 		for(Planeta p:planetas)
 		{%>
 		<option id="lala" value="<%=p.getIdPlaneta()%>"><%=p.getNombrePlaneta()%></option>				

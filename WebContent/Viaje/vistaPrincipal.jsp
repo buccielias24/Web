@@ -25,7 +25,8 @@ margin-top: 50px;
   <body class="py-4">
 
 <h1>Bienvenido</h1>
-<h2> Por favor, seleccione el planeta para ver los viajes disponibles</h2>y
+<a href="/Web/cargaviaje">Nuevo Viaje clic aqui</a>
+<h2> Por favor, seleccione el planeta para ver los viajes disponibles</h2>
 <form action="/Web/vistaViaje" method="get">
 <select id="origen" name="origen" >
 		<option disabled selected> -- select an option -- </option>
