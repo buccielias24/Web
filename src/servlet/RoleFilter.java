@@ -19,7 +19,7 @@ import logic.UserController;
 /**
  * Servlet Filter implementation class RoleFilter
  */
-@WebFilter({"/Planeta/registrarPlaneta.jsp","/Planeta/modificarPlaneta.jsp","/Planeta/BajaPlaneta.jsp","/Viaje/registrarViaje.jsp"})
+@WebFilter({"/Planeta/registrarPlaneta.jsp","/cargaViaje","/Planeta/modificarPlaneta.jsp","/Planeta/BajaPlaneta.jsp","/Viaje/registrarViaje.jsp"})
 public class RoleFilter implements Filter {
 
     /**
