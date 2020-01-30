@@ -2,9 +2,11 @@ package servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +39,30 @@ public class CargaViaje extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		PlanetaControler pc=new PlanetaControler();
+		ArrayList<Planeta> planetas=new ArrayList<Planeta>();
+		ArrayList<Planeta> planetas2=new ArrayList<Planeta>();
+		planetas2=pc.getAll();
+		
+		for(Planeta p:planetas2)
+		{
+			if(p.getEstado())
+			{
+				System.out.println(p);
+				planetas.add(p);
+			}else {}
+		}
+		request.setAttribute("planetasDisponibles", planetas);
+		RequestDispatcher rd=request.getRequestDispatcher("/Viaje/registrarViaje.jsp");
+		rd.forward(request,response);
+	}
+
+	/**
+	 * @|see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession(false);
 		//Se quito el astrobus de la carga
@@ -98,14 +124,6 @@ public class CargaViaje extends HttpServlet {
 										}
 					}
 			  }
-	}
-
-	/**
-	 * @|see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
