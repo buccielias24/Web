@@ -93,8 +93,11 @@ public class ViajeController {
 				if(cini.before(cactu))
 					{
 			 		System.out.println("No se pueden agregar viajes anteriores a la fecha actual");
-					}
-					else {		
+					}else {
+							if(cfin.get(cfin.YEAR)!=2020) 
+			 					{System.out.println("FECHA INVALIDA");
+			 					}else {
+			 							System.out.println("FECHA VALIDA");
 											while(!cfin.before(cini)) {
 													if(cini.get(Calendar.DAY_OF_WEEK)==Calendar.MONDAY && frecuencia[0]==true) {
 															dates.add(cini.getTime());}else			
@@ -113,10 +116,11 @@ public class ViajeController {
 													cini.add(Calendar.DATE,1);
 													}
 					}
-		
+				}
 		System.out.println("a ver :"+dates.size());
 		Date[] arreglo=new Date[dates.size()];
 		return (dates.toArray(arreglo));
+			
 	} 
 
 	public double getDistancia(Viaje v) {
