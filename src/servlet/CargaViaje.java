@@ -16,8 +16,11 @@ import javax.servlet.http.HttpSession;
 
 import entidades.Planeta;
 import entidades.Viaje;
+import logic.AstrobusController;
+import logic.AutomaticUpdate;
 import logic.PlanetaControler;
 import logic.ViajeController;
+import entidades.Astrobus;
 import entidades.Ciudadano;
 
 /**
@@ -50,10 +53,11 @@ public class CargaViaje extends HttpServlet {
 		{
 			if(p.getEstado())
 			{
-				System.out.println(p);
 				planetas.add(p);
 			}else {}
 		}
+		AutomaticUpdate au=new AutomaticUpdate();
+		au.asignarAstrobus();
 		request.setAttribute("planetasDisponibles", planetas);
 		RequestDispatcher rd=request.getRequestDispatcher("/Viaje/registrarViaje.jsp");
 		rd.forward(request,response);
@@ -92,7 +96,7 @@ public class CargaViaje extends HttpServlet {
 		
 		p1=pc.getById(p1);
 		p2=pc.getById(p2);
-			
+		
 		  //Verificando estado del planeta para continuar con el proceso de carga
 			if(p1.getEstado()==false )
 				{
@@ -119,11 +123,18 @@ public class CargaViaje extends HttpServlet {
 										Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(v.getDistancia()/100)));
 										v.setLlegada(formatter.format(newDate));
 										System.out.println("salida: "+fechas[i]+" llegada : "+newDate);
-										vc.add(v,(Ciudadano)session.getAttribute("user"));
-		   
+										try {
+											vc.add(v,(Ciudadano)session.getAttribute("user"));}catch(Exception e)
+											{
+												System.out.println("usuario no logeado");	
+												RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
+												rd.forward(request,response);	
+											}
 										}
 					}
 			  }
+			RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
+			rd.forward(request,response);
 	}
 
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 
 import data.DataViaje;
-
 import entidades.Ciudadano;
 import entidades.Planeta;
 import entidades.Viaje;
@@ -127,6 +126,40 @@ public class ViajeController {
 		double total=0;
 		total=Math.sqrt(Math.pow(v.getDestino().getCoordenadaX()-v.getOrigen().getCoordenadaX(), 2)+Math.pow(v.getDestino().getCoordenadaY()-v.getOrigen().getCoordenadaY(), 2));		
 		return total;
+	}
+	
+	public ArrayList<Viaje> getViajesSinAstrobus(){
+		
+		ArrayList<Viaje> sinNave=new ArrayList<Viaje>();
+			ArrayList<Viaje> viajes=this.getAll();
+				for(Viaje v:viajes)
+				{
+					if(v.getAstrobus().getIdNave()==0 && this.calcularDiferencia(v.getSalida())<=20 && this.calcularDiferencia(v.getSalida())>=0)
+					{
+				    System.out.println("Para el viaje : "+v.getIdViaje()+" faltan :"+this.calcularDiferencia(v.getSalida())+" horas");
+					sinNave.add(v);
+					}
+			} 
+		return sinNave;
+	}
+	
+	public long calcularDiferencia(String inicio) {
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String fechaActual = formatter.format(new Date());	
+		Calendar cini=Calendar.getInstance();
+		Calendar cfin=Calendar.getInstance();
+		try {
+			cini.setTime(formatter.parse(inicio));
+			cfin.setTime(formatter.parse(fechaActual));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		long diferencia=cini.getTimeInMillis()-cfin.getTimeInMillis();
+		return diferencia/(1000*3600);
+		
 	}
 	
 	

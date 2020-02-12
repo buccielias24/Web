@@ -14,6 +14,25 @@ public class Astrobus {
 	private String tiempoLibre;
 	private String marca;
 	private boolean estado;
+	private int coordenadaX;
+	private int coordenadaY;
+	
+	public int getCoordenadaX() {
+		return coordenadaX;
+	}
+
+	public void setCoordenadaX(int coordenadaX) {
+		this.coordenadaX = coordenadaX;
+	}
+
+	public int getCoordenadaY() {
+		return coordenadaY;
+	}
+
+	public void setCoordenadaY(int coordenadaY) {
+		this.coordenadaY = coordenadaY;
+	}
+
 	// Constructor de Astrobus
 	public Astrobus() {
 		
@@ -112,8 +131,9 @@ public class Astrobus {
 		return "Astrobus [fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", motivo=" + motivo
 				+ ", comentario=" + comentario + ", idNave=" + idNave + ", cantAsientos=" + cantAsientos
 				+ ", distRecorrida=" + distRecorrida + ", distService=" + distService + ", distLimite=" + distLimite
-				+ ", tiempoLibre=" + tiempoLibre + ", marca=" + marca + ", estado=" + estado + "]";
+				+ ", tiempoLibre=" + tiempoLibre + ", marca=" + marca + ", estado=" + estado + ", coordenadaX="
+				+ coordenadaX + ", coordenadaY=" + coordenadaY + "]";
 	}
-	
 
+	
 }

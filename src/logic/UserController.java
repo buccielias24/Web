@@ -1,15 +1,21 @@
 package logic;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Properties;
 
+import javax.imageio.ImageIO;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
+
 import data.DataUser;
 import entidades.Ciudadano;
+import sun.misc.BASE64Encoder;
 
 public class UserController {
 	DataUser du;
@@ -23,6 +29,27 @@ public class UserController {
 		return du.getById(ciud);	
 	}
 	
+	
+
+	// Completar al registrar y editar perfil poder subir foto
+	public String encodeToString(BufferedImage image, String type)
+	{
+		String imageString=null;
+		ByteArrayOutputStream bos=new ByteArrayOutputStream();
+		try {
+			ImageIO.write(image,type, bos);
+			byte[] imageBytes =bos.toByteArray();
+			
+			BASE64Encoder encoder=new BASE64Encoder();
+			imageString="data:image/jpeg;base64,"+encoder.encode(imageBytes);
+			
+			bos.close();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		return imageString;
+	}
 	
 	public Boolean userExist(Ciudadano ciud)
 	{

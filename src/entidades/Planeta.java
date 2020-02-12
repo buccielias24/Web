@@ -12,13 +12,14 @@ public class Planeta {
 	private String fecha_alta;
 	private String fecha_baja;
 	private int motivo;
-	private String url;
+	private String comentario;
 	
-	public String getUrl() {
-		return url;
+	
+	public String getComentario() {
+		return comentario;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 	public int getIdPlaneta() {
 		return idPlaneta;
@@ -71,11 +72,12 @@ public class Planeta {
 	
 	public Planeta() {		
 	}
+
 	@Override
 	public String toString() {
 		return "Planeta [idPlaneta=" + idPlaneta + ", nombrePlaneta=" + nombrePlaneta + ", coordenadaX=" + coordenadaX
-				+",coordenadaY= "+coordenadaY+", estado=" + estado + ", fecha_alta=" + fecha_alta + ", fecha_baja=" + fecha_baja + ", motivo="
-				+ motivo + "]";
+				+ ", coordenadaY=" + coordenadaY + ", estado=" + estado + ", fecha_alta=" + fecha_alta + ", fecha_baja="
+				+ fecha_baja + ", motivo=" + motivo + ", comentario=" + comentario + "]";
 	}
 	@Override
 	public int hashCode() {

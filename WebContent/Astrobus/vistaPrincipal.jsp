@@ -122,8 +122,7 @@
       <td><%=astro.getMarca() %></td>
       <td><%=astro.getCantAsientos() %></td>
       <td><%=astro.getDistLimite() %></td>
-      <td><%=astro.getTiempoLibre() %></td>   
-      <td><%=ac.getDistancia(astro)%></td>        
+      <td><%=astro.getTiempoLibre() %></td>          
       <td><%=astro.getEstado()%></td>  
    	  <td><%=astro.getFecha_alta()%></td>
    	  <td><%=astro.getFecha_baja()%></td>

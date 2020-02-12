@@ -31,6 +31,8 @@ public class DataAstrobus {
 					a.setFecha_alta(rs.getString("fecha_alta"));
 					a.setFecha_baja(rs.getString("fecha_baja"));
 					a.setMotivo(rs.getInt("motivo"));
+					a.setCoordenadaX(rs.getInt("coordenadaX"));
+					a.setCoordenadaY(rs.getInt("coordenadaY"));
 					a.setComentario(rs.getString("comentario"));
 					astrobuses.add(a);
 				}
@@ -47,11 +49,10 @@ public class DataAstrobus {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		
+		}		
 		return astrobuses;
 	}
+	
 	public Astrobus getById(Astrobus a){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;

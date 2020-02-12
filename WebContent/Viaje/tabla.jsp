@@ -129,16 +129,6 @@ margin-top: 100px;
       <td><%=v.getDestino().getNombrePlaneta()%></td>
       <td><%=v.getSalida()%></td>
       <td><%=v.getLlegada()%></td>
-	  <%
-	  
-	  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	  Date transactionDateTime = simpleDateFormat.parse(v.getSalida());
-	  Calendar c = Calendar.getInstance();
-	  c.setTime(transactionDateTime);
-	  int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-	  System.out.println(dayOfWeek);	 %>
-	     
-
   	<%}
 			  }catch(Exception e) {}
 %>

@@ -42,15 +42,10 @@ public class PlanetaControler {
 	}
 	
 	public void delete(Planeta p) {
-		ViajeController vc=new ViajeController();
+		/*ViajeController vc=new ViajeController();
 		ArrayList<Viaje> viajes=vc.getAll();
 			for(Viaje v:viajes)
 			{
-				System.out.println("llego aca, origen:"+v.getOrigen());
-				System.out.println("----, destino:"+v.getDestino());
-				System.out.println("parametro de entrada:"+p);
-				
-				
 				if(v.getOrigen().equals(p)||v.getDestino().equals(p))
 				{
 					
@@ -58,29 +53,11 @@ public class PlanetaControler {
 					v.setMotivo(1);
 					vc.modify(v);
 				}
-			}
+			}*/
+		System.out.println(p);
 		dp.delete(p);
 	}
 	
-	// ver como pasar la imagen del front hacia aca.
-	public String encodeToString(BufferedImage image, String type)
-	{
-		String imageString=null;
-		ByteArrayOutputStream bos=new ByteArrayOutputStream();
-		try {
-			ImageIO.write(image,type, bos);
-			byte[] imageBytes =bos.toByteArray();
-			
-			BASE64Encoder encoder=new BASE64Encoder();
-			imageString="data:image/jpeg;base64,"+encoder.encode(imageBytes);
-			
-			bos.close();
-		}catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-		return imageString;
-	}
 	
 	public Planeta getUltimo()
 	{
@@ -90,10 +67,10 @@ public class PlanetaControler {
 	
 	public void modify(Planeta p)
 		{
-			if(p.getEstado()!=true || p.getEstado()!=false)
-				{
-					
-				}
-			   		dp.modify(p);
-	}
+			if(p.getEstado()==true)
+			{
+				p.setFecha_baja(null);
+				dp.modify(p);	
+			}
+		}
 }

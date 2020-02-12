@@ -25,7 +25,7 @@ public class DataPlaneta {
 					p.setMotivo(rs.getInt("motivo_baja"));
 					p.setFecha_alta("fecha_alta");
 					p.setFecha_baja("fecha_baja");
-					p.setUrl(rs.getString("url"));
+					p.setComentario(rs.getString("comentario"));
 					planetas.add(p);
 				}
 			}			
@@ -48,7 +48,7 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into planetas(nombre, coordenadaX,coordenadaY, estado,motivo_baja,fecha_alta,fecha_baja,url) values(?,?,?,?,?,?,?,?)",
+							"insert into planetas(nombre, coordenadaX,coordenadaY, estado,motivo_baja,fecha_alta,fecha_baja) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombrePlaneta());
 			stmt.setInt(2, p.getCoordenadaX());
@@ -57,7 +57,6 @@ public class DataPlaneta {
 			stmt.setInt(5, p.getMotivo());
 			stmt.setString(6, p.getFecha_alta());
 			stmt.setString(7, p.getFecha_baja());
-			stmt.setString(8, p.getUrl());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
@@ -79,9 +78,11 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"UPDATE planetas set estado = false Where id=?",
+							"UPDATE planetas set estado =false, comentario=?, fecha_baja=? Where id=?",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, p.getIdPlaneta());
+			stmt.setString(1, p.getComentario());
+			stmt.setString(2, p.getFecha_baja());
+			stmt.setInt(3, p.getIdPlaneta());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();
@@ -142,7 +143,7 @@ public class DataPlaneta {
 					p.setCoordenadaX(rs.getInt("coordenadaX"));
 					p.setCoordenadaY(rs.getInt("coordenadaY"));
 					p.setEstado(rs.getBoolean("estado"));			
-					p.setUrl(rs.getString("url"));
+					p.setComentario(rs.getString("comentario"));
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,8 +165,8 @@ public class DataPlaneta {
 		try {
 			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETAS SET nombre=?,estado=? where id=?");
 			stmt.setString(1,pla.getNombrePlaneta());
-			stmt.setBoolean(3,pla.getEstado());
-			stmt.setInt(4,pla.getIdPlaneta());
+			stmt.setBoolean(2,pla.getEstado());
+			stmt.setInt(3,pla.getIdPlaneta());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {

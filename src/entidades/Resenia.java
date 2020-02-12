@@ -1,5 +1,6 @@
 package entidades;
 
+import java.util.Date;
 
 public class Resenia {
 	
@@ -7,7 +8,7 @@ public class Resenia {
 	private String comentario;
 	private Ciudadano usuario;
 	private Planeta planeta;
-	private String fecha;
+	private Date fecha;
 	
 	public Resenia() {}
 	
@@ -24,10 +25,11 @@ public class Resenia {
 		this.comentario = comentario;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

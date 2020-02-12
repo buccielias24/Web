@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +42,7 @@ public class DataResenia {
 					pl.setIdPlaneta(rs.getInt("idPlaneta"));
 					pl=pc.getById(pl);
 					r.setPlaneta(pl);
-					r.setFecha(rs.getString("fecha"));
+					r.setFecha(rs.getDate("fecha"));
 					r.setPuntaje(rs.getInt("puntaje"));
 					reseñas.add(r);
 				}
@@ -68,7 +69,7 @@ public class DataResenia {
 					prepareStatement(
 							"insert into resenia(fecha,comentario,puntaje,idPlaneta,idUsuario) values(?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1,r.getFecha());
+			stmt.setDate(1, (Date)r.getFecha());
 			stmt.setString(2, r.getComentario());
 			stmt.setInt(3, r.getPuntaje());
 			stmt.setInt(4, r.getPlaneta().getIdPlaneta());
@@ -81,7 +82,7 @@ public class DataResenia {
 				  	r.setPlaneta(p);
 				  	Ciudadano ciud=new Ciudadano();
 				  	ciud.setDgu(keyResultSet.getInt(5));				  	
-	                r.setFecha(keyResultSet.getString(1));}
+	                }
 	    	}catch (SQLException e) {
             e.printStackTrace();}	finally {
                 try {
@@ -98,7 +99,7 @@ public class DataResenia {
 		PreparedStatement stmt= null;
 		try {
 			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE resenia SET fecha=?,comentario=?,puntaje=?,idPlaneta=?,idUsuario=? where id=?");
-			stmt.setString(1,res.getFecha());
+			stmt.setDate(1,(Date) res.getFecha());
 			stmt.setString(2,res.getComentario());
 			stmt.setInt(3,res.getPuntaje());
 			stmt.setInt(4,res.getPlaneta().getIdPlaneta());
@@ -129,7 +130,7 @@ public class DataResenia {
 					r=new Resenia();
 				    r.setPlaneta(p);					
 				    r.setUsuario(c);
-					r.setFecha(rs.getString("fecha"));
+					r.setFecha(rs.getDate("fecha"));
 					r.setPuntaje(rs.getInt("puntaje"));
 					r.setComentario(rs.getString("comentario"));
 				}			

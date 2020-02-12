@@ -50,12 +50,11 @@ public class CargaAstrobus extends HttpServlet {
 		a.setCantAsientos(Integer.parseInt(request.getParameter("cantAsientos")));
 		a.setDistLimite(Float.parseFloat(request.getParameter("distLimite")));
 		a.setDistService(Float.parseFloat(request.getParameter("distService")));
-		
 		a.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
 		
 		AstrobusController ac=new AstrobusController();
 		ac.add(a);
-		response.sendRedirect("registrarAstrobus.jsp");
+		response.sendRedirect("/registrarAstrobus.jsp");
 		
 		
 		//doGet(request, response);

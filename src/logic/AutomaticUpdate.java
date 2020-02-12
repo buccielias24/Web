@@ -3,27 +3,28 @@ package logic;
 
 import static java.util.concurrent.TimeUnit.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
+import entidades.Astrobus;
 import entidades.Viaje;
 
 public class AutomaticUpdate {
    private final ScheduledExecutorService scheduler = 
       Executors.newScheduledThreadPool(1);
-   ViajeController vc=new ViajeController();
-	
    public void beepForAnHour() {
        final Runnable beeper = new Runnable() {
                public void run() 
                {
-            	   actualizarEstados();
-            	   System.out.println("Viajes Actualizados");
-            	   
+            	actualizarEstados();   
+            	asignarAstrobus();
+            	System.out.println("Actualizado");
                }
            };
        final ScheduledFuture<?> beeperHandle = 
@@ -33,8 +34,35 @@ public class AutomaticUpdate {
            }, 60 * 60, SECONDS);
    }
    
+   
+   public void asignarAstrobus() {
+   AstrobusController ac=new AstrobusController();
+	ViajeController vc=new ViajeController();
+		for(Viaje v:vc.getViajesSinAstrobus())
+				{
+					Astrobus elegido=ac.getCercano(v.getOrigen());
+					v.setAstrobus(elegido);
+					elegido.setEstado(false);
+					ac.modify(elegido);		 					
+					System.out.println("elegido para el viaje :"+v.getIdViaje()+"es : "+ v.getAstrobus());
+				}
+   }
+   public void actualizarAstrobus(Astrobus a) 
+   {
+	   AstrobusController ac=new AstrobusController();
+	   a.setEstado(true);
+	   SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	   String fechaActual = formatter.format(new Date());
+	   a.setTiempoLibre(fechaActual);
+	//Agregar distancia Recorrida al adicionar service
+	   ac.modify(a);
+	   
+	   
+   }
+   
    public void actualizarEstados()
 	{
+	   ViajeController vc=new ViajeController();
 		LocalDateTime localDate=LocalDateTime.now();
 		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		ArrayList<Viaje> viajes=vc.getAll();
@@ -44,9 +72,7 @@ public class AutomaticUpdate {
 				{					
 					v.setEstado(4);
 					vc.modify(v);
-					System.out.println("Viaje actualizado");
 				}else {
-					System.out.println("Viaje no actualizado");
 				}
 			}
 	}

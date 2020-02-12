@@ -44,11 +44,18 @@ public class BajaPlaneta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Planeta p= new Planeta();
-		int id=Integer.parseInt(request.getParameter("id"));
-		p.setIdPlaneta(id);
 		PlanetaControler pc=new PlanetaControler();
-		pc.delete(pc.getById(p));
+		
+		Planeta p= new Planeta();
+		int id=Integer.parseInt(request.getParameter("inBaja1"));
+		String fecha=request.getParameter("inBaja2");
+		String comentario=request.getParameter("inBaja3");
+		
+		p.setIdPlaneta(id);
+		p=pc.getById(p);
+		p.setFecha_baja(fecha);
+		p.setComentario(comentario);		
+		pc.delete(p);
 		response.sendRedirect("/Web/Planeta/vistaPrincipal.jsp");
 		}
 }
