@@ -33,17 +33,17 @@ public class vistaViaje extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// TODO Auto-generated method stub		
 		ViajeController vc=new ViajeController();
 		try{ArrayList<Viaje> arribos=vc.getArribos(Integer.parseInt(request.getParameter("origen")),Integer.parseInt(request.getParameter("destino")));
+		 
 		request.setAttribute("arribos", arribos);
-		RequestDispatcher rd=request.getRequestDispatcher("Viaje/tabla.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("Viaje/NewFile.jsp");
 		rd.forward(request,response);		
 		}catch(Exception e) {
 			ArrayList<Viaje> arribos=vc.getArribos(Integer.parseInt(request.getParameter("origen")),0);
 			request.setAttribute("arribos", arribos);
-			RequestDispatcher rd=request.getRequestDispatcher("Viaje/tabla.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("Viaje/NewFile.jsp");
 			rd.forward(request,response);				
 		}
 	}

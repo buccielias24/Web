@@ -114,7 +114,7 @@ public class DataViaje {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into viaje(origen,destino,salida,llegada,estadoViaje,distancia,motivo) values(?,?,?,?,?,?,?)",
+							"insert into viaje(origen,destino,salida,llegada,estadoViaje,distancia,motivo,astrobus) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1,v.getOrigen().getIdPlaneta());
 			stmt.setInt(2,v.getDestino().getIdPlaneta());
@@ -123,6 +123,7 @@ public class DataViaje {
 			stmt.setInt(5, v.getEstado());
 			stmt.setDouble(6, v.getDistancia());
             stmt.setInt(7,v.getMotivo());
+            stmt.setInt(8, v.getAstrobus().getIdNave());
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){

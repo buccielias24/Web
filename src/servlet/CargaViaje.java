@@ -17,10 +17,8 @@ import javax.servlet.http.HttpSession;
 import entidades.Planeta;
 import entidades.Viaje;
 import logic.AstrobusController;
-import logic.AutomaticUpdate;
 import logic.PlanetaControler;
 import logic.ViajeController;
-import entidades.Astrobus;
 import entidades.Ciudadano;
 
 /**
@@ -56,8 +54,8 @@ public class CargaViaje extends HttpServlet {
 				planetas.add(p);
 			}else {}
 		}
-		AutomaticUpdate au=new AutomaticUpdate();
-		au.asignarAstrobus();
+		//AutomaticUpdate au=new AutomaticUpdate();
+		//au.asignarAstrobus();
 		request.setAttribute("planetasDisponibles", planetas);
 		RequestDispatcher rd=request.getRequestDispatcher("/Viaje/registrarViaje.jsp");
 		rd.forward(request,response);
@@ -69,7 +67,10 @@ public class CargaViaje extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession(false);
-		//Se quito el astrobus de la carga
+		// Parametros recibidos de la carga
+		AstrobusController ac=new AstrobusController();
+		PlanetaControler pc=new PlanetaControler();
+		ViajeController vc=new ViajeController();
 		int origen=Integer.parseInt(request.getParameter("origen"));
 	   	int destino=Integer.parseInt(request.getParameter("destino"));
 		String horaS=request.getParameter("horaSalida");
@@ -87,54 +88,56 @@ public class CargaViaje extends HttpServlet {
 	    
 	    Planeta p1=new Planeta();
 		Planeta p2=new Planeta();
-		
-		PlanetaControler pc=new PlanetaControler();
-		ViajeController vc=new ViajeController();
-		
+
+		//Busca los objetos planetas en el controlador
 		p1.setIdPlaneta(origen);
 		p2.setIdPlaneta(destino);
-		
 		p1=pc.getById(p1);
 		p2=pc.getById(p2);
 		
 		  //Verificando estado del planeta para continuar con el proceso de carga
 			if(p1.getEstado()==false )
-				{
-					System.out.println("planeta de origen no disponible");
-					
-				}
-			else {	
-					if(p2.getEstado()==false)
-						{
-							System.out.println("planeta destino no disponible");
-						}
-							else {
-								Viaje v=new Viaje();
-								v.setOrigen(p1);
-								v.setDestino(p2);
-								v.setFrecuencia(frecuencia);
-								v.setDistancia(vc.getDistancia(v));
-
-								SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-								Date[] fechas=vc.determinarFecha(desde, hasta, frecuencia, horaS);
-									for(int i=0; i<fechas.length ;i++)	
-										{		
-										v.setSalida(formatter.format(fechas[i]));
-										Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(v.getDistancia()/100)));
-										v.setLlegada(formatter.format(newDate));
-										System.out.println("salida: "+fechas[i]+" llegada : "+newDate);
-										try {
-											vc.add(v,(Ciudadano)session.getAttribute("user"));}catch(Exception e)
-											{
-												System.out.println("usuario no logeado");	
+					{
+					System.out.println("planeta de origen no disponible");	
+					}else {	
+							if(p2.getEstado()==false)
+								{
+									System.out.println("planeta destino no disponible");
+								}
+								else {
+										//si el origen y destino estan disponibles crea el viaje
+										Viaje v=new Viaje();
+										ArrayList<Viaje> vsinAsignar=new ArrayList<Viaje>();
+										v.setOrigen(p1);
+										v.setDestino(p2);
+										v.setFrecuencia(frecuencia);
+										v.setDistancia(vc.getDistancia(v));
+										SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+										Date[] fechas=vc.determinarFecha(desde, hasta, frecuencia, horaS);
+										 
+											for(int i=0; i<fechas.length ;i++)	
+												{	
+													if(ac.asignarAstrobus(v))
+													  {	
+														v.setSalida(formatter.format(fechas[i]));
+														Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(v.getDistancia()/100)));
+														v.setLlegada(formatter.format(newDate));
+															try {
+																vc.add(v,(Ciudadano)session.getAttribute("user"));}catch(Exception e)
+																	{
+																	System.out.println("usuario no logeado");	
+																	RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
+																	rd.forward(request,response);	
+																	}
+													  }else 
+													  		{
+														  	  	vsinAsignar.add(v);
+													  		}
+												request.setAttribute("sinAsignar", vsinAsignar);	
 												RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
-												rd.forward(request,response);	
+												rd.forward(request,response);
 											}
-										}
-					}
-			  }
-			RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
-			rd.forward(request,response);
-	}
-
+								}
+						}
+		}
 }

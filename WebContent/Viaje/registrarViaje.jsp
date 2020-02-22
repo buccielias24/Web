@@ -71,19 +71,6 @@
        value="00:00"
        min="00:00" max="23:59">
 <br><br>
- <br><br>      
- <h3>Astrobus definido para el viaje</h3>
-<select required type="text" id="elegirAstrobus"  name="elegirAstrobus">
-		<option disabled selected> -- select an option -- </option>
-<% 
-		AstrobusController ac=new AstrobusController();
-		ArrayList<Astrobus> astrobuses=ac.getAll();
-		for(Astrobus a:astrobuses)
-		{%>
-		<option id="lala" value="<%=a.getIdNave()%>"><%=a.getMarca()%></option>				
-		<%}%>
-</select>
-<br>
 <h3>Que dias realizara los viajes</h3>
 <input type="checkbox" name="Lunes" value="true">Lunes<br>
 <input type="checkbox" name="Martes" value="true">Martes<br>

@@ -47,6 +47,22 @@ public class AstrobusController {
 		da.modify(a);
 	}
 	
+	   public boolean asignarAstrobus(Viaje v) {
+		Astrobus elegido=this.getCercano(v.getOrigen());
+		if(elegido.getIdNave()==0)
+			{
+			return false;
+			}
+			 else {
+					v.setAstrobus(elegido);
+					elegido.setEstado(false);
+					this.modify(elegido);		 					
+					System.out.println("elegido para el viaje :"+v.getIdViaje()+"es : "+ v.getAstrobus());
+					return true;
+				   }
+	   }
+		  
+	
 	public Astrobus getCercano(Planeta p)
 	{
 		ArrayList<Astrobus> libres=this.getDisponibles();

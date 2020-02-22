@@ -45,7 +45,7 @@ margin-top: 100px;
 
 <body>
 <div id="refresh" class="container">
-<h3 class="table">ULTIMOS ARRIBOS</h3>
+<h3 class="table">Viajes</h3>
 <table  class="table" id="refrescar">
 
   <thead class="thead-dark">
@@ -100,41 +100,8 @@ margin-top: 100px;
 		}catch(Exception e) {}
 %>
  </tbody>
-</table>	
-		
-<h3 class="table">VIAJES</h3>
-<table  class="table" id="refrescar">
-  <thead class="thead-dark">
-    <tr>
-       <th scope="col">Origen</th>
-        <th scope="col">Destino</th>
-         <th scope="col">Salida</th>
-          <th scope="col">Llegada</th>
-           	<th scope="col">Lunes</th>
-     		 <th scope="col">Martes</th>
-     		  <th scope="col">Miercoles</th>	
-     			<th scope="col">Jueves</th>
-     			  <th scope="col">Viernes</th>
-     			  	<th scope="col">Sabado</th>
-     			  	 <th scope="col">Domingo</th>	
-     </tr>
-  </thead>
-  <tbody id="myTbody">
-  	<%
-  	try{						
-		 for(Viaje v:viajes){
-										%>
-    <tr>
-      <td><%=v.getOrigen().getNombrePlaneta()%></td>  
-      <td><%=v.getDestino().getNombrePlaneta()%></td>
-      <td><%=v.getSalida()%></td>
-      <td><%=v.getLlegada()%></td>
-  	<%}
-			  }catch(Exception e) {}
-%>
- </tbody>
-</table>	
-
+</table>		
 </div>
+
 </body>
 </html>

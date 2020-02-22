@@ -16,7 +16,7 @@ import entidades.Astrobus;
 import entidades.Viaje;
 
 public class AutomaticUpdate {
-   private final ScheduledExecutorService scheduler = 
+ /*  private final ScheduledExecutorService scheduler = 
       Executors.newScheduledThreadPool(1);
    public void beepForAnHour() {
        final Runnable beeper = new Runnable() {
@@ -35,18 +35,7 @@ public class AutomaticUpdate {
    }
    
    
-   public void asignarAstrobus() {
-   AstrobusController ac=new AstrobusController();
-	ViajeController vc=new ViajeController();
-		for(Viaje v:vc.getViajesSinAstrobus())
-				{
-					Astrobus elegido=ac.getCercano(v.getOrigen());
-					v.setAstrobus(elegido);
-					elegido.setEstado(false);
-					ac.modify(elegido);		 					
-					System.out.println("elegido para el viaje :"+v.getIdViaje()+"es : "+ v.getAstrobus());
-				}
-   }
+
    public void actualizarAstrobus(Astrobus a) 
    {
 	   AstrobusController ac=new AstrobusController();
@@ -76,5 +65,6 @@ public class AutomaticUpdate {
 				}
 			}
 	}
+	*/
 }
 
