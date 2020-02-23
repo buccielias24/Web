@@ -10,6 +10,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema astrobuses
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `astrobuses` ;
 
 -- -----------------------------------------------------
 -- Schema astrobuses
@@ -20,6 +21,8 @@ USE `astrobuses` ;
 -- -----------------------------------------------------
 -- Table `astrobuses`.`astrobus`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`astrobus` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`astrobus` (
   `IdAstrobus` INT NOT NULL,
   `cantAsientos` INT NOT NULL,
@@ -38,6 +41,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `astrobuses`.`planeta`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`planeta` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`planeta` (
   `IdPlaneta` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
@@ -54,6 +59,8 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `astrobuses`.`raza`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`raza` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`raza` (
   `IdRaza` INT NOT NULL AUTO_INCREMENT,
   `nombreRaza` VARCHAR(45) NOT NULL,
@@ -65,22 +72,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `astrobuses`.`resenia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `astrobuses`.`resenia` (
-  `fecha` DATETIME NOT NULL,
-  `comentario` VARCHAR(45) NULL DEFAULT NULL,
-  `puntaje` INT NULL DEFAULT NULL,
-  `idPlaneta` INT NOT NULL,
-  `idUsuario` INT NOT NULL,
-  PRIMARY KEY (`idUsuario`, `idPlaneta`, `fecha`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `astrobuses`.`usuario`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`usuario` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`usuario` (
   `dgu` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
@@ -91,30 +86,51 @@ CREATE TABLE IF NOT EXISTS `astrobuses`.`usuario` (
   `rol` INT NOT NULL,
   `us_raza` INT NOT NULL,
   PRIMARY KEY (`dgu`),
-  INDEX `us_raza_idx` (`us_raza` ASC) VISIBLE,
   CONSTRAINT `raza de usuario`
     FOREIGN KEY (`us_raza`)
     REFERENCES `astrobuses`.`raza` (`IdRaza`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+CREATE INDEX `us_raza_idx` ON `astrobuses`.`usuario` (`us_raza` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `astrobuses`.`resenia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`resenia` ;
+
+CREATE TABLE IF NOT EXISTS `astrobuses`.`resenia` (
+  `fecha` DATETIME NOT NULL,
+  `comentario` VARCHAR(45) NULL DEFAULT NULL,
+  `puntaje` INT NULL DEFAULT NULL,
+  `idPlaneta` INT NOT NULL,
+  `idUsuario` INT NOT NULL,
+  PRIMARY KEY (`idUsuario`, `idPlaneta`, `fecha`),
+  CONSTRAINT `id planeta`
+    FOREIGN KEY (`idPlaneta`)
+    REFERENCES `astrobuses`.`planeta` (`IdPlaneta`),
+  CONSTRAINT `id usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `astrobuses`.`usuario` (`dgu`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE INDEX `id planeta_idx` ON `astrobuses`.`resenia` (`idPlaneta` ASC) VISIBLE;
+
 
 -- -----------------------------------------------------
 -- Table `astrobuses`.`viaje`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`viaje` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`viaje` (
   `idViaje` INT NOT NULL AUTO_INCREMENT,
-  `salida` DATETIME NOT NULL,
-  `llegada` DATETIME NOT NULL,
   `estadoViaje` INT NOT NULL DEFAULT '0',
   `origen` INT NOT NULL,
   `destino` INT NOT NULL,
-  `distancia` DOUBLE NULL DEFAULT NULL,
-  `astrobus` INT NULL DEFAULT NULL,
   `motivo` INT NULL DEFAULT NULL,
   PRIMARY KEY (`idViaje`),
-  INDEX `origen_idx` (`origen` ASC) VISIBLE,
-  INDEX `destino_idx` (`destino` ASC) VISIBLE,
   CONSTRAINT `destino`
     FOREIGN KEY (`destino`)
     REFERENCES `astrobuses`.`planeta` (`IdPlaneta`),
@@ -126,10 +142,16 @@ AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+CREATE INDEX `origen_idx` ON `astrobuses`.`viaje` (`origen` ASC) VISIBLE;
+
+CREATE INDEX `destino_idx` ON `astrobuses`.`viaje` (`destino` ASC) VISIBLE;
+
 
 -- -----------------------------------------------------
 -- Table `astrobuses`.`viaje_astrobus_usuario_planeta`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `astrobuses`.`viaje_astrobus_usuario_planeta` ;
+
 CREATE TABLE IF NOT EXISTS `astrobuses`.`viaje_astrobus_usuario_planeta` (
   `fechaSalida` DATETIME NOT NULL,
   `fechaLlegada` DATETIME NOT NULL,
@@ -137,9 +159,6 @@ CREATE TABLE IF NOT EXISTS `astrobuses`.`viaje_astrobus_usuario_planeta` (
   `IdAstrobus` INT NOT NULL,
   `IdUsuario` INT NOT NULL,
   PRIMARY KEY (`fechaSalida`, `fechaLlegada`, `IdViaje`, `IdAstrobus`, `IdUsuario`),
-  INDEX `viaje_idx` (`IdViaje` ASC) VISIBLE,
-  INDEX `astrobus_idx` (`IdAstrobus` ASC) VISIBLE,
-  INDEX `usuario_idx` (`IdUsuario` ASC) VISIBLE,
   CONSTRAINT `astrobus`
     FOREIGN KEY (`IdAstrobus`)
     REFERENCES `astrobuses`.`astrobus` (`IdAstrobus`),
@@ -151,6 +170,12 @@ CREATE TABLE IF NOT EXISTS `astrobuses`.`viaje_astrobus_usuario_planeta` (
     REFERENCES `astrobuses`.`viaje` (`idViaje`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+CREATE INDEX `viaje_idx` ON `astrobuses`.`viaje_astrobus_usuario_planeta` (`IdViaje` ASC) VISIBLE;
+
+CREATE INDEX `astrobus_idx` ON `astrobuses`.`viaje_astrobus_usuario_planeta` (`IdAstrobus` ASC) VISIBLE;
+
+CREATE INDEX `usuario_idx` ON `astrobuses`.`viaje_astrobus_usuario_planeta` (`IdUsuario` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
