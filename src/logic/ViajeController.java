@@ -21,15 +21,11 @@ public class ViajeController {
 	}
 	
 	
-	public boolean add(Viaje v, Ciudadano user)
+	public void add(Viaje v)
 	{		
-		if(user==null || user.getRol()!=1)
-		{
-		return false;
-		}else
-			dv.add(v);
-			return true;}	
-
+	 dv.add(v);
+    }
+	
 	public ArrayList<Viaje> getAll(){
 		return dv.getAll();
 	}

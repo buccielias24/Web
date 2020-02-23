@@ -121,23 +121,23 @@ public class CargaViaje extends HttpServlet {
 													  {	
 														v.setSalida(formatter.format(fechas[i]));
 														Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(v.getDistancia()/100)));
-														v.setLlegada(formatter.format(newDate));
-															try {
-																vc.add(v,(Ciudadano)session.getAttribute("user"));}catch(Exception e)
-																	{
-																	System.out.println("usuario no logeado");	
-																	RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
-																	rd.forward(request,response);	
-																	}
-													  }else 
+														v.setLlegada(formatter.format(newDate));	
+													    vc.add(v);	
+														}else 
 													  		{
-														  	  	vsinAsignar.add(v);
+														  	 vsinAsignar.add(v);
 													  		}
-												request.setAttribute("sinAsignar", vsinAsignar);	
-												RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
-												rd.forward(request,response);
-											}
+												}
+												 	if(vsinAsignar.size()==0)
+												 		{	
+												 		RequestDispatcher rd=request.getRequestDispatcher("/Viaje/vistaPrincipal.jsp");
+												 		rd.forward(request,response);
+												 		}else {
+												 				request.setAttribute("sinAsignar", vsinAsignar);	
+												 				RequestDispatcher rd=request.getRequestDispatcher("/error.jsp");
+												 				rd.forward(request,response);
+												 			  }
 								}
-						}
+				}
 		}
 }

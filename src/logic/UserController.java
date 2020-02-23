@@ -2,6 +2,7 @@ package logic;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
@@ -29,7 +30,42 @@ public class UserController {
 		return du.getById(ciud);	
 	}
 	
+	public void addUser(Ciudadano user, String pass2)
+	{
+			if (this.validarUsuario(user))
+			{
+				this.correo(user.getEmail());
+				du.add(user);	
+			}else {System.out.println("usuario ya existe");
+			}
+			
+	}
 	
+	public boolean validarUsuario(Ciudadano usuario)
+	{
+		boolean validar=false;
+		ArrayList<Ciudadano> usuarios=this.getAll();
+		for(Ciudadano user:usuarios)
+		{
+			if(user.getDgu()!=usuario.getDgu())
+			{
+				if(!user.getEmail().equals(usuario.getEmail()))
+				{
+					if(!user.getUser().equals(usuario.getUser()))
+					{
+					  validar=true;
+					}else {validar=false;break;}
+				}else {validar=false; break;}
+			}else {validar=false; break;}
+		
+		}					
+	return validar;
+	}
+	
+	public ArrayList<Ciudadano> getAll()
+	{
+		return du.getAll();
+	}
 
 	// Completar al registrar y editar perfil poder subir foto
 	public String encodeToString(BufferedImage image, String type)
@@ -66,7 +102,7 @@ public class UserController {
 		
 	}
 	
-	public void correo()
+	public void correo(String receptor)
 	{
 		Properties props = new Properties();
 
@@ -97,16 +133,15 @@ public class UserController {
 		try {	message.setFrom(new InternetAddress("buccielias@gmail.com"));
 	
 		// A quien va dirigido
-		message.setRecipient(Message.RecipientType.TO, new InternetAddress("buccielias@gmail.com"));
-		message.setSubject("Asunto del mensaje");
-		message.setText("Texto del mensaje");
+		message.setRecipient(Message.RecipientType.TO, new InternetAddress(receptor));
+		message.setSubject("Bienvenido");
+		message.setText("<h1>Desde ahora sera el señor thompson del lago del terror.</h1>");
 	
 		Transport t = session.getTransport("smtp");
 
 		// Aqui usuario y password de gmail
 		t.connect("buccielias@gmail.com","Bu4576063Cc2");
 		t.sendMessage(message,message.getAllRecipients());
-		System.out.println("Llega aca");
 		t.close();
 	}catch(Exception e) {
 		e.printStackTrace();
