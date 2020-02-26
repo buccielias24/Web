@@ -1,45 +1,22 @@
-<%@page import="logic.PlanetaControler"%>
-<%@page import="entidades.Planeta"%>
+<%@page import="logic.AstrobusController"%>
+<%@page import="entidades.Astrobus"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Baja Astrobus</title>
-</head>
 <body>
-
-<h1>BAJA DE PLANETAS</h1>
-<h2> LISTADO DE PLANETAS</h2>
-<table>
-<tr>
-	<th>ID</th><th>NOMBRE</th>
-	<th>COORDENADA</th><th>ESTADO</th>
-</tr>
-<% 
-	try{	
-		ArrayList<Planeta> planetas=new PlanetaControler().getAll();
-					
-			for(Planeta p:planetas){
-			%>
-			<tr>
-				<th><%=p.getIdPlaneta()%></th>	
-				<th><%=p.getNombrePlaneta()%></th>
-				<th><%=p.getEstado()%></th>
-			</tr><%
-			} 
-	}catch(Exception e) {}
+<h3>Baja Astrobus</h3>
+<br>
+<br>
+<form action="/Web/BajaAstrobus" method="post">
+<%	AstrobusController ac=new AstrobusController();	
+	Astrobus a=ac.getById((Astrobus)request.getAttribute("astrobus"));
 %>
-</table>
-<br>
-<br>
-<form action="/Web/Planetas" method="post">
-  <label>ID Planeta</label> <input type="text" name="id">
-  							<input type="hidden" name="accion" value="baja">
-  <input type="submit" value="Aceptar">
+ <input type="text" id="inBaja1" name="inBaja1" value="<%=a.getIdNave()%>"><br>	
+<% /* Fecha :<input type="datetime-local" id="inBaja2" name="inBaja2"><br>
+Motivo: <textarea rows="10" cols="100" id="inBaja3" name="inBaja3"></textarea><br>*/ %>
+ <input type="submit" value="aceptar">
 </form>
-
 </body>
 </html>

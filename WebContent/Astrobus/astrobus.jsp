@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Naves</title>
+    <title>Astrobuses</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/grid/">
 
@@ -77,7 +77,7 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
       </form>
     </div>
   </nav>
@@ -87,23 +87,20 @@
     <div class="container">
 
   <p class="lead">Astrobuses</p>
- 	<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Viaje/registrarViaje.jsp', 'test', window, 600, 300)" role="button">Nuevo Viaje</a></p>	
-<!--  <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets.."> -->
+ 	<p><a class="btn btn-secondary" onclick="popupWindow('/Web/Astrobus/registrarAstrobus.jsp', 'test', window, 600, 300)" role="button">Nuevo Astrobus</a></p>	
+<!--  <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search astrobuses.."> -->
 
 <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Marca</th>
       <th scope="col">Asientos</th>
-       <th scope="col">Distancia Limite</th>
-       <th scope="col">Tiempo sin uso</th>
        <th scope="col">Distancia recorrida</th>
+       <th scope="col">Distancia Limite</th>
        <th scope="col">Estado</th>
        <th scope="col">Fecha Alta</th>
        <th scope="col">Fecha Baja</th>
        <th scope="col">Motivo</th>
-       <th scope="col">Comentario</th>    
     </tr>
   </thead>
   <tbody id="myTbody">
@@ -114,16 +111,13 @@
 			%>
     <tr>
       <th scope="row"><%=astro.getIdNave()%></th>
-      <td><%=astro.getMarca() %></td>
       <td><%=astro.getCantAsientos() %></td>
-      <td><%=astro.getDistLimite() %></td>
-      <td><%=astro.getTiempoLibre() %></td>   
-      <td><%=ac.getDistancia(astro)%></td>        
+      <td><%=astro.getDistRecorrida() %></td>
+      <td><%=astro.getDistLimite() %></td>     
       <td><%=astro.getEstado()%></td>  
    	  <td><%=astro.getFecha_alta()%></td>
    	  <td><%=astro.getFecha_baja()%></td>
    	  <td><%=astro.getMotivo()%></td>
-   	  <td><%=astro.getComentario()%></td>	
     </tr>    
   	<%
   	  	

@@ -96,12 +96,11 @@ public class DataAstrobus {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into astrobus(marca,cantAsientos,distRecorrida,distLimite,distService,tiempoDesdeSinUso,estado) values(?,?,0,?,?,now(),true)",
+							"insert into astrobus(cantAsientos,distRecorrida,distLimite,distService,fechaAlta,estado) values(?,0,?,?,now(),true)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, a.getMarca());
-			stmt.setInt(2, a.getCantAsientos());
-			stmt.setDouble(3, a.getDistLimite());
-			stmt.setDouble(4, a.getDistService());
+			stmt.setInt(1, a.getCantAsientos());
+			stmt.setDouble(2, a.getDistLimite());
+			stmt.setDouble(3, a.getDistService());
 			stmt.executeUpdate();			
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
@@ -123,18 +122,8 @@ public class DataAstrobus {
 	public void modify(Astrobus a) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE astrobus SET marca=?,cantAsientos=?,distService=?,distLimite=?,tiempoDesdeSinUso=?,estado=?,fecha_alta=?,fecha_baja=?,motivo=?,comentario=? where id=?");
-			stmt.setString(1, a.getMarca());
-			stmt.setInt(2,a.getCantAsientos());
-			stmt.setDouble(3,a.getDistService());
-			stmt.setDouble(4, a.getDistLimite());
-			stmt.setString(5, a.getTiempoLibre());
-			stmt.setBoolean(6, a.getEstado());
-			stmt.setString(7,a.getFecha_alta());
-			stmt.setString(8, a.getFecha_baja());
-			stmt.setInt(9,a.getMotivo());
-			stmt.setString(10, a.getComentario());
-			stmt.setInt(11, a.getIdNave());
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE astrobus SET estado=false,fecha_baja=now(),motivo='porque se hizo percha' where id=?");
+			stmt.setInt(1, a.getIdNave());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {
