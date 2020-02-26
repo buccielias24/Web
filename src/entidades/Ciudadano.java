@@ -9,7 +9,7 @@ public class Ciudadano {
 	private String password;
 	private int rol;
 	private String email;
-	
+	private Raza raza;
 	
 	
 	public int getRol() {
@@ -72,7 +72,9 @@ public class Ciudadano {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,7 +100,7 @@ public class Ciudadano {
 		}else {return false;}
 	}
 
-	public Ciudadano(int dgu, String nombre, String apellido, String user, String password, String email) {
+	public Ciudadano(int dgu, String nombre, String apellido, String user, String password, String email,Raza raza) {
 		super();
 		this.dgu = dgu;
 		this.nombre = nombre;
@@ -106,11 +108,20 @@ public class Ciudadano {
 		this.user = user;
 		this.password = password;
 		this.email = email;
+		this.raza=raza;
 	}
 
 	@Override
 	public String toString() {
 		return "Ciudadano [dgu=" + dgu + ", nombre=" + nombre + ", apellido=" + apellido + ", user=" + user + ", rol="
 				+ rol + ", email=" + email + "]";
+	}
+
+	public Raza getRaza() {
+		return raza;
+	}
+
+	public void setRaza(Raza raza) {
+		this.raza = raza;
 	}	
 }

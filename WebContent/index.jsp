@@ -52,14 +52,11 @@
       <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
     </ol>
     <div class="carousel-inner">
-      <div class="carousel-item">
-      <!--     <%//PlanetaControler pc=new PlanetaControler();
-                 //Planeta p=pc.getUltimo();
-            %>
-            <img alt="" src="<%//=p.getUrl()%>" height="100" width="100">
-  			-->       
+      <div class="carousel-item">       
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg> 
         <div class="container">
           <div class="carousel-caption text-left">
+          
             <h1>Ultimo Planeta Agregado .</h1>
             <p><a class="btn btn-lg btn-primary" href="registroUsuario.jsp" role="button">Registrarse</a></p>
           </div>

@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Raza"%>
+<%@page import="logic.RazaController"%>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -114,8 +117,14 @@
             <div class="col-md-4 mb-3">
             <label for="state">Raza</label>
             <select class="custom-select d-block w-100" id="raza" name="raza" required>
-              <option value="">Choose...</option>
-              <option>Humano</option>
+              <option disabled value="">Choose...</option>
+              <% 
+              RazaController rc=new RazaController(); 
+            	 for(Raza r:rc.getAll())
+            	  {
+            	  %>
+              <option value="<%=r.getIdRaza()%>"><%=r.getNombre()%></option>
+           			<%}%> 
             </select>
             <div class="invalid-feedback">
               Please provide a valid state.

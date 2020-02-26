@@ -33,35 +33,18 @@ public class ViajeController {
 	// agregar metodo para determinar dia y hora de llegada a traves de un calculo
 	
 	public ArrayList<Viaje> getArribos(int origen, int destino){
+		
 		ArrayList<Viaje> viajes=this.getAll();
 		ArrayList<Viaje> arribos=new ArrayList<Viaje>(); 
-		PlanetaControler pc=new PlanetaControler();
-		Planeta p1=new Planeta();
-		Planeta p2=new Planeta();
-		if(destino==0)
-		{
-			p2=null;
-		}else {p2.setIdPlaneta(destino);
-		p2=pc.getById(p2);}
+	
+			for(Viaje v:viajes) {
+				if(v.getOrigen().getIdPlaneta()==origen && v.getDestino().getIdPlaneta()==destino)
+					{
+						arribos.add(v);
+					}
 		
-		p1.setIdPlaneta(origen);
-		p1=pc.getById(p1);
-			if(p2==null)
-			{
-				for(Viaje v:viajes) {
-					if(v.getOrigen().equals(p1))
-					{
-						arribos.add(v);
-					}
 				}
-			}else {
-				for(Viaje v:viajes) {
-					if(v.getOrigen().equals(p1)&&v.getDestino().equals(p2))
-					{
-						arribos.add(v);
-					}
-				}
-			}
+			
 			return arribos;
 		}
 	
@@ -132,8 +115,7 @@ public class ViajeController {
 				{
 					if(v.getAstrobus().getIdNave()==0 && this.calcularDiferencia(v.getSalida())<=20 && this.calcularDiferencia(v.getSalida())>=0)
 					{
-				    System.out.println("Para el viaje : "+v.getIdViaje()+" faltan :"+this.calcularDiferencia(v.getSalida())+" horas");
-					sinNave.add(v);
+				    sinNave.add(v);
 					}
 			} 
 		return sinNave;
@@ -152,16 +134,9 @@ public class ViajeController {
 			e.printStackTrace();
 		}
 		
-		
 		long diferencia=cini.getTimeInMillis()-cfin.getTimeInMillis();
 		return diferencia/(1000*3600);
 		
-	}
-	
-	
-	public void modify(Viaje v)
-	{
-		dv.modify(v);
 	}
 	
 }

@@ -47,15 +47,11 @@ public class BajaPlaneta extends HttpServlet {
 		PlanetaControler pc=new PlanetaControler();
 		
 		Planeta p= new Planeta();
-		int id=Integer.parseInt(request.getParameter("inBaja1"));
-		String fecha=request.getParameter("inBaja2");
-		String comentario=request.getParameter("inBaja3");
-		
+		int id=Integer.parseInt(request.getParameter("idPlaneta"));
+		int motivoBaja=Integer.parseInt(request.getParameter("motivoBaja"));
 		p.setIdPlaneta(id);
-		p=pc.getById(p);
-		p.setFecha_baja(fecha);
-		p.setComentario(comentario);		
-		pc.delete(p);
+		p.setMotivo(motivoBaja);
+		pc.baja(p);
 		response.sendRedirect("/Web/Planeta/vistaPrincipal.jsp");
 		}
 }

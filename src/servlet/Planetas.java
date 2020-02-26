@@ -1,10 +1,7 @@
 
 package servlet;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,18 +48,23 @@ public class Planetas extends HttpServlet {
 		doGet(request, response);
 		    
 			PlanetaControler pc=new PlanetaControler();
-			Planeta p=new Planeta();
 			
-			p.setNombrePlaneta(request.getParameter("inAlta1"));			
-			p.setFecha_alta(request.getParameter("inAlta4"));
-			p.setCoordenadaX(Integer.parseInt(request.getParameter("inAlta2")));
-			p.setCoordenadaY(Integer.parseInt(request.getParameter("inAlta3")));
-			HttpSession session=request.getSession(false);  
+			String nombre=request.getParameter("inAlta1");
+			int coordenadaX=Integer.parseInt(request.getParameter("inAlta2"));
+			int coordenadaY=Integer.parseInt(request.getParameter("inAlta3"));
+			Planeta p=new Planeta(nombre,coordenadaX,coordenadaY);
 			
-			pc.add(p,(Ciudadano)session.getAttribute("user"));
-			
+			HttpSession session=request.getSession(false);  			
+			int resp=pc.add(p,(Ciudadano)session.getAttribute("user"));
+			if(resp==0)
+			{
 			RequestDispatcher rd=request.getRequestDispatcher("/Planeta/exito.jsp");
 			rd.forward(request,response);
+			}else {
+				request.setAttribute("code", resp);
+				RequestDispatcher rd=request.getRequestDispatcher("/error.jsp");
+				rd.forward(request,response);			
+			}
 	}
 	
 }

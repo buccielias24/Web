@@ -17,7 +17,7 @@ public class DataUser {
 		Ciudadano c=null;	
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select nombre,apellido,dgu,usuario,password,rol from usuarios where usuario=? or dgu=? ");
+					prepareStatement("select nombre,apellido,dgu,usuario,password,rol from usuario where usuario=? or dgu=? ");
 				stmt.setString(1,ciud.getUser());
 				stmt.setInt(2, ciud.getDgu());
 				rs=stmt.executeQuery();
@@ -51,7 +51,7 @@ public class DataUser {
 		ArrayList<Ciudadano> usuarios= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select * from usuarios");
+			rs= stmt.executeQuery("select * from usuario");
 			if(rs!=null) {
 				while(rs.next()) {
 					Ciudadano c=new Ciudadano();
@@ -83,7 +83,7 @@ public class DataUser {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into usuarios(dgu, nombre,apellido, usuario,password,email,rol) values(?,?,?,?,?,?,?)",
+							"insert into usuario(dgu, nombre,apellido, usuario,password,email,rol,us_raza) values(?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, user.getDgu());
 			stmt.setString(2, user.getNombre());
@@ -92,6 +92,7 @@ public class DataUser {
 			stmt.setString(5, user.getPassword());
 			stmt.setString(6, user.getEmail());
 			stmt.setInt(7, user.getRol());
+			stmt.setInt(8,user.getRaza().getIdRaza());
 			stmt.executeUpdate();	
 			}catch (SQLException e) {
             e.printStackTrace();}	finally {

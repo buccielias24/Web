@@ -36,7 +36,6 @@ $(document).ready(function(){
          	<th scope="col">Fecha y Hora Salida</th>
           	<th scope="col">Fecha Y Hora Llegada</th>
            	<th scope="col">Estado</th>
-   		    <th scope="col">Distancia</th> 
    		    <th scope="col">Astrobus</th>	
        </tr>
      </thead>
@@ -50,8 +49,7 @@ $(document).ready(function(){
       				<td id="salidaViaje"><%=v.getSalida()%></td>
       				<td id="llegadaViaje"><%=v.getLlegada()%></td>
 	  				<td id="estadoViaje"></td>
-      				<td><%=v.getDistancia()%></td>
-	  				<td><a href="/Web/cargaastrobus?id=<%=v.getAstrobus().getIdNave()%>"><%=v.getAstrobus().getMarca()%>, Patente: <%=v.getAstrobus().getIdNave()%></a></td>
+      				<td><a href="/Web/cargaastrobus?id=<%=v.getAstrobus().getIdNave()%>"><%=v.getAstrobus().getMarca()%>, Patente: <%=v.getAstrobus().getIdNave()%></a></td>
 					</tr> <%}					
 		}catch(Exception e) {}%>
  	</tbody>

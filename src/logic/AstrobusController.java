@@ -34,9 +34,7 @@ public class AstrobusController {
 		return disponibles;
 	}	
 		
-	public void add(Astrobus a) {
-		da.add(a); 
-	}
+
 	public Astrobus getById(Astrobus a) {
 		return da.getById(a);
 		
@@ -57,7 +55,6 @@ public class AstrobusController {
 					v.setAstrobus(elegido);
 					elegido.setEstado(false);
 					this.modify(elegido);		 					
-					System.out.println("elegido para el viaje :"+v.getIdViaje()+"es : "+ v.getAstrobus());
 					return true;
 				   }
 	   }

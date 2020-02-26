@@ -11,11 +11,11 @@
 <body>
 			<h3>Viajes no agregados por falta de astrobuses</h3>
 		<%
-			ArrayList<Viaje> viajes=(ArrayList<Viaje>)request.getAttribute("sinAsignar");
-			for(Viaje v:viajes)
-			{%>
-				<p>Origen: <%=v.getOrigen()%>, destino: <%=v.getOrigen()%></p><br>		
-			<%}
-		%>
+			//ArrayList<Viaje> viajes=(ArrayList<Viaje>)request.getAttribute("sinAsignar");
+			//for(Viaje v:viajes)
+			//{%>
+				<p>Origen: <%//=v.getOrigen()%>, destino: <%//=v.getOrigen()%></p><br>		
+		<%//}
+	%>
 </body>
 </html>

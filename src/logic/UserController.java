@@ -34,16 +34,19 @@ public class UserController {
 	{
 			if (this.validarUsuario(user))
 			{
-				this.correo(user.getEmail());
-				du.add(user);	
-			}else {System.out.println("usuario ya existe");
+				try {
+					du.add(user);
+					this.correo(user.getEmail());
+					}catch(Exception e) {System.out.println("algun error");}	
+			}else {
+				System.out.println("usuario ya existe");
 			}
 			
 	}
 	
 	public boolean validarUsuario(Ciudadano usuario)
 	{
-		boolean validar=false;
+		boolean validar=true;
 		ArrayList<Ciudadano> usuarios=this.getAll();
 		for(Ciudadano user:usuarios)
 		{
@@ -53,7 +56,6 @@ public class UserController {
 				{
 					if(!user.getUser().equals(usuario.getUser()))
 					{
-					  validar=true;
 					}else {validar=false;break;}
 				}else {validar=false; break;}
 			}else {validar=false; break;}

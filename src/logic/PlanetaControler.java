@@ -27,50 +27,53 @@ public class PlanetaControler {
 		return dp.getById(pla);
 	}
 	
-	public Boolean add(Planeta p, Ciudadano c) {
+	public int add(Planeta p, Ciudadano c) {
 		
 		if(c!=null && c.getRol()==1)
-		{
-		p.setEstado(true);
-		dp.add(p);
-		return true;
-		}
-		else {
-		 	return false;
-		}
+			{
+				if(planetaExiste(p)){
+					p.setEstado(true);	
+					dp.add(p);	
+				return 0;}else {
+				System.out.println("planeta existe");
+				return 1;}
+			}
+			else {
+					System.out.println("no esta logeado");
+					return 2;
+				 }
 		
 	}
 	
-	public void delete(Planeta p) {
-		/*ViajeController vc=new ViajeController();
-		ArrayList<Viaje> viajes=vc.getAll();
-			for(Viaje v:viajes)
-			{
-				if(v.getOrigen().equals(p)||v.getDestino().equals(p))
-				{
-					
-					v.setEstado(1);
-					v.setMotivo(1);
-					vc.modify(v);
-				}
-			}*/
-		System.out.println(p);
-		dp.delete(p);
-	}
-	
-	
-	public Planeta getUltimo()
+	public boolean planetaExiste(Planeta pla)
 	{
-		return dp.getLast();		 
+		boolean validar=true;
+		ArrayList<Planeta>planetas=this.getAll();
+		for (Planeta p:planetas)
+		{
+			 if(p.getCoordenadaX()==pla.getCoordenadaX()&&p.getCoordenadaY()==pla.getCoordenadaY())
+				 {validar=false;
+				  System.out.println("Coordenada duplicada");
+				 break;}else
+				 {
+					 if(p.getNombrePlaneta().equals(pla.getNombrePlaneta()))
+							 {
+						 		validar=false;
+						 		System.out.println("Nombre planeta duplicado");
+						 		break;
+							 }
+				 }
+		}
+		return validar;
 	}
 	
 	
 	public void modify(Planeta p)
 		{
-			if(p.getEstado()==true)
-			{
-				p.setFecha_baja(null);
-				dp.modify(p);	
-			}
+			dp.modify(p);
 		}
+	public void baja(Planeta p)
+	{
+		dp.baja(p);
+	}
 }

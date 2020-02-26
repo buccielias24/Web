@@ -45,13 +45,17 @@ public class Modificar extends HttpServlet {
 		// TODO Auto-generated method stub
 		int id=Integer.parseInt(request.getParameter("id"));
 		String nombre=request.getParameter("nombre");		
-		Boolean estado=Boolean.parseBoolean(request.getParameter("estado"));
+		int coordX=Integer.parseInt(request.getParameter("coordenadaX"));
+		int coordY=Integer.parseInt(request.getParameter("coordenadaY"));
+		boolean estado=Boolean.parseBoolean(request.getParameter("estado"));
 		PlanetaControler pc=new PlanetaControler();
+
 		Planeta p=new Planeta();
 
-		
 		p.setIdPlaneta(id);
 		p.setNombrePlaneta(nombre);
+		p.setCoordenadaX(coordX);
+		p.setCoordenadaY(coordY);
 		p.setEstado(estado);
 		pc.modify(p);
 	}

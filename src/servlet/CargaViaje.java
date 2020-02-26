@@ -19,7 +19,6 @@ import entidades.Viaje;
 import logic.AstrobusController;
 import logic.PlanetaControler;
 import logic.ViajeController;
-import entidades.Ciudadano;
 
 /**
  * Servlet implementation class CargaViaje
@@ -110,8 +109,6 @@ public class CargaViaje extends HttpServlet {
 										ArrayList<Viaje> vsinAsignar=new ArrayList<Viaje>();
 										v.setOrigen(p1);
 										v.setDestino(p2);
-										v.setFrecuencia(frecuencia);
-										v.setDistancia(vc.getDistancia(v));
 										SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 										Date[] fechas=vc.determinarFecha(desde, hasta, frecuencia, horaS);
 										 
@@ -120,7 +117,7 @@ public class CargaViaje extends HttpServlet {
 													if(ac.asignarAstrobus(v))
 													  {	
 														v.setSalida(formatter.format(fechas[i]));
-														Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(v.getDistancia()/100)));
+														Date newDate=new Date(fechas[i].getTime()+TimeUnit.HOURS.toMillis(Math.round(vc.getDistancia(v)/100)));
 														v.setLlegada(formatter.format(newDate));	
 													    vc.add(v);	
 														}else 

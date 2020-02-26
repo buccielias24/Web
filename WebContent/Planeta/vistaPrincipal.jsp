@@ -80,7 +80,7 @@
 <%}%>
 <input type="text" id="myInput" onkeyup="filtrar()" placeholder="Search Planets..">
 
-<table class="table">
+<table class="table" id="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
@@ -92,7 +92,7 @@
       <th scope="col"></th>
     </tr>
   </thead>
-  <tbody id="myTbody">
+  <tbody>
   	<% 
 		try{	
 			ArrayList<Planeta> planetas=new PlanetaControler().getAll();				
@@ -139,5 +139,27 @@
 
 
 </div> <!-- /container -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    var table = $('#table').DataTable();
+ 
+    $('#table tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+ 
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+} );
+
+</script>
 </body></html>

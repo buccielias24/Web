@@ -21,19 +21,14 @@ public class DataAstrobus {
 			if(rs!=null) {
 				while(rs.next()) {
 					Astrobus a=new Astrobus();
-					a.setIdNave(rs.getInt("id"));
-					a.setMarca(rs.getString("marca"));
+					a.setIdNave(rs.getInt("IdAstrobus"));
 					a.setCantAsientos(rs.getInt("cantAsientos"));
 					a.setDistLimite(rs.getDouble("distLimite"));
 					a.setDistService(rs.getDouble("distService"));
 					a.setEstado(rs.getBoolean("estado"));
-					a.setTiempoLibre(rs.getString("tiempoDesdeSinUso"));
 					a.setFecha_alta(rs.getString("fecha_alta"));
 					a.setFecha_baja(rs.getString("fecha_baja"));
 					a.setMotivo(rs.getInt("motivo"));
-					a.setCoordenadaX(rs.getInt("coordenadaX"));
-					a.setCoordenadaY(rs.getInt("coordenadaY"));
-					a.setComentario(rs.getString("comentario"));
 					astrobuses.add(a);
 				}
 			}
@@ -59,21 +54,18 @@ public class DataAstrobus {
 		Astrobus a1=new Astrobus();
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from astrobus where id=?");
+					prepareStatement("select * from astrobus where IdAstrobus=?");
 			stmt.setInt(1,a.getIdNave());
 				rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
-				a1.setIdNave(rs.getInt("id"));
-				a1.setMarca(rs.getString("marca"));
+				a1.setIdNave(rs.getInt("IdAstrobus"));
 				a1.setCantAsientos(rs.getInt("cantAsientos"));
 				a1.setDistLimite(rs.getDouble("distLimite"));
 				a1.setDistService(rs.getDouble("distService"));
-				a1.setTiempoLibre(rs.getString("tiempoDesdeSinUso"));
 				a1.setEstado(rs.getBoolean("estado"));			
 				a1.setFecha_alta(rs.getString("fecha_alta"));
 				a1.setFecha_baja(rs.getString("fecha_baja"));
-				a1.setMotivo(rs.getInt("motivo"));
-				a1.setComentario(rs.getString("comentario"));			
+				a1.setMotivo(rs.getInt("motivo"));			
 			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,52 +82,14 @@ public class DataAstrobus {
 		return a1;
 	}
 	
-	public void add(Astrobus a) {
-		PreparedStatement stmt= null;
-		ResultSet keyResultSet=null;
 		
-		try {
-			stmt=Conectar.getInstancia().getConn().
-					prepareStatement(
-							"insert into astrobus(marca,cantAsientos,distRecorrida,distLimite,distService,tiempoDesdeSinUso,estado) values(?,?,0,?,?,now(),true)",
-							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, a.getMarca());
-			stmt.setInt(2, a.getCantAsientos());
-			stmt.setDouble(3, a.getDistLimite());
-			stmt.setDouble(4, a.getDistService());
-			stmt.executeUpdate();			
-			keyResultSet=stmt.getGeneratedKeys();
-			  if(keyResultSet!=null && keyResultSet.next()){
-	                a.setIdNave(keyResultSet.getInt(1));}
-	    	}catch (SQLException e) {
-          e.printStackTrace();}	finally {
-              try {
-                  if(keyResultSet!=null)keyResultSet.close();
-                  if(stmt!=null)stmt.close();
-                  Conectar.getInstancia().releaseConn();
-              } catch (SQLException e) {
-              	e.printStackTrace();
-              }
-  		}
- } 	
-
-	
 //DAR DE BAJA ASTROBUS
 	public void modify(Astrobus a) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE astrobus SET marca=?,cantAsientos=?,distService=?,distLimite=?,tiempoDesdeSinUso=?,estado=?,fecha_alta=?,fecha_baja=?,motivo=?,comentario=? where id=?");
-			stmt.setString(1, a.getMarca());
-			stmt.setInt(2,a.getCantAsientos());
-			stmt.setDouble(3,a.getDistService());
-			stmt.setDouble(4, a.getDistLimite());
-			stmt.setString(5, a.getTiempoLibre());
-			stmt.setBoolean(6, a.getEstado());
-			stmt.setString(7,a.getFecha_alta());
-			stmt.setString(8, a.getFecha_baja());
-			stmt.setInt(9,a.getMotivo());
-			stmt.setString(10, a.getComentario());
-			stmt.setInt(11, a.getIdNave());
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE astrobus SET estado=? where IdAstrobus=?");
+			stmt.setBoolean(1, a.getEstado());
+			stmt.setInt(2, a.getIdNave());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {

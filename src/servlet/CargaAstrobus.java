@@ -53,7 +53,6 @@ public class CargaAstrobus extends HttpServlet {
 		a.setEstado(Boolean.parseBoolean(request.getParameter("estado")));
 		
 		AstrobusController ac=new AstrobusController();
-		ac.add(a);
 		response.sendRedirect("/registrarAstrobus.jsp");
 		
 		
