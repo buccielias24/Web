@@ -27,7 +27,7 @@ public class DataResenia {
 		try {
 			stmt= Conectar.getInstancia().getConn().
 					prepareStatement("select * from resenia where idPlaneta=?");
-				stmt.setInt(1,p.getIdPlaneta());
+				stmt.setInt(1,p.getId());
 				rs=stmt.executeQuery();
 				if(rs!=null) {
 					while(rs.next()) {
@@ -39,7 +39,7 @@ public class DataResenia {
 					c.setDgu(rs.getInt("idUsuario"));
 					c=uc.getById(c);
 					r.setUsuario(c);
-					pl.setIdPlaneta(rs.getInt("idPlaneta"));
+					pl.setId(rs.getInt("idPlaneta"));
 					pl=pc.getById(pl);
 					r.setPlaneta(pl);
 					r.setFecha(rs.getDate("fecha"));

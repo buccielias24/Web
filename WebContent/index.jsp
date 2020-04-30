@@ -106,7 +106,7 @@
         <svg class="bd-placeholder-img rounded-circle" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Planetas</title><rect width="100%" height="100%" fill="#"></rect><image xlink:href="img/planeta.jpg" width=150% height=100%>></svg>
         <h2>Planetas</h2>
         <p>Puede ver los planetas y sus estados para viajar. Comentar que le ha parecido el planeta en su visita y puntuarlo para otras personas que deseen viajar a este destino.</p>
-        <p><a class="btn btn-secondary" href="Planeta/vistaPrincipal.jsp" role="button">Acceder</a></p>
+        <p><a class="btn btn-secondary" href="/Web/Planetas" role="button">Acceder</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
         <svg class="bd-placeholder-img rounded-circle" width="200" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Viajes</title><rect width="100%" height="100%" fill="#777"></rect><image xlink:href="img/viaje.jpg" width=181% height=100%></svg>

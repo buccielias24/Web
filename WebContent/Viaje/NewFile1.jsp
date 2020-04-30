@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Viajes</title>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+.myLink {display: none}
+</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  
+<script type="text/javascript">
+ $(document).ready(function() {
+	 var availableTags=[]
+      $.ajax({
+             type:"GET",
+             url:"http://localhost:8080/Web/Planetas"
+         })
+         .done(function (data) {
+        	  $.each( data, function( key, val ) {
+        	    availableTags.push(val.nombre)
+        	  });
+         });
+	 
+	 $( function() {
+		    $( "#tags" ).autocomplete({
+		      source: availableTags
+		    });
+		  } );
+	
+	 $( function() {
+		    $( "#tags2" ).autocomplete({
+		      source: availableTags
+		    });
+		  });
+ });
+</script>
+
+<script type="text/javascript">
+		$(document).on("submit", "#myform", function(event) {
+		    var $form = $(this);
+		    $.get($form.attr("action"), $form.serialize(), function(data) {
+		     if(data.length!=0){
+		    	 var html = '<table class="table table-striped">';
+		    	    html += '<tr>';
+		    	    var flag = 0;
+		    	    $.each(data[0], function(index, value){
+		    	        html += '<th>'+index+'</th>';
+		    	    });
+		    	    html += '</tr>';
+		    	     $.each(data, function(index, value){
+		    	         html += '<tr>';
+		    	            html += '<td>'+value.salida+'</td>';
+		    	            html += '<td>'+value.llegada+'</td>';
+		    	            html += '<td>'+value.origen.nombre+'</td>';
+		    	            html += '<td>'+value.destino.nombre+'</td>';
+		    	            html += '<td>'+value.astrobus.id+'</td>';
+		    	        html += '<tr>';
+		    	     });
+		    	     html += '</table>';
+		    	     $('#containerTable').html(html);		    	        
+		       		}
+		     else{alert("No hay viajes disponibles")}
+		    });
+		    event.preventDefault(); // Important! Prevents submitting the form.		    
+		});
+		</script>
+
+</head>
+<body class="w3-light-grey">
+
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
+  <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>Logo</b></a>
+  <a href="#" class="w3-bar-item w3-button w3-right w3-hover-red w3-text-grey"><i>Login</i></a>
+</div>
+
+
+
+<!-- Page content --> 
+<!-- Header -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+  <img class="w3-image" src="https://invdes.com.mx/wp-content/uploads/2017/08/06-08-17-universo.jpg" alt="London" width="1500" height="700">
+  <div class="w3-display-middle" style="width:65%">
+    <div class="w3-bar w3-black">
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane w3-margin-right"></i>Flight</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Hotel');"><i class="fa fa-bed w3-margin-right"></i>Hotel</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Rental</button>
+    </div>
+
+    <!-- Tabs -->
+    <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Travel the world with us</h3>
+      <form id="myform" action="/Web/vistaViaje" method="get"  > 
+      <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-half">     
+          <label>From</label>
+          <input id="tags" name="from" class="w3-input w3-border" type="text" placeholder="Departing from">
+        </div>
+        <div class="w3-half">
+          <label>To</label>
+          <input id="tags2" name="to" class="w3-input w3-border" type="text" placeholder="Arriving at">
+        </div>
+      </div>
+      <p><button class="w3-button w3-dark-grey" style="margin-top: 10px">Search and find dates</button></p>
+    </form>
+    </div>
+
+    <div id="Hotel" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Find the best hotels</h3>
+      <p>Book a hotel with us and get the best fares and promotions.</p>
+      <p>We know hotels - we know comfort.</p>
+      <p><button class="w3-button w3-dark-grey">Search Hotels</button></p>
+    </div>
+
+    <div id="Car" class="w3-container w3-white w3-padding-16 myLink">
+      <h3>Best car rental in the world!</h3>
+      <p><span class="w3-tag w3-deep-orange">DISCOUNT!</span> Special offer if you book today: 25% off anywhere in the world with CarServiceRentalRUs</p>
+      <input class="w3-input w3-border" type="text" placeholder="Pick-up point">
+      <p><button class="w3-button w3-dark-grey">Search Availability</button></p>
+    </div>
+  </div>
+</header>
+  <!-- Table -->
+ <div class="container" id="containerTable">
+   
+</div>
+  <!-- End Table -->
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-opacity w3-margin-bottom">
+  <h5>Find Us On</h5>
+  <div class="w3-xlarge w3-padding-16">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+<script>
+// Tabs
+function openLink(evt, linkName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("myLink");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+  }
+  document.getElementById(linkName).style.display = "block";
+  evt.currentTarget.className += " w3-red";
+}
+
+// Click on the first tablink on load
+document.getElementsByClassName("tablink")[0].click();
+</script>
+
+</body>
+</html>

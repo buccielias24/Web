@@ -32,19 +32,20 @@ public class ViajeController {
 	
 	// agregar metodo para determinar dia y hora de llegada a traves de un calculo
 	
-	public ArrayList<Viaje> getArribos(int origen, int destino){
+	public ArrayList<Viaje> getArribos(String origen, String destino){
 		
 		ArrayList<Viaje> viajes=this.getAll();
 		ArrayList<Viaje> arribos=new ArrayList<Viaje>(); 
 	
 			for(Viaje v:viajes) {
-				if(v.getOrigen().getIdPlaneta()==origen && v.getDestino().getIdPlaneta()==destino)
+				if(v.getOrigen().getNombre().equalsIgnoreCase(origen) && v.getDestino().getNombre().equalsIgnoreCase(destino))
 					{
+						System.out.println(v.getOrigen().getNombre()+origen+v.getDestino().getNombre()+destino);
+						System.out.println(v.getOrigen().getNombre().equalsIgnoreCase(origen) && v.getDestino().getNombre().equalsIgnoreCase(destino));
 						arribos.add(v);
 					}
 		
 				}
-			
 			return arribos;
 		}
 	

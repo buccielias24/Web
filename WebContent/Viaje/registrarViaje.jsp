@@ -15,7 +15,7 @@
 <body>
 <form action="/Web/CargaViaje" method="post">
 		<h3>Seleccione Origen</h3>
-<select required type="text" id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
+    <select required type="text" id="elegirOrigen" onchange="seleccion(this.value)" name="origen">
 		<option disabled selected> -- select an option -- </option>
 <% 		ArrayList<Planeta> planetas=(ArrayList<Planeta>)request.getAttribute("planetasDisponibles");
 		for(Planeta p:planetas)

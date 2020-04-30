@@ -3,25 +3,24 @@ package entidades;
 
 public class Planeta {
 
-	private int idPlaneta;
-	private String nombrePlaneta;
+	private int id;
+	private String nombre;
 	private int coordenadaX;
 	private int coordenadaY;
 	private boolean estado;
-	private int motivo;
 	
 	
-	public int getIdPlaneta() {
-		return idPlaneta;
+	public int getId() {
+		return id;
 	}
-	public void setIdPlaneta(int idPlaneta) {
-		this.idPlaneta = idPlaneta;
+	public void setId(int idPlaneta) {
+		this.id = idPlaneta;
 	}
-	public String getNombrePlaneta() {
-		return nombrePlaneta;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombrePlaneta(String nombrePlaneta) {
-		this.nombrePlaneta = nombrePlaneta;
+	public void setNombre(String nombrePlaneta) {
+		this.nombre = nombrePlaneta;
 	}
 	public int getCoordenadaX() {
 		return coordenadaX;
@@ -42,19 +41,12 @@ public class Planeta {
 		this.estado = estado;
 	}
 	
-	public int getMotivo() {
-		return motivo;
-	}
-	public void setMotivo(int motivo) {
-		this.motivo = motivo;
-	}
-	
 	public Planeta() {		
 	}
 	
 	public Planeta(String nombre, int coordX, int coordY)
 	{
-		this.nombrePlaneta=nombre;
+		this.nombre=nombre;
 		this.coordenadaX=coordX;
 		this.coordenadaY=coordY;
 	}

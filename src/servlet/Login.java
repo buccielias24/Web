@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import entidades.Ciudadano;
-import logic.AutomaticUpdate;
 import logic.UserController;
 
 /**
@@ -55,6 +53,10 @@ public class Login extends HttpServlet {
 		{
 			HttpSession misession= request.getSession();
 			misession.setAttribute("user",uc.getById(ciud));
+			if(uc.getById(ciud).getRol()==1)
+			{
+				misession.setAttribute("admin", true);
+			}
 			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
 			rd.forward(request,response);
 		}

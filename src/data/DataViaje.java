@@ -27,20 +27,20 @@ public class DataViaje {
 		ArrayList<Viaje> viajes= new ArrayList<>();		
 		try {
 			stmt= Conectar.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select * from astrobus_planeta");
+			rs= stmt.executeQuery("select * from viaje");
 			if(rs!=null) {
 				while(rs.next()) {
 					Viaje v=new Viaje();
 					Planeta p1=new Planeta();
 					Planeta p2=new Planeta();
 					Astrobus a=new Astrobus();
-					v.setSalida(rs.getString("fechaSalida"));
-					v.setLlegada(rs.getString("fechaLlegada"));
-					p1.setIdPlaneta(rs.getInt("origen"));
+					v.setSalida(rs.getString("salida"));
+					v.setLlegada(rs.getString("llegada"));
+					p1.setId(rs.getInt("origen"));
 					v.setOrigen(pc.getById(p1));
-					p2.setIdPlaneta(rs.getInt("destino"));
+					p2.setId(rs.getInt("destino"));
 					v.setDestino(pc.getById(p2));
-					a.setIdNave(rs.getInt("IdAstrobus")); 
+					a.setIdNave(rs.getInt("id_astrobus")); 
 					v.setAstrobus(ac.getById(a));
 					viajes.add(v);
 				}
@@ -66,8 +66,8 @@ public class DataViaje {
 					prepareStatement(
 							"insert into astrobus_planeta(origen,destino,fechaSalida,fechaLlegada,IdAstrobus) values(?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1,v.getOrigen().getIdPlaneta());
-			stmt.setInt(2,v.getDestino().getIdPlaneta());
+			stmt.setInt(1,v.getOrigen().getId());
+			stmt.setInt(2,v.getDestino().getId());
 			stmt.setString(3, v.getSalida());
 			stmt.setString(4, v.getLlegada());
 		    stmt.setInt(5, v.getAstrobus().getIdNave());
