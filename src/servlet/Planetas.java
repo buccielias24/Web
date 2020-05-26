@@ -29,8 +29,7 @@ import logic.*;
 public class Planetas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PlanetaControler pc=new PlanetaControler();
-	private UserController uc=new UserController();
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -80,25 +79,63 @@ public class Planetas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub	
-			String nombre=request.getParameter("nombreP");
-			int coordenadaX=Integer.parseInt(request.getParameter("coordX"));
-			int coordenadaY=Integer.parseInt(request.getParameter("coordY"));
-			Planeta p=new Planeta(nombre,coordenadaX,coordenadaY);
+		    String accion=request.getParameter("accion");
+		    HttpSession session=request.getSession(false);
+		    
+		    if (accion.equalsIgnoreCase("new"))
+		        {
+		    	String nombre=request.getParameter("nombreP");
+		    	int coordenadaX=Integer.parseInt(request.getParameter("coordX"));
+		    	int coordenadaY=Integer.parseInt(request.getParameter("coordY"));
+		    	Planeta p=new Planeta(nombre,coordenadaX,coordenadaY);
 			
-			HttpSession session=request.getSession(false);  			
-			pc.add(p,(Ciudadano)session.getAttribute("user"));
-			List<Planeta> planetas=pc.getAll();
-			response.setContentType("application/json");
-	        response.setCharacterEncoding("UTF-8");
-	        Gson gson = new Gson();
-	        String jsonData = gson.toJson(planetas);
-	        PrintWriter out = response.getWriter();
-		    try {
-		        	out.println(jsonData);
-		        } finally {
-		            out.close();
-		          
+			  			
+		    	pc.add(p,(Ciudadano)session.getAttribute("user"));
+		    	List<Planeta> planetas=pc.getAll();
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				Gson gson = new Gson();
+				String jsonData = gson.toJson(planetas);
+				PrintWriter out = response.getWriter();
+				try {
+		        		out.println(jsonData);
+					} finally {
+						out.close();}
+		        }else if(accion.equalsIgnoreCase("edit"))
+		        {
+		    	int id=Integer.parseInt(request.getParameter("id"));
+				String nombre=request.getParameter("nombre");		
+				int coordX=Integer.parseInt(request.getParameter("coordenadaX"));
+				int coordY=Integer.parseInt(request.getParameter("coordenadaY"));
+				boolean estado=Boolean.parseBoolean(request.getParameter("estado"));
+				
+
+				Planeta p=new Planeta();
+				p.setId(id);
+				p.setNombre(nombre);
+				p.setCoordenadaX(coordX);
+				p.setCoordenadaY(coordY);
+				p.setEstado(estado);				
+				pc.modify(p);
+				List<Planeta> planetas=pc.getAll();
+				response.setContentType("application/json");
+		        response.setCharacterEncoding("UTF-8");
+		        Gson gson = new Gson();
+		        String jsonData = gson.toJson(planetas);
+		        PrintWriter out = response.getWriter();
+			    try {
+			        	out.println(jsonData);
+			        } finally {
+			            out.close();
+			          
+			        }	
+		    	
+		        }else if(accion.equalsIgnoreCase("delete"))
+		        {
+		        	System.out.println("eliminar");
+		   
 		        }
 	}
-	
 }
+
+

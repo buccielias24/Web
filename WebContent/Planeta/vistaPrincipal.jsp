@@ -16,10 +16,12 @@
     <!-- Bootstrap core CSS -->
 <link href="/Web/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC"crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
+  
     <!-- Custom styles for this template -->
     <link href="/Web/css/grid.css" rel="stylesheet">
 
@@ -39,8 +41,10 @@
         		 data.pop();
         		 $.each( data, function( key, val ) {		  
            		  tr = $('<tr class="text-center"/>');
-                     tr.append("<td>" + val.id + "</td>");
+                     tr.append('<td style="display:none;">' + val.id + "</td>");
                      tr.append("<td>" + val.nombre + "</td>");  
+                     tr.append("<td>" + val.coordenadaX + "</td>"); 
+                     tr.append("<td>" + val.coordenadaY + "</td>"); 
                      tr.append("<td>" + val.estado + "</td>");
                      $('#tablebody').append(tr);
            	  }); 
@@ -50,10 +54,12 @@
    				$('#trhead').append('<th>Acciones</th>'); 
    				$.each( data, function( key, val ) {		  
              		  tr = $('<tr class="text-center"/>');
-                       tr.append("<td>" + val.id + "</td>");
+             		   tr.append('<td style="display:none;">' + val.id + "</td>");
                        tr.append("<td>" + val.nombre + "</td>");  
+                       tr.append("<td>" + val.coordenadaX + "</td>"); 
+                       tr.append("<td>" + val.coordenadaY + "</td>"); 
                        tr.append("<td>" + val.estado + "</td>");
-                       tr.append("<td>" + '<button type="button" id="trigger_modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Editar</button>' + '<button style="margin-left:10px" id="delete" type="button" class="btn btn-danger">Eliminar</button>' +"</td>");        
+                       tr.append("<td>" + '<button type="button" id="trigger_modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Editar</button>' + '<button style="margin-left: 10px;" type="button"  id="trigger_modal" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete">Eliminar</button>'  +"</td>");        
                        $('#tablebody').append(tr);
              	  }); 
    			  }
@@ -68,15 +74,17 @@
 		    	$("#tablebody").empty();
 		    	 	$.each( response, function( key, val ) {
 	        		  tr = $('<tr class="text-center"/>');
-	                  tr.append("<td>" + val.id + "</td>");
+	        		  tr.append('<td style="display:none;">' + val.id + "</td>");
 	                  tr.append("<td>" + val.nombre + "</td>");  
+	                  tr.append("<td>" + val.coordenadaX + "</td>"); 
+                      tr.append("<td>" + val.coordenadaY + "</td>"); 
 	                  tr.append("<td>" + val.estado + "</td>");
-	                  tr.append("<td>" + '<button type="button" id="trigger_modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Editar</button>' + '<button style="margin-left:10px" id="delete" type="button" class="btn btn-danger">Eliminar</button>' +"</td>");
+	                  tr.append("<td>" + '<button type="button" id="trigger_modal" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Editar</button>' + '<button style="margin-left:10px" data-toogle="modal" data-taget="#myModalDelete" id="delete" type="button" class="btn btn-danger">Eliminar</button>' +"</td>");
 	                  $('#tablebody').append(tr);
 		    	 	});
 		    	 	alert("Planeta actualizado");
 		    });
-		    event.preventDefault(); // Important! Prevents submitting the form.	    
+		    event.preventDefault(); 	    
 		});
 </script>
 
@@ -85,11 +93,21 @@
 $(document).ready(function(){
 	  $(".thehide").hide();
 	  $(document).on("click", "table button", function(){
-	   // $("#trigger_modal").trigger("click");
 	    $("#myModal2 .modal-body").html($("#partial_container").html());
-	    $('#myModal2 input[name="nombreP"]').val($(this).closest("tr").find("td:nth-child(1)").text());
-	    $('#myModal2 input[name="coordX"]').val($(this).closest("tr").find("td:nth-child(2)").text());
-	    $('#myModal2 input[name="coordY"]').val($(this).closest("tr").find("td:nth-child(3)").text());
+	    $('#myModal2 input[name="id"]').val($(this).closest("tr").find("td:nth-child(1)").text());
+	    $('#myModal2 input[name="nombre"]').val($(this).closest("tr").find("td:nth-child(2)").text());
+	    $('#myModal2 input[name="coordenadaX"]').val($(this).closest("tr").find("td:nth-child(3)").text());
+	    $('#myModal2 input[name="coordenadaY"]').val($(this).closest("tr").find("td:nth-child(4)").text());
+	    $('#myModal2 input[name="estado"]').val($(this).closest("tr").find("td:nth-child(52 )").text());
+	  });	  
+});	
+</script>
+
+<script>
+$(document).ready(function(){
+	  $(document).on("click", "table button", function(){
+	    $('#myModalDelete input[name="id"]').val($(this).closest("tr").find("td:nth-child(1)").text());
+	    $('#myModalDelete input[name="nombre"]').val($(this).closest("tr").find("td:nth-child(2)").text());
 	  });	  
 });	
 </script>
@@ -117,7 +135,8 @@ $(document).ready(function(){
                     <thead> 
                         <tr class="text-center" id="trhead">
                             <th>Nombre</th>
-                            <th>Coordenada</th>
+                            <th>Coordenada X</th>
+                            <th>Coordenada Y</th>
                             <th>Disponibilidad</th>               
                         </tr>
                     </thead>
@@ -209,23 +228,36 @@ $(document).ready(function(){
 <!-- the partial container -->
 
 <div class="thehide" id="partial_container">
-  <form id="myform2" action="/java-examen/editaralumno" method="post">
+  <form id="form" name="form" action="/Web/Planetas" method="post">
+     <input type="hidden" value="edit" name="accion">
 			 <div class="form-group row">
-    		    <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
+    		    <label for="inputNombre" class="col-sm-2 col-form-label">ID</label>
    					<div class="col-sm-10">
-   						<input type="text" class="form-control" id="inputNombre" name="nombreP" placeholder="Nombre Planeta">
+   						<input type="text" class="form-control" id="ID" name="id" readonly>
     				</div>
   			</div>
   			<div class="form-group row">
-  			   <label for="inputCoordenadaX" class="col-sm-2 col-form-label">CoordX</label>
+  			   <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
     				<div class="col-sm-10">
-     					<input type="text" class="form-control" id="inputCoordenadaX" name="coordX" placeholder="Coordenada X">
+     					<input type="text" class="form-control" id="inputNombre" name="nombre" placeholder="Coordenada X">
     				</div>
   			</div>
   			<div class="form-group row">
-  			   <label for="inputCoordenadaY" class="col-sm-2 col-form-label">CoordY</label>
+  			   <label for="inputCoordenadaX" class="col-sm-2 col-form-label">Pos X</label>
     				<div class="col-sm-10">
-     					<input type="text" class="form-control" id="inputCoordenadaY" name="coordY" placeholder="Coordenada Y">
+     					<input type="text" class="form-control" id="inputCoordenadaX" name="coordenadaX" placeholder="Coordenada X">
+    				</div>
+  			</div>
+  				<div class="form-group row">
+  			   <label for="inputCoordenadaY" class="col-sm-2 col-form-label">Pos Y</label>
+    				<div class="col-sm-10">
+     					<input type="text" class="form-control" id="inputCoordenadaY" name="coordenadaY" placeholder="Coordenada Y">
+    				</div>
+  			</div>
+  			<div class="form-group row">
+  			   <label for="estado" class="col-sm-2 col-form-label">Estado</label>
+    				<div class="col-sm-10">
+     					<input type="text" class="form-control" id="inputEstado" name="estado" placeholder="Estado">
     				</div>
   			</div>
   			<div class="form-group row">
@@ -237,6 +269,46 @@ $(document).ready(function(){
   			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>
 </div>
+
+<!-- MODAL ELIMINAR PLANETA -->
+  <div class="modal" id="myModalDelete">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" align="center">Eliminar</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+  		<form action="/Web/Planetas" method="post" name="form" id="form" enctype="multipart/form-data">
+			 <input type="hidden" value="delete" name="accion">
+			 <div class="form-group row">
+    		    <label for="inputNombre" class="col-sm-2 col-form-label">ID</label>
+   					<div class="col-sm-10">
+   						<input type="text" class="form-control" id="ID" name="id" readonly>
+    				</div>
+  			</div>
+			 <div class="form-group row">
+    		    <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
+   					<div class="col-sm-10">
+   						<input type="text" class="form-control" id="inputNombre" name="nombre" placeholder="Nombre Planeta" readonly>
+    				</div>
+  			</div>			
+  			<button type="submit" class="btn btn-danger">Eliminar</button>
+		</form>			
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
  
 </body>
 </html>
