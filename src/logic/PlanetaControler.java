@@ -25,12 +25,6 @@ import entidades.*;
 	{
 		dp.modify(p);
 	}
-
-	public void baja(Planeta p)
-	{
-		dp.baja(p);
-	}
-	
 	
 	public int add(Planeta p, Ciudadano c) {
 			

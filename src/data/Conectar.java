@@ -33,7 +33,7 @@ public class Conectar {
 	public Connection getConn() {
 		try {
 			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
+				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?useSSL=false", user, password);
 				conectados=0;
 			}
 		} catch (SQLException e) {

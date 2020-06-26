@@ -1,23 +1,19 @@
-
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Planeta"%>
 <%@page import="logic.PlanetaControler"%>
 <%@page import="logic.AutomaticUpdate"%>
 <%@page import="entidades.Ciudadano"%>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Home</title>
-
-
-
     <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/carousel.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/carousel.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -38,10 +34,12 @@
     <!-- Custom styles for this template -->
     
   </head>
-  <body>
-    <header>
-	<jsp:include page="header.jsp"/>
-</header>
+ 
+ <header>
+   <jsp:include page="/header.jsp"></jsp:include>
+  </header>
+
+ <body>
 
 <main role="main">
 
@@ -173,7 +171,4 @@
     <p>© 2017-2019 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
   </footer>
 </main>
-	 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-      <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
-
 </body></html>

@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import data.DataResenia;
-import entidades.Ciudadano;
-import entidades.Planeta;
-import entidades.Resenia;
+import entidades.*;
 
 public class reseniaController {
 		
@@ -16,23 +14,15 @@ public class reseniaController {
 		dr=new DataResenia();
 	}
 	
-	public ArrayList<Resenia>getAll(Planeta p)
-		{
-			return dr.getAll(p);
-			
-		}
-	public double getPuntaje(Planeta p)
+	public ArrayList<Resenia> getOne(Planeta p)
 	{
-		ArrayList<Resenia>resenias=dr.getAll(p);
-		double tot=0;
-		int i=0;
-			for(Resenia res:resenias)
-			{
-				tot=tot+res.getPuntaje();
-				i++;
-			}
-			return tot/i;
-	}	
+		return dr.getOne(p);
+	}
+	
+	public ArrayList<Resenia>getAll()
+		{
+			return dr.getAll();		
+		}
 	
 	public void add(Resenia r)
 	{

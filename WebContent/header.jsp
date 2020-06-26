@@ -4,6 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+ 
 <style type="text/css">
 .dropbtn {
   background-color: #3498DB;
@@ -32,7 +41,6 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -44,6 +52,17 @@
 
 .show {display: block;}
 </style>
+
+<script type="text/javascript">
+		$(document).on("submit", "#form", function(event) {
+		    var $form = $(this);
+		    $.post($form.attr("action"), $form.serialize(), function(response) {    	
+		    	location.reload();	
+		    });
+		    event.preventDefault(); 	    
+		});
+</script>
+
 <script>
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
@@ -71,9 +90,10 @@ window.onclick = function(event) {
     <% 
     	if(session.getAttribute("user")==null)
     	{%>
-    <a class="navbar-brand" href="/Web/login.jsp">Login</a>
+    <a type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal">Iniciar Sesion</a>
     	<% }else {
     		Ciudadano c=(Ciudadano)session.getAttribute("user");
+    		session.setAttribute("url", request.getRequestURL());
     	%>
     	<div class="dropdown">
   			<button onclick="myFunction()" class="dropbtn"><%=c.getUser()%></button>
@@ -95,11 +115,38 @@ window.onclick = function(event) {
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
       </ul>
-      <form class="form-inline mt-2 mt-md-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
 </header>
+<body>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" align="center">Iniciar Sesion</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+      <div class="modal-body">
+  	    <form class="form-signin" action="/Web/login" method="post" name="form" id="form" enctype="multipart/form-data">	
+  		  <img class="mb-4" src="http://localhost:8080/Web/img/login.jpg" alt="" width="200" height="200">
+  		    <label for="inputEmail" class="sr-only">Email address</label>
+ 	        <input type="text" id="user" class="form-control" name="user" placeholder="Email address" required autofocus>
+  	        <label for="inputPassword" class="sr-only">Password</label>
+  	        <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+              <div class="checkbox mb-3">
+    		   <label>
+               <input type="checkbox" value="remember-me"> Remember me
+              </label>
+  			 </div>
+  		 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>			
+    </div>
+      </div>
+    </div>
+  </div>
+</body>
 </html>

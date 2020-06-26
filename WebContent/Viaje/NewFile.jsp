@@ -1,59 +1,60 @@
-<%@page import="entidades.Viaje"%>
-<%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Viajes</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("tr").each(function(){
-        var date1=new Date();
-        var stringFecha = $(this).find("td:eq(3)").text();
-        var date2=new Date(stringFecha);
-          if(date1.getTime()>date2.getTime())
-          {
-        	$(this).find("td:eq(4)").html("Vuelo ya realizado");
-        	$("#tableViaje2 tbody").append(this);
-          }else
-          {
-          	$(this).find("td:eq(4)").html("Vuelvo disponible");
-         }
-   });   
-});
-</script>
-
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Autocomplete - Remote datasource</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {	
+	 var availableTags=[]	
+	  $(document).ready(function(){ 
+		 $.ajax({
+	             type:"GET",
+	             url:"http://localhost:8080/Web/Planetas"
+	         })
+	         .done(function (data) {
+	        	  $.each( data, function( key, val ) {
+	        	    availableTags.push(val)
+	        	  });
+	         }); 	
+	  })
+	 
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+ 
+    $( "#birds" ).autocomplete({
+      source: availableTags,
+      minLength: 2,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    });
+  });
+  </script>
+</head> 	
 <body>
-<table  class="table" id="tableViaje">
-    <thead class="thead-dark">
-        <tr>
-       		<th scope="col">Origen</th>
-        	<th scope="col">Destino</th>
-         	<th scope="col">Fecha y Hora Salida</th>
-          	<th scope="col">Fecha Y Hora Llegada</th>
-           	<th scope="col">Estado</th>
-   		    <th scope="col">Astrobus</th>	
-       </tr>
-     </thead>
-    <tbody id="myTbody">
-  		<% ArrayList<Viaje> viajes=(ArrayList<Viaje>)request.getAttribute("arribos");
-  			try{						
-				for(Viaje v:viajes){										%>
-    				<tr>
-  				    <td><%=v.getOrigen().getNombrePlaneta()%></td>  
-      				<td><%=v.getDestino().getNombrePlaneta()%></td>
-      				<td id="salidaViaje"><%=v.getSalida()%></td>
-      				<td id="llegadaViaje"><%=v.getLlegada()%></td>
-	  				<td id="estadoViaje"></td>
-      				<td><a href="/Web/cargaastrobus?id=<%=v.getAstrobus().getIdNave()%>"><%=v.getAstrobus().getMarca()%>, Patente: <%=v.getAstrobus().getIdNave()%></a></td>
-					</tr> <%}					
-		}catch(Exception e) {}%>
- 	</tbody>
-</table>
-<h3>Tabla2</h3><table id="tableViaje2"><tbody><tr><td></td></tr></tbody></table>
+ 
+<div class="ui-widget">
+  <label for="birds">Birds: </label>
+  <input id="birds">
+</div>
+ 
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+  Result:
+  <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+ 
+ 
 </body>
 </html>

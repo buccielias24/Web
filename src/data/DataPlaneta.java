@@ -22,6 +22,7 @@ public class DataPlaneta {
 					p.setCoordenadaX(rs.getInt("coordenadaX"));
 					p.setCoordenadaY(rs.getInt("coordenadaY"));
 					p.setEstado(rs.getBoolean("estado"));
+					p.setUrl(rs.getString("url"));
 					planetas.add(p);
 				}
 			}			
@@ -105,29 +106,12 @@ public class DataPlaneta {
 	public void modify(Planeta pla) {
 		PreparedStatement stmt= null;
 		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETA SET nombre=?,coordenadaX=?,coordenadaY=?,estado=? where id_planeta=?");
+			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE planeta SET nombre=?,coordenadaX=?,coordenadaY=?,estado=? where id_planeta=?");
 			stmt.setString(1,pla.getNombre());
 			stmt.setInt(2, pla.getCoordenadaX());
 			stmt.setInt(3, pla.getCoordenadaY());
 			stmt.setBoolean(4, pla.getEstado());
 			stmt.setInt(5,pla.getId());
-			stmt.executeUpdate();			
-            } catch (SQLException e) {
-            e.printStackTrace();}finally {
-			try {
-				if(stmt!=null) {stmt.close();}
-				Conectar.getInstancia().releaseConn();
-				} catch (SQLException e) {
-				e.printStackTrace();} 	
-				}
-		}
-	
-	public void baja(Planeta pla) {
-		PreparedStatement stmt= null;
-		try {
-			stmt=Conectar.getInstancia().getConn().prepareStatement("UPDATE PLANETA SET estado=false,motivo_baja=? where id_planeta=?");
-			stmt.setInt(1, pla.getMotivo());
-			stmt.setInt(2,pla.getId());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
             e.printStackTrace();}finally {

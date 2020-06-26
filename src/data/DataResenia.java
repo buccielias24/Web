@@ -18,16 +18,15 @@ public class DataResenia {
 	PlanetaControler pc=new PlanetaControler();
 	UserController uc=new UserController();
 	
-	public ArrayList<Resenia> getAll(Planeta p){
+	public ArrayList<Resenia> getAll(){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Resenia r=null;
-		ArrayList<Resenia> reseñas=new ArrayList<>();
+		ArrayList<Resenia> resenias=new ArrayList<>();
 		
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from resenia where idPlaneta=?");
-				stmt.setInt(1,p.getId());
+					prepareStatement("select * from resenia");
 				rs=stmt.executeQuery();
 				if(rs!=null) {
 					while(rs.next()) {
@@ -36,15 +35,15 @@ public class DataResenia {
 						
 					r=new Resenia();
 					r.setComentario(rs.getString("comentario"));		
-					c.setDgu(rs.getInt("idUsuario"));
+					c.setDgu(rs.getInt("dgu"));
 					c=uc.getById(c);
 					r.setUsuario(c);
-					pl.setId(rs.getInt("idPlaneta"));
+					pl.setId(rs.getInt("id_planeta"));
 					pl=pc.getById(pl);
 					r.setPlaneta(pl);
 					r.setFecha(rs.getDate("fecha"));
 					r.setPuntaje(rs.getInt("puntaje"));
-					reseñas.add(r);
+					resenias.add(r);
 				}
 			}			
 		} catch (SQLException e) {
@@ -58,7 +57,7 @@ public class DataResenia {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}	return reseñas;
+		}	return resenias;
 	}
 	
 	public void add(Resenia r) {
@@ -72,13 +71,13 @@ public class DataResenia {
 			stmt.setDate(1, (Date)r.getFecha());
 			stmt.setString(2, r.getComentario());
 			stmt.setInt(3, r.getPuntaje());
-			stmt.setInt(4, r.getPlaneta().getIdPlaneta());
+			stmt.setInt(4, r.getPlaneta().getId());
 			stmt.setInt(5, r.getUsuario().getDgu());
 			stmt.executeUpdate();	
 			keyResultSet=stmt.getGeneratedKeys();
 			  if(keyResultSet!=null && keyResultSet.next()){
 				  	Planeta p=new Planeta();
-				  	p.setIdPlaneta(keyResultSet.getInt(4));
+				  	p.setId(keyResultSet.getInt(4));
 				  	r.setPlaneta(p);
 				  	Ciudadano ciud=new Ciudadano();
 				  	ciud.setDgu(keyResultSet.getInt(5));				  	
@@ -102,7 +101,7 @@ public class DataResenia {
 			stmt.setDate(1,(Date) res.getFecha());
 			stmt.setString(2,res.getComentario());
 			stmt.setInt(3,res.getPuntaje());
-			stmt.setInt(4,res.getPlaneta().getIdPlaneta());
+			stmt.setInt(4,res.getPlaneta().getId());
 			stmt.setInt(5,res.getUsuario().getDgu());
 			stmt.executeUpdate();			
             } catch (SQLException e) {
@@ -115,26 +114,38 @@ public class DataResenia {
 				}
 		}
 	
-	public Resenia getByIds(Planeta p,Ciudadano c){
+	public ArrayList<Resenia> getOne(Planeta p){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Resenia r=null;
+		ArrayList<Resenia> resenias=new ArrayList<>();
 		try {
 			stmt= Conectar.getInstancia().getConn().
-					prepareStatement("select * from resenia where idPlaneta=? and idUsuario=?");
-				stmt.setInt(1,p.getIdPlaneta());
-				stmt.setInt(2,c.getDgu());
+					prepareStatement("select * from resenia where id_planeta=?");
+				stmt.setInt(1,p.getId());
 				rs=stmt.executeQuery();
-			if(rs!=null && rs.next()) {
-					p.setIdPlaneta(rs.getInt("idPlaneta"));					
+				if(rs!=null) {
+					while(rs.next()) {
+					Ciudadano c=new Ciudadano();
+					Planeta pl=new Planeta();
+						
 					r=new Resenia();
-				    r.setPlaneta(p);					
-				    r.setUsuario(c);
+					r.setComentario(rs.getString("comentario"));		
+					c.setDgu(rs.getInt("dgu"));
+					c=uc.getById(c);
+					r.setUsuario(c);
+					pl.setId(rs.getInt("id_planeta"));
+					pl=pc.getById(pl);
+					r.setPlaneta(pl);
 					r.setFecha(rs.getDate("fecha"));
 					r.setPuntaje(rs.getInt("puntaje"));
-					r.setComentario(rs.getString("comentario"));
-				}			
+					resenias.add(r);
+				}
+			}		
+						
 		} catch (SQLException e) {
+			
+			
 			e.printStackTrace();
 			
 		} finally {
@@ -146,8 +157,8 @@ public class DataResenia {
 				e.printStackTrace();
 			}
 		}	
-		return r;
-	}
+		return resenias;
+	}	
 }
 
 

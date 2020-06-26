@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -48,7 +48,6 @@ public class Login extends HttpServlet {
 		ciud.setPassword(request.getParameter("password"));
 		//AutomaticUpdate au=new AutomaticUpdate();
 		//au.beepForAnHour();
-		
 		if (uc.userExist(ciud))		
 		{
 			HttpSession misession= request.getSession();
@@ -57,12 +56,12 @@ public class Login extends HttpServlet {
 			{
 				misession.setAttribute("admin", true);
 			}
-			RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
-			rd.forward(request,response);
+			//RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
+			//rd.forward(request,response);
 		}
 		else {
-		    RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
-		    rd.forward(request,response);
+		    //RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+		    //rd.forward(request,response);
 		
 	  }
 	}

@@ -8,7 +8,7 @@ public class Planeta {
 	private int coordenadaX;
 	private int coordenadaY;
 	private boolean estado;
-	
+	private String url;
 	
 	public int getId() {
 		return id;
@@ -40,7 +40,12 @@ public class Planeta {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public Planeta() {		
 	}
 	

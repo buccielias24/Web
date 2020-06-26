@@ -18,12 +18,10 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<% Planeta p=(Planeta)session.getAttribute("planeta");%>
 <form action="/Web/resenia" method="post">
 	<div>
 		<label>Ingrese su comentario</label>
 		<input type="text" name="comment"> 
-		<input type="hidden" name=planeta value="<%=p.getIdPlaneta()%>">
 	</div>	
     <div class="star_content">
         <input name="rate" value="1" type="radio" class="star"/> 

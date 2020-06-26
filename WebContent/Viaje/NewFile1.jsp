@@ -23,27 +23,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 <script type="text/javascript">
  $(document).ready(function() {
 	 var availableTags=[]
-      $.ajax({
+	 $.ajax({
              type:"GET",
              url:"http://localhost:8080/Web/Planetas"
          })
          .done(function (data) {
+        	 data.pop();
         	  $.each( data, function( key, val ) {
         	    availableTags.push(val.nombre)
         	  });
-         });
-	 
+         }); 
 	 $( function() {
 		    $( "#tags" ).autocomplete({
 		      source: availableTags
 		    });
-		  } );
-	
-	 $( function() {
-		    $( "#tags2" ).autocomplete({
+		   $( "#tags2" ).autocomplete({    
 		      source: availableTags
-		    });
-		  });
+			});
+		});
  });
 </script>
 
@@ -58,7 +55,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 		    	    $.each(data[0], function(index, value){
 		    	        html += '<th>'+index+'</th>';
 		    	    });
-		    	    html += '</tr>';
+		    	    html += '</tr>';     
 		    	     $.each(data, function(index, value){
 		    	         html += '<tr>';
 		    	            html += '<td>'+value.salida+'</td>';
@@ -78,29 +75,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 		</script>
 
 </head>
+
 <body class="w3-light-grey">
 
-<!-- Navigation Bar -->
-<div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-  <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>Logo</b></a>
-  <a href="#" class="w3-bar-item w3-button w3-right w3-hover-red w3-text-grey"><i>Login</i></a>
-</div>
-
+<header>
+ <jsp:include page="/header.jsp"></jsp:include>
+</header>
 
 
 <!-- Page content --> 
 <!-- Header -->
-<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
   <img class="w3-image" src="https://invdes.com.mx/wp-content/uploads/2017/08/06-08-17-universo.jpg" alt="London" width="1500" height="700">
   <div class="w3-display-middle" style="width:65%">
     <div class="w3-bar w3-black">
-      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Flight');"><i class="fa fa-plane w3-margin-right"></i>Flight</button>
-      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Hotel');"><i class="fa fa-bed w3-margin-right"></i>Hotel</button>
-      <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Car');"><i class="fa fa-car w3-margin-right"></i>Rental</button>
-    </div>
-
+      <button class="w3-bar-item w3-button tablink"><i class="fa fa-plane w3-margin-right"></i>Flight</button>
     <!-- Tabs -->
-    <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
+    <div id="Flight" class="w3-container w3-white w3-padding-16">
       <h3>Travel the world with us</h3>
       <form id="myform" action="/Web/vistaViaje" method="get"  > 
       <div class="w3-row-padding" style="margin:0 -16px;">
@@ -116,22 +106,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <p><button class="w3-button w3-dark-grey" style="margin-top: 10px">Search and find dates</button></p>
     </form>
     </div>
-
-    <div id="Hotel" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Find the best hotels</h3>
-      <p>Book a hotel with us and get the best fares and promotions.</p>
-      <p>We know hotels - we know comfort.</p>
-      <p><button class="w3-button w3-dark-grey">Search Hotels</button></p>
+    
     </div>
 
-    <div id="Car" class="w3-container w3-white w3-padding-16 myLink">
-      <h3>Best car rental in the world!</h3>
-      <p><span class="w3-tag w3-deep-orange">DISCOUNT!</span> Special offer if you book today: 25% off anywhere in the world with CarServiceRentalRUs</p>
-      <input class="w3-input w3-border" type="text" placeholder="Pick-up point">
-      <p><button class="w3-button w3-dark-grey">Search Availability</button></p>
-    </div>
+    
   </div>
-</header>
   <!-- Table -->
  <div class="container" id="containerTable">
    
@@ -151,26 +130,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   </div>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
 </footer>
-
-<script>
-// Tabs
-function openLink(evt, linkName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("myLink");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-  }
-  document.getElementById(linkName).style.display = "block";
-  evt.currentTarget.className += " w3-red";
-}
-
-// Click on the first tablink on load
-document.getElementsByClassName("tablink")[0].click();
-</script>
 
 </body>
 </html>
