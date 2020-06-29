@@ -10,7 +10,7 @@ import entidades.Ciudadano;
 import entidades.Planeta;
 
 public class DataUser {
-//seria getByUser
+
 	public Ciudadano getById(Ciudadano ciud){
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
