@@ -14,19 +14,10 @@
  
 <style type="text/css">
 body{
-  background:url(https://wallpapercave.com/wp/wp3493593.jpg) repeat;
+  background:url(https://wallpapercave.com/wp/wp3493593.jpg);
+  background-size: cover;
 }
-.planet{
-  animation: translateBackground 40s infinite linear;  
-  position:relative;
-  width:50%;
-  padding-bottom:50%;
-  padding-left:50%;
-  border-radius:50%;
-  margin:auto;
-  overflow:hidden;
-  box-shadow: 0 0 60px -20px rgba(255, 189, 3, 0.72), -14px -15px 40px -10px rgba(255, 238, 191, 0.23),inset -10px -10px 40px #251303, inset 10px 10px 30px -10px rgba(255, 204, 159, 0.6); 
-}
+
 .header {
   color: #ffffff;
   text-align: center;
@@ -71,27 +62,65 @@ body{
   background-color: #0099cc;
 }
 
-@keyframes translateBackground{
-  0%{
-    background-position-x:0;
-  }
-  100%{
-    background-position-x:-600px;
-  }
-}
-
 .carousel-control-next, .carousel-control-prev {
     top: 50% !important;
     bottom: 50% !important;
 }
 
+<!-- -->
+
+@-webkit-keyframes planet-rotation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: -200% 0%;
+    }
+}
+@keyframes planet-rotation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: -200% 0%;
+    }
+}
+
+
+.planet-image {
+     width: 25vw;
+     height: 25vw;
+     max-width: 512px;
+     max-height: 512px;
+     border-radius: 50%;
+     position: relative;
+     background-size: cover;
+     -webkit-animation: planet-rotation 30s linear infinite;
+     margin:auto;
+}
+
+.planet-image:after {
+    position: absolute;
+    content: '';
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    
+    height: 100%;
+    border-radius: 50%;
+    background-image:
+        -webkit-radial-gradient(16% 50%, 30% 50%, rgba(255,240,230,.6), transparent),
+        linear-gradient(to right, rgba(255,240,220,0.5) 12%, rgba(255,240,220,0) 40%, rgba(0,0,0,0.64) 60%, rgba(0,0,0,1) 100%);
+    box-shadow: inset 10px 0 30px rgba(255,240,220,0.4);
+}
 </style>
 
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha384-R4/ztc4ZlRqWjqIuvf6RX5yb/v90qNGx6fS48N0tRxiGkqveZETq72KgDVJCp2TC"crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
  <script>
  
  $(document).ready(function() {
@@ -124,7 +153,7 @@ body{
 					'<li class="list-item">Otros</li></ul></div></div>'+
 					'<div class="col-md-8"><div class="row"><div class="col-md-12"><div class="header"><h1>'+val.nombre+'</h1></div>'+ 
 					'</div></div><div class="row"><div class="col-md-12" style="padding-top: 10px">'+
-					'<div class="planet" style="background:url('+val.url+') repeat-x fixed center"></div>'+'<div class="col-md-12"><div class="footer" style="margin-top:1%"><h4>'+estrellas+'</h4></div></div>'+
+					'<div class="planet-image" style="background-image:url('+val.url+')"></div>'+'<div class="col-md-12"><div class="footer" style="margin-top:1%"><h4>'+estrellas+'</h4></div></div>'+
 					'</div></div></div><div class="col-md-2" style="padding-top: 10%"><div class="aside">DATOS EXTRAS'+
 					'</div></div>'+
 				  '</div></div>';
@@ -143,7 +172,7 @@ body{
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="carousel slide" id="carousel-610499">
+			<div class="carousel" id="carousel-610499">
 				<div class="carousel-inner" id="mycarousel">
 		     		</div> <a class="carousel-control-prev" href="#carousel-610499" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-610499" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
 			</div>
@@ -213,8 +242,5 @@ body{
 				
 			</div>
 <!--  FIN modal Nuevo Planeta -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
   </body>
 </html>
