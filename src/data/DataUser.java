@@ -83,7 +83,7 @@ public class DataUser {
 		try {
 			stmt=Conectar.getInstancia().getConn().
 					prepareStatement(
-							"insert into usuario(dgu, nombre,apellido, usuario,password,email,rol,us_raza) values(?,?,?,?,?,?,?,?)",
+							"insert into usuario(dgu, nombre,apellido, usuario,password,email,rol) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, user.getDgu());
 			stmt.setString(2, user.getNombre());
@@ -92,7 +92,6 @@ public class DataUser {
 			stmt.setString(5, user.getPassword());
 			stmt.setString(6, user.getEmail());
 			stmt.setInt(7, user.getRol());
-			stmt.setInt(8,user.getRaza().getIdRaza());
 			stmt.executeUpdate();	
 			}catch (SQLException e) {
             e.printStackTrace();}	finally {

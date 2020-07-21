@@ -1,17 +1,14 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <title>Bootstrap 4, from LayoutIt!</title>
+<style>
+.mySlides {display:none;}
 
-    <meta name="description" content="Source code generated using layoutit.com">
-    <meta name="author" content="LayoutIt!">
- 
-<style type="text/css">
 body{
   background:url(https://wallpapercave.com/wp/wp3493593.jpg);
   background-size: cover;
@@ -124,18 +121,17 @@ body{
 	font-size:22px;
 	background-color:#262626;
 	}
-	
 </style>
 
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  	
+  		 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
- <script>
+<script>
  
  $(document).ready(function() {
      $.ajax({
@@ -144,12 +140,7 @@ body{
         })
         .done(function (data) {
        	  data.pop();
-       		 $.each( data, function( key, val ) {
-       		   if (key==0){
-          		   cabecera='<div class="carousel-item active">';	
-          		}else{
-          			cabecera='<div class="carousel-item">';
-          		}
+       		 $.each( data, function( key, val ) {	   
        		    //estrellas
        				var puntaje=parseInt(val.puntaje);
             		var j=0;
@@ -161,8 +152,7 @@ body{
            	 		    estrellas=estrellas+('<span class="fa fa-star"></span>');	}   
    	                 }
 				var planeta=
-					cabecera+
-					'<div class="container-fluid" ><div class="row"><div class="col-md-2"><div class="menu" style="padding-top:10%">'+
+					'<div class="container-fluid mySlides" ><div class="row"><div class="col-md-2"><div class="menu" style="padding-top:10%">'+
 					'<ul><li class="list-item">Viajes a este destino</li><li class="list-item"><a id="modal-669121" href="#modal-container-669121" data-toggle="modal">Comentarios</a></li>'+
 					'<li class="list-item">Otros</li></ul></div></div>'+
 					'<div class="col-md-8"><div class="row"><div class="col-md-12"><div class="header"><h1>'+val.nombre+'</h1></div>'+ 
@@ -171,87 +161,40 @@ body{
 					'</div></div></div><div class="col-md-2" style="padding-top: 10%"><div class="aside">DATOS EXTRAS'+
 					'</div></div>'+
 				  '</div></div>';
-				  $('#mycarousel').append(planeta); 	
+				  "url("+val.url+") repeat-x"
+				  $('#items').append(planeta); 	
           	  }); 
         });
 });
  </script>
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
-  
-</head>
-<header>  <jsp:include page="/header2.jsp"></jsp:include></header>
-  <body>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="carousel" id="carousel-610499" data-interval="false">
-				<div class="carousel-inner" id="mycarousel">
-		     		</div> <a class="carousel-control-prev" href="#carousel-610499" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-610499" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-			</div>
-		</div>
-	</div>
-</div>
+<body>
 
-<!-- Modal Comentarios  -->			
-			<div class="modal fade" id="modal-container-669121" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-xl" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								Modal title
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="card">
- 		 						<div class="card-header">
- 		 							<img class="profilePicture" src="/Web/img/login.jpg">
- 		 						</div>
-  								<div class="card-body">
-   								 <blockquote class="blockquote mb-0">
-      							 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      							 <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    				             </blockquote>
-  								</div>
-							</div>
-							<div class="card">
- 		 						<div class="card-header">Quote
- 		 						</div>
-  								<div class="card-body">
-   								 <blockquote class="blockquote mb-0">
-      							 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      							 <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    				             </blockquote>
-  								</div>
-							</div>
-							<div class="card">
- 		 						<div class="card-header">Quote
- 		 						</div>
-  								<div class="card-body">
-   								 <blockquote class="blockquote mb-0">
-      							 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      							 <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    				             </blockquote>
-  								</div>
-							</div>														
-						</div>
-						<div class="modal-footer">
-							 
-							<button type="button" class="btn btn-primary">
-								Save changes
-							</button> 
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">
-								Close
-							</button>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-<!--  FIN modal Comentarios -->
-  </body>
+<h2 class="w3-center">Manual Slideshow</h2>
+<div id="items"> 
+  
+ </div>
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+ x[slideIndex-1].style.display = "block";  
+}
+</script>
+
+</body>
 </html>

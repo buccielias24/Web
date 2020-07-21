@@ -20,7 +20,6 @@
 	.body{
 	color:#ffffff;
 	font-family: 'Roboto';
-	font-size:22px;
 	background-color:#262626;
 	}
 	.header {

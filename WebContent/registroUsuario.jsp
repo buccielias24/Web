@@ -10,8 +10,7 @@
     <title>User Register</title>
 
     <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet" >
-
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <style>
       .bd-placeholder-img {
@@ -30,7 +29,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="css/form-validation.css" rel="stylesheet">
+    	<link href="css/form-validation.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>    
         <script src="js/pass-validation.js"> 
         </script>
@@ -44,18 +43,18 @@
     <div class="py-5 text-center">
   
       <h4 class="mb-3">Complete los datos</h4>
-      <form class="needs-validation" action="registroUsuario" method="post">
+      <form class="needs-validation" action="usuarios" method="post">
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+            <label for="name">First name</label>
+            <input type="text" class="form-control" id="firstName" name="nombre" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" name="lastName" id="lastName" placeholder="" value="" required>
+            <input type="text" class="form-control" name="apellido" id="lastName" placeholder="" value="" required>
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
@@ -69,7 +68,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text">@</span>
             </div>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+            <input type="text" class="form-control" id="username" name="usuario" placeholder="Username" required>
             <div class="invalid-feedback" style="width: 100%;">
               Your username is required.
             </div>
@@ -133,70 +132,14 @@
           
           <div class="col-md-3 mb-3">
             <label for="zip">DGU</label>
-            <input type="text" class="form-control" id="DGU" name="DGU" placeholder="" required>
+            <input type="text" class="form-control" id="DGU" name="dgu" placeholder="" required>
             <div class="invalid-feedback">
               DGU code required.
             </div>
           </div>
-         
+         <input type="hidden" value="nuevo" name="action">
         </div>
          <label><input id="chknotificacion" type="checkbox"> Deseo recibir notificaciones acerca de nuevos viajes</label>
-        
-        <!--<div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="save-info">
-          <label class="custom-control-label" for="save-info">Save this information for next time</label>
-        </div>
-        <hr class="mb-4">
-
-        <h4 class="mb-3">Payment</h4>
-
-        <div class="d-block my-3">
-          <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-            <label class="custom-control-label" for="credit">Credit card</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-            <label class="custom-control-label" for="debit">Debit card</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-            <label class="custom-control-label" for="paypal">PayPal</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="cc-name">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-            <small class="text-muted">Full name as displayed on card</small>
-            <div class="invalid-feedback">
-              Name on card is required
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="cc-number">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-            <div class="invalid-feedback">
-              Credit card number is required
-            </div>
-          </div>
-        </div> 
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="cc-expiration">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-            <div class="invalid-feedback">
-              Expiration date required
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="cc-cvv">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-            <div class="invalid-feedback">
-              Security code required
-            </div>
-          </div>
-        </div>-->
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
       </form>
