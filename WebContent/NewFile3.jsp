@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bootstrap 4, from LayoutIt!</title>
+    <title>Destinos</title>
 
     <meta name="description" content="Source code generated using layoutit.com">
     <meta name="author" content="LayoutIt!">
@@ -94,7 +94,7 @@ body{
      border-radius: 50%;
      position: relative;
      background-size: cover;
-     -webkit-animation: planet-rotation 30s linear infinite;
+     -webkit-animation: planet-rotation 50s linear infinite;
      margin:auto;
 }
 
