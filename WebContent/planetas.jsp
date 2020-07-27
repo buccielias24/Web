@@ -133,7 +133,7 @@
      background-size: cover;
      -webkit-animation: planet-rotation 50s linear infinite;
      margin:auto;
-}
+} 	
 
 .planet-image:after {
     position: absolute;

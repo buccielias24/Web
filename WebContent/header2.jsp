@@ -34,14 +34,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+    <ul id="navItems" class="navbar-nav mr-auto">
+      <li class="nav-item" id="home">
         <a class="nav-link" href="index2.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" id="planets">
         <a class="nav-link" href="NewFile3.jsp">Planetas</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" id="travels">
         <a class="nav-link" href="Viajes.jsp">Viajes</a>
       </li>
     </ul> 
@@ -81,7 +81,7 @@
         <!-- Modal body -->
       <div class="modal-body">
   	    <form class="form-signin" action="/Web/login" method="post" name="form" id="form" enctype="multipart/form-data">	
-  		  <img class="mb-4" src="http://localhost:8080/Web/img/login.jpg" alt="" width="200" height="200">
+  		  <img class="mb-4" src="http://localhost:8080/Web/img/login.jpg" style="margin:auto;" alt="" width="200" height="200">
   		    <label for="inputEmail" class="sr-only">Email address</label>
  	        <input type="text" id="user" class="form-control" name="user" placeholder="Email address" required autofocus>
   	        <label for="inputPassword" class="sr-only">Password</label>
@@ -92,6 +92,10 @@
               </label>
   			 </div>
   		 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <div>
+      		<a href="#">Olvide mi contraseña</a>
+      		<a style="right: 0" href="#">Registrese aqui</a>
+      </div>
       </form>			
     </div>
       </div>

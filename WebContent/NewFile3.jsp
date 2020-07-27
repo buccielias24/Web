@@ -133,51 +133,9 @@ body{
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   	
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
- <script>
- 
- $(document).ready(function() {
-     $.ajax({
-            type:"GET",
-            url:"http://localhost:8080/Web/Planetas"
-        })
-        .done(function (data) {
-       	  data.pop();
-       		 $.each( data, function( key, val ) {
-       		   if (key==0){
-          		   cabecera='<div class="carousel-item active">';	
-          		}else{
-          			cabecera='<div class="carousel-item">';
-          		}
-       		    //estrellas
-       				var puntaje=parseInt(val.puntaje);
-            		var j=0;
-            		var estrellas='';
-            	     for(j=0; j<5;j++){
-           	 	      if(puntaje>j){
-           	 			estrellas=estrellas+('<span class="fa fa-star checked"></span>');}
-           	 	      else{
-           	 		    estrellas=estrellas+('<span class="fa fa-star"></span>');	}   
-   	                 }
-				var planeta=
-					cabecera+
-					'<div class="container-fluid" ><div class="row"><div class="col-md-2"><div class="menu" style="padding-top:10%">'+
-					'<ul><li class="list-item">Viajes a este destino</li><li class="list-item"><a id="modal-669121" href="#modal-container-669121" data-toggle="modal">Comentarios</a></li>'+
-					'<li class="list-item">Otros</li></ul></div></div>'+
-					'<div class="col-md-8"><div class="row"><div class="col-md-12"><div class="header"><h1>'+val.nombre+'</h1></div>'+ 
-					'</div></div><div class="row"><div class="col-md-12" style="padding-top: 10px">'+
-					'<div class="planet-image" style="background-image:url('+val.url+')"></div>'+'<div class="col-md-12"><div class="footer" style="margin-top:1%"><h4>'+estrellas+'</h4></div></div>'+
-					'</div></div></div><div class="col-md-2" style="padding-top: 10%"><div class="aside">DATOS EXTRAS'+
-					'</div></div>'+
-				  '</div></div>';
-				  $('#mycarousel').append(planeta); 	
-          	  }); 
-        });
-});
- </script>
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   
 </head>
 <header>  <jsp:include page="/header2.jsp"></jsp:include></header>
@@ -253,5 +211,47 @@ body{
 				
 			</div>
 <!--  FIN modal Comentarios -->
+  <script>
+ 
+ $(document).ready(function() {
+     $.ajax({
+            type:"GET",
+            url:"http://localhost:8080/Web/Planetas"
+        })
+        .done(function (data) {
+       	  data.pop();
+       		 $.each( data, function( key, val ) {
+       		   if (key==0){
+          		   cabecera='<div class="carousel-item active">';	
+          		}else{
+          			cabecera='<div class="carousel-item">';
+          		}
+       		    //estrellas
+       				var puntaje=parseInt(val.puntaje);
+            		var j=0;
+            		var estrellas='';
+            	     for(j=0; j<5;j++){
+           	 	      if(puntaje>j){
+           	 			estrellas=estrellas+('<span class="fa fa-star checked"></span>');}
+           	 	      else{
+           	 		    estrellas=estrellas+('<span class="fa fa-star"></span>');	}   
+   	                 }
+				var planeta=
+					cabecera+
+					'<div class="container-fluid" ><div class="row"><div class="col-md-2"><div class="menu" style="padding-top:10%">'+
+					'<ul><li class="list-item">Viajes a este destino</li><li class="list-item"><a id="modal-669121" href="#modal-container-669121" data-toggle="modal">Comentarios</a></li>'+
+					'<li class="list-item">Otros</li></ul></div></div>'+
+					'<div class="col-md-8"><div class="row"><div class="col-md-12"><div class="header"><h1>'+val.nombre+'</h1></div>'+ 
+					'</div></div><div class="row"><div class="col-md-12" style="padding-top: 10px">'+
+					'<div class="planet-image" style="background-image:url('+val.url+')"></div>'+'<div class="col-md-12"><div class="footer" style="margin-top:1%"><h4>'+estrellas+'</h4></div></div>'+
+					'</div></div></div><div class="col-md-2" style="padding-top: 10%"><div class="aside">DATOS EXTRAS'+
+					'</div></div>'+
+				  '</div></div>';
+				  $('#mycarousel').append(planeta); 	
+          	  }); 
+        });
+});
+ </script>
+  
   </body>
 </html>
