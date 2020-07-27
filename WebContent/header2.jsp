@@ -36,7 +36,7 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul id="navItems" class="navbar-nav mr-auto">
       <li class="nav-item" id="home">
-        <a class="nav-link" href="index2.jsp">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" id="planets">
         <a class="nav-link" href="NewFile3.jsp">Planetas</a>
