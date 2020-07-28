@@ -3,14 +3,15 @@ package data;
 import java.sql.*;
 
 public class Conectar {
-
 	private static Conectar instancia;
 	
 	private String driver="com.mysql.jdbc.Driver";
-	private String host="localhost";
+	private String host="node51985-env-8234297.jelastic.saveincloud.net";
+	private String localhost="localhost";
 	private String port="3306";
 	private String user="root";
-	private String password="root";
+	private String password="3uEy1obLkw";
+	private String localpassword="root";
 	private String db="astrobuses";
 	private int conectados=0;
 	private Connection conn=null;
@@ -33,7 +34,7 @@ public class Conectar {
 	public Connection getConn() {
 		try {
 			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?useSSL=false", user, password);
+				conn=DriverManager.getConnection("jdbc:mysql://"+localhost+":"+port+"/"+db+"?useSSL=false", user, localpassword);
 				conectados=0;
 			}
 		} catch (SQLException e) {

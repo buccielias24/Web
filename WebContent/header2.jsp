@@ -94,7 +94,7 @@
   		 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <div>
       		<a href="#">Olvide mi contraseña</a>
-      		<a style="right: 0" href="#">Registrese aqui</a>
+      		<a style="right: 0" href="/Web/registroUsuario.jsp">Registrese aqui</a>
       </div>
       </form>			
     </div>

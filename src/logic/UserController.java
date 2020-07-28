@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -34,7 +35,8 @@ public class UserController {
 			 user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
              user.setRol(0);
              du.add(user);
-             this.correo(user.getEmail());}
+             this.correo(user.getEmail());
+             }
 		else{
         	 System.out.println("Usuario ya existe");}		
 	}
@@ -76,13 +78,13 @@ public class UserController {
 		Properties props = new Properties();
 
 		// Nombre del host de correo, es smtp.gmail.com para gmail
-		props.setProperty("mail.smtp.host", "smtp.gmail.com");
+		props.setProperty("mail.smtp.host", "ssl://smtp.gmail.com");
 
 		// TLS si esta disponible
 		props.setProperty("mail.smtp.starttls.enable", "true");
-
+		
 		// Puerto de gmail para envio de correos
-		props.setProperty("mail.smtp.port","587");
+		props.setProperty("mail.smtp.port","465");
 
 		// Nombre del usuario
 		props.setProperty("mail.smtp.user", "buccielias@gmail.com");

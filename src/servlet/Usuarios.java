@@ -47,7 +47,12 @@ public class Usuarios extends HttpServlet {
 				 c.setEmail(request.getParameter("email"));
 				 c.setPassword(request.getParameter("password"));
 				 c.setUser(request.getParameter("usuario"));
-				 uc.addUser(c);} 
+				 try {
+				 uc.addUser(c);}catch(Exception e)
+				 {   
+			     e.printStackTrace();
+				 }		 	
+			  } 
 			  else {
 				  
 			  	   
