@@ -30,9 +30,22 @@
     </style>
     <!-- Custom styles for this template -->
     	<link href="css/form-validation.css" rel="stylesheet">
-		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>    
+    	
+    	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
         <script src="js/pass-validation.js"> 
         </script>
+        
+        <script type="text/javascript">
+		$(document).on("submit", "#form", function(event) {
+		    var $form = $(this);
+		    $.post($form.attr("action"), $form.serialize(), function(response) {    	
+		    	alert(response);
+		    });
+		    event.preventDefault(); 	    
+		});
+</script>
+
   </head>
   <body class="bg-light">
     <div class="container">
@@ -43,7 +56,7 @@
     <div class="py-5 text-center">
   
       <h4 class="mb-3">Complete los datos</h4>
-      <form class="needs-validation" action="usuarios" method="post">
+      <form class="needs-validation" action="/usuarios" method="post" name="form" id="form" enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="name">First name</label>
@@ -155,6 +168,8 @@
     </ul>
   </footer>
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
       <script>window.jQuery || document.write('<script src="js/jquery-slim.min.js"><\/script>')</script><script src="js/bootstrap.bundle.min.js" ></script>   
         <script src="js/form-validation.js"></script>

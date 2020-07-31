@@ -52,18 +52,18 @@
 		</div>
 		<div class="row" style="padding-top:5%">
 			<div class="col-md-4">
-				<img alt="ejemplo1" src="http://localhost:8080/Web/img/planeta.jpg" class="rounded-circle center"/>
+				<img alt="ejemplo1" src="/img/planeta.jpg" class="rounded-circle center"/>
 				<div class="text-center">
 					<h2>Planeta</h2>
 					<p>Vea los destinos disponibles para viajar. Comentarios de viajantes</p>
-					<button onclick="location.href='http://localhost:8080/Web/NewFile3.jsp'" class="btn btn-secondary">PLANETAS</button>
+					<button onclick="location.href='localhost:80/NewFile3.jsp'" class="btn btn-secondary">PLANETAS</button>
 				</div>
 			</div>
 			<div class="col-md-4">
-				<img alt="ejemplo1" src="http://localhost:8080/Web/img/planeta.jpg" class="rounded-circle center"/>
+				<img alt="ejemplo1" src="/img/planeta.jpg" class="rounded-circle center"/>
 			</div>
 			<div class="col-md-4">
-				<img alt="ejemplo1" src="http://localhost:8080/Web/img/planeta.jpg" class="rounded-circle center"/>
+				<img alt="ejemplo1" src="/img/planeta.jpg" class="rounded-circle center"/>
 			</div>
 		</div>
 		<div class="row">

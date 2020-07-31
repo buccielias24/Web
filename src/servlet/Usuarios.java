@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,11 +53,17 @@ public class Usuarios extends HttpServlet {
 				 uc.addUser(c);}catch(Exception e)
 				 {   
 			     e.printStackTrace();
-				 }		 	
+				 }
+				 PrintWriter out =response.getWriter();  
+			     response.setContentType("application/json");
+			     response.setCharacterEncoding("UTF-8");
+			     out.println("success");
 			  } 
 			  else {
-				  
-			  	   
+				    PrintWriter out =response.getWriter();  
+			        response.setContentType("application/json");
+			        response.setCharacterEncoding("UTF-8");
+			        out.println("err_badpass");			  	   
 			       }
 		   }
 	}

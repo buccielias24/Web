@@ -78,13 +78,13 @@ public class UserController {
 		Properties props = new Properties();
 
 		// Nombre del host de correo, es smtp.gmail.com para gmail
-		props.setProperty("mail.smtp.host", "ssl://smtp.gmail.com");
+		props.setProperty("mail.smtp.host", "smtp.gmail.com");
 
 		// TLS si esta disponible
 		props.setProperty("mail.smtp.starttls.enable", "true");
 		
 		// Puerto de gmail para envio de correos
-		props.setProperty("mail.smtp.port","465");
+		props.setProperty("mail.smtp.port","587");
 
 		// Nombre del usuario
 		props.setProperty("mail.smtp.user", "buccielias@gmail.com");

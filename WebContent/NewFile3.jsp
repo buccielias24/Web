@@ -216,7 +216,7 @@ body{
  $(document).ready(function() {
      $.ajax({
             type:"GET",
-            url:"http://localhost:8080/Web/Planetas"
+            url:"/Planetas"
         })
         .done(function (data) {
        	  data.pop();

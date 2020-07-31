@@ -80,8 +80,8 @@
         
         <!-- Modal body -->
       <div class="modal-body">
-  	    <form class="form-signin" action="/Web/login" method="post" name="form" id="form" enctype="multipart/form-data">	
-  		  <img class="mb-4" src="http://localhost:8080/Web/img/login.jpg" style="margin:auto;" alt="" width="200" height="200">
+  	    <form class="form-signin" action="/login" method="post" name="form" id="form" enctype="multipart/form-data">	
+  		  <img class="mb-4" src="/img/login.jpg" style="margin:auto;" alt="" width="200" height="200">
   		    <label for="inputEmail" class="sr-only">Email address</label>
  	        <input type="text" id="user" class="form-control" name="user" placeholder="Email address" required autofocus>
   	        <label for="inputPassword" class="sr-only">Password</label>
@@ -94,7 +94,7 @@
   		 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <div>
       		<a href="#">Olvide mi contraseña</a>
-      		<a style="right: 0" href="/Web/registroUsuario.jsp">Registrese aqui</a>
+      		<a style="right: 0" href="/registroUsuario.jsp">Registrese aqui</a>
       </div>
       </form>			
     </div>
