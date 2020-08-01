@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +56,7 @@ public class Login extends HttpServlet {
 			{
 				misession.setAttribute("admin", true);
 			}
+		
 			//RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
 			//rd.forward(request,response);
 		}
@@ -63,5 +65,8 @@ public class Login extends HttpServlet {
 		    //rd.forward(request,response);
 		
 	  }
+		PrintWriter out =response.getWriter();  
+        response.setContentType("text/html;charset=UTF-8");
+        out.println("err_badpass");	
 	}
 }

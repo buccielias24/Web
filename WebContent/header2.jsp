@@ -15,7 +15,7 @@
 		$(document).on("submit", "#form", function(event) {
 		    var $form = $(this);
 		    $.post($form.attr("action"), $form.serialize(), function(response) {    	
-		    	location.reload();	
+		    	alert(response);
 		    });
 		    event.preventDefault(); 	    
 		});

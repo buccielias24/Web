@@ -30,7 +30,10 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PrintWriter out =response.getWriter();  
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.println("err_badpass");	
 	}
 
 	/**
@@ -38,10 +41,7 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String action=request.getParameter("action");
-		if (action.equalsIgnoreCase("nuevo"))
-			{
-			  if(request.getParameter("password").equals(request.getParameter("password2"))){
+			/*  if(request.getParameter("password").equals(request.getParameter("password2"))){
 				 Ciudadano c=new Ciudadano();
 				 c.setApellido(request.getParameter("apellido"));
 				 c.setNombre(request.getParameter("nombre"));
@@ -55,17 +55,16 @@ public class Usuarios extends HttpServlet {
 			     e.printStackTrace();
 				 }
 				 PrintWriter out =response.getWriter();  
-			     response.setContentType("application/json");
-			     response.setCharacterEncoding("UTF-8");
-			     out.println("success");
+			        response.setContentType("application/json");
+			        response.setCharacterEncoding("UTF-8");
+			        out.println("success");	
 			  } 
-			  else {
+			  else {*/
 				    PrintWriter out =response.getWriter();  
 			        response.setContentType("application/json");
 			        response.setCharacterEncoding("UTF-8");
 			        out.println("err_badpass");			  	   
-			       }
-		   }
+		//	       }
 	}
 
 }
