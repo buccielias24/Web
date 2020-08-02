@@ -1,4 +1,3 @@
-<%@page import="entidades.Ciudadano"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,14 +20,21 @@
 <script type="text/javascript">
 		$(document).on("submit", "#form", function(event) {
 		    var $form = $(this);
-		    $.post($form.attr("action"), $form.serialize(), function(response) {    	estadoemail	  
-		      	if(response.error=="usuario_mail")
+		    $.post($form.attr("action"), $form.serialize(), function(response) {    		  
+		      if(response.error=="usuario_mail")
 		    		{
 		    		   $("#validationTooltip03").attr('class', 'form-control is-invalid');
-		    		   $("invalid-tooltip").append("usuario ya existe");
-		    			}else 
+		    		   $("#validationTooltip03_2").attr('class', 'invalid-feedback');
+		    		   $("#validationTooltip03_2").append( "Correo no disponible");
+		    		}else  
 		    			{
-		    				$('#myModal').modal('show');
+		    			  if(response.estadoemail=="false")
+		    			   {
+		    				 $("#validationTooltip03").attr('class', 'form-control is-invalid');
+		 		    		 $("#validationTooltip03_2").attr('class', 'invalid-feedback');
+		 		    		 $("#validationTooltip03_2").append( "Correo invalido");  		
+		    			   }	
+		    					//$('#myModal').modal('show');
 		    			}
 		    },
 		    dataType='json'
@@ -82,7 +88,7 @@
     		  	<div class="col-md-6 mb-3">
       				<label for="validationTooltip03">Email</label>
      				<input type="text" class="form-control" name="email" id="validationTooltip03" placeholder="City" required maxlength="50" onchange="this.val">
-      			  <div class="invalid-tooltip">
+      			  <div id="validationTooltip03_2">
         			
       			  </div>
     	        </div>

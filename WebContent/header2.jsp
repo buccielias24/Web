@@ -85,7 +85,7 @@
         
         <!-- Modal body -->
       <div class="modal-body">
-  	    <form class="form-signin" action="/login" method="post" name="form" id="form" enctype="multipart/form-data">	
+  	    <form class="form-signin" action="login" method="post" name="form" id="form" enctype="multipart/form-data">	
   		  <img class="mb-4" src="/img/login.jpg" style="margin:auto;" alt="" width="200" height="200">
   		    <label for="inputEmail" class="sr-only">Email address</label>
  	        <input type="text" id="user" class="form-control" name="user" placeholder="Email address" required autofocus>

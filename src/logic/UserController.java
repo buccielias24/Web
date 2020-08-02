@@ -8,7 +8,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.google.gson.JsonArray;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import data.DataUser;
@@ -39,40 +39,48 @@ public class UserController {
 		return du.getAll();
 	}
 	
-	public void addUser(Ciudadano user) {
-		
-		if(this.validarUsuario(user)){				
+	public void addUser(Ciudadano user) {				
 			 user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
              user.setRol(0);
              du.add(user);
              this.correo(user.getEmail());
-             }
-		else{
-        	 System.out.println("Usuario ya existe");}		
+    }		
+
+	
+	public JsonObject validarCorreo(String email){
+		
+		String estado_email=null;
+		try {
+			estado_email=this.checkEmail(email);
+			}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();}
+				
+		JsonObject correo=new JsonObject();
+		
+		Gson g = new Gson(); 
+		correo = g.fromJson(estado_email, JsonObject.class);
+				
+		JsonObject jo=new JsonObject();
+		
+		if(correo.get("smtp_check").toString().equalsIgnoreCase("false"))
+		{
+			jo.addProperty("estadoemail", correo.get("smtp_check").toString());		
+		}else {
+				for(Ciudadano usuario:this.getAll())
+					{
+						if(usuario.getEmail().equalsIgnoreCase(email))
+							{					 
+								jo.addProperty("error", "usuario_mail");
+							}
+							else {jo.addProperty("error", "success");
+							}
+					}
+		}
+		System.out.println(jo);
+		return jo;
 	}
 	
-	public boolean validarUsuario(Ciudadano usuario)
-	{
-		boolean validar=false;
-		
-		ArrayList<Ciudadano> usuarios=this.getAll();
-		
-		for(Ciudadano user:usuarios)
-		{
-			if(user.getDgu()!=usuario.getDgu())
-			{
-				if(!user.getEmail().equals(usuario.getEmail()))
-				{
-					if(!user.getUser().equals(usuario.getUser()))
-					{
-					  validar=true;
-					}else {validar=false;break;}
-				}else {validar=false; break;}
-			}else {validar=false; break;}		
-		}					
-		return validar;
-	}
-		
 	public Boolean userExist(Ciudadano ciud)
 	{
 		Ciudadano c=new Ciudadano();

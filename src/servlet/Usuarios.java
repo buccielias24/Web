@@ -65,36 +65,12 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+			
 			String email=request.getParameter("email");
-			String emailresponse=null;
-			try {
-				emailresponse=uc.checkEmail(email);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			JsonObject correo=new JsonObject();
-			
-			Gson g = new Gson(); 
-			correo = g.fromJson(emailresponse, JsonObject.class);
-			
-			
-			JsonObject jo=new JsonObject();
-			
-			
-				for(Ciudadano usuario:uc.getAll())
-				{
-					if(usuario.getEmail().equalsIgnoreCase(email))
-					{
-						 
-				        jo.addProperty("error", "usuario_mail");
-					}
-					else jo.addProperty("error", "success");
-				}
-				jo.addProperty("estadoemail", correo.get("smtp_check").toString());
-				PrintWriter out =response.getWriter();  
+			JsonObject respuesta=uc.validarCorreo(email);
+			PrintWriter out =response.getWriter();  
 		        response.setContentType("application/json");
 		        response.setCharacterEncoding("UTF-8");
-		        out.println(jo);
+		        out.println(respuesta);
 	}
 }
