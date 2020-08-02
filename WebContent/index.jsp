@@ -52,7 +52,7 @@
 		</div>
 		<div class="row" style="padding-top:5%">
 			<div class="col-md-4">
-				<img alt="ejemplo1" src="/img/planeta.jpg" class="rounded-circle center"/>
+				<img alt="ejemplo1" src="img/planeta.jpg" class="rounded-circle center"/>
 				<div class="text-center">
 					<h2>Planeta</h2>
 					<p>Vea los destinos disponibles para viajar. Comentarios de viajantes</p>

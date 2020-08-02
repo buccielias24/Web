@@ -211,12 +211,12 @@ body{
 				
 			</div>
 <!--  FIN modal Comentarios -->
-  <script>
+<script>
  
  $(document).ready(function() {
      $.ajax({
             type:"GET",
-            url:"/Planetas"
+            url:"Planetas"
         })
         .done(function (data) {
        	  data.pop();

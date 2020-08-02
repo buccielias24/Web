@@ -3,17 +3,27 @@ package logic;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import data.DataUser;
 import entidades.Ciudadano;
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class UserController {
 	
 	private DataUser du;
+	private final String apikey="42fa2e2d8069288df3335ea6668ec280";
 	
 	public UserController() {
 		du=new DataUser();
@@ -44,7 +54,9 @@ public class UserController {
 	public boolean validarUsuario(Ciudadano usuario)
 	{
 		boolean validar=false;
+		
 		ArrayList<Ciudadano> usuarios=this.getAll();
+		
 		for(Ciudadano user:usuarios)
 		{
 			if(user.getDgu()!=usuario.getDgu())
@@ -117,5 +129,39 @@ public class UserController {
 		e.printStackTrace();
 		}
 	}		
+	
+		  
+		  		 
+		   
+		  public String checkEmail(String email) throws Exception {
+
+		   String url = "https://apilayer.net/api/check?access_key="+apikey+"&email="+email+"&smtp=1&format=1";
+		   
+		   URL urlobj = new URL(url);
+		   
+		   HttpURLConnection con = (HttpURLConnection) urlobj.openConnection();
+
+		   // optional default is GET
+		   con.setRequestMethod("GET");
+
+		   //add request header
+		   con.setRequestProperty("User-Agent", "Mozilla/17.0");
+
+		   
+		   BufferedReader in = new BufferedReader(
+		           new InputStreamReader(con.getInputStream()));
+		   String inputLine;
+		   StringBuffer response = new StringBuffer();
+
+		   while ((inputLine = in.readLine()) != null) {
+		    response.append(inputLine);
+		   }
+		   in.close();
+
+		   //print result
+		   return response.toString();
+
+		  }
+	
 	
  }

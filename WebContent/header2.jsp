@@ -28,7 +28,7 @@
 </style>
 
 </head>
-<body>
+<header>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -68,6 +68,11 @@
     </ul>
   </div>
 </nav>
+</header>
+
+<body>
+
+
 <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -94,7 +99,7 @@
   		 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       <div>
       		<a href="#">Olvide mi contraseña</a>
-      		<a style="right: 0" href="/registroUsuario.jsp">Registrese aqui</a>
+      		<a style="padding-left:20px;" href="registro.jsp">Registrese aqui</a>
       </div>
       </form>			
     </div>
