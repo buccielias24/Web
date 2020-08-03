@@ -66,11 +66,17 @@ public class Usuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 			
-			String email=request.getParameter("email");
-			JsonObject respuesta=uc.validarCorreo(email);
+			Ciudadano c=new Ciudadano();
+		
+			c.setEmail(request.getParameter("email"));
+			c.setUser(request.getParameter("usuario"));
+			
+			JsonObject respuesta=uc.nuevoUsuario(c);
+			
 			PrintWriter out =response.getWriter();  
 		        response.setContentType("application/json");
 		        response.setCharacterEncoding("UTF-8");
+		        System.out.println(respuesta);
 		        out.println(respuesta);
 	}
 }

@@ -93,6 +93,7 @@ public class Planetas extends HttpServlet {
         
         ja.add(usuario);
         
+        
         PrintWriter out =response.getWriter();  
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

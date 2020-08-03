@@ -47,6 +47,54 @@ public class UserController {
     }		
 
 	
+	public boolean validarNuevoUsuario(Ciudadano c)
+	{
+		boolean validar=false;
+		for(Ciudadano usuario:this.getAll())
+		{
+			if(usuario.getUser().equalsIgnoreCase(c.getUser()))
+			{
+				validar=true;
+			}
+		}
+		return validar;
+	}
+	
+	public boolean validarNuevoEmail(Ciudadano c)
+	{
+		boolean validar=false;
+		for(Ciudadano usuario:this.getAll())
+		{
+			if(usuario.getEmail().equalsIgnoreCase(c.getEmail()))
+			{
+				validar=true;
+			}
+		}
+		return validar;
+	}
+	
+	public JsonObject nuevoUsuario(Ciudadano c)
+	{
+		JsonObject respuesta=new JsonObject();
+			if(this.validarNuevoUsuario(c))
+				{
+					respuesta.addProperty("error", "userexist");
+				}else {
+					 	if(this.validarNuevoEmail(c))
+					 	{
+					 		respuesta.addProperty("error", "usuario_mail");
+					 	}else
+					 		{
+					 			respuesta=this.validarCorreo(c.getEmail());
+					 			if(respuesta.get("error").toString().equalsIgnoreCase("success"))
+					 				{
+					 					this.addUser(c);
+					 				}
+					 		}
+					  }
+	   return respuesta;
+	}
+	
 	public JsonObject validarCorreo(String email){
 		
 		String estado_email=null;
@@ -61,24 +109,17 @@ public class UserController {
 		Gson g = new Gson(); 
 		correo = g.fromJson(estado_email, JsonObject.class);
 				
-		JsonObject jo=new JsonObject();
+		JsonObject respuesta=new JsonObject();
 		
-		if(correo.get("smtp_check").toString().equalsIgnoreCase("false"))
-		{
-			jo.addProperty("estadoemail", correo.get("smtp_check").toString());		
-		}else {
-				for(Ciudadano usuario:this.getAll())
-					{
-						if(usuario.getEmail().equalsIgnoreCase(email))
-							{					 
-								jo.addProperty("error", "usuario_mail");
-							}
-							else {jo.addProperty("error", "success");
-							}
-					}
-		}
-		System.out.println(jo);
-		return jo;
+	
+			if(correo.get("smtp_check").toString().equalsIgnoreCase("true"))
+				{
+					respuesta.addProperty("error", "success");
+				}else {					
+					respuesta.addProperty("error", correo.get("smtp_check").toString());	
+					  }
+		
+		return respuesta;
 	}
 	
 	public Boolean userExist(Ciudadano ciud)
