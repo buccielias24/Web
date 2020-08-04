@@ -39,9 +39,28 @@
 		    $("#validationTooltip03_2").attr('class', '');
 		    $("#validationTooltip03_2").empty();
 		    
+		    $("#validationTooltip05").attr('class', 'form-control');
+		    $("#validationTooltip05_2").attr('class', '');
+		    $("#validationTooltip05_2").empty();
+		    
 		    
 			var $form = $(this);
-		    $.post($form.attr("action"), $form.serialize(), function(response) {    		  
+		    $.post($form.attr("action"), $form.serialize(), function(response) {    
+		    	if(response.error=="bad_pass")
+		    	  {
+		    	  $("#validationTooltip05").attr('class', 'form-control is-invalid');
+	    		   $("#validationTooltip05_2").attr('class', 'invalid-feedback');
+	    		   $("#validationTooltip05_2").append("Las contraseñas no coinciden");
+		    	  }else
+		    	 	{	
+		    	
+		    	if(response.error=="sintaxisUsuario")
+		    	  {
+		    	  $("#validationTooltipUsername").attr('class', 'form-control is-invalid');
+	    		   $("#validationTooltipUsername2").attr('class', 'invalid-feedback');
+	    		   $("#validationTooltipUsername2").append("Lo sentimos, solo se permiten letras (a-z), números (0-9)");
+		    	  }else
+		    	 	{
 		      if(response.error=="userexist")
 		    	  {
 		    	  $("#validationTooltipUsername").attr('class', 'form-control is-invalid');
@@ -66,7 +85,9 @@
 			    				   	$('#myModal').modal('show');
 			    				   }		    					
 			    			}
-		    	 	}    	
+		    	   	}
+		         }
+		      }
 		    },
 		    dataType='json'
 		    );
@@ -143,15 +164,16 @@ html, body {
 
 							<div class="col-md-3 mb-3">
 								<label for="validationTooltip04">Contraseña</label> <input
-									type="password" class="form-control" id="validationTooltip04"
+									type="password" class="form-control" id="validationTooltip04" name="password"
 									placeholder="Contraseña" required maxlength="10">
 							</div>
 
 
 							<div class="col-md-3 mb-3">
 								<label for="validationTooltip05">Repetir Contraseña</label> <input
-									type="password" class="form-control" id="validationTooltip05"
+									type="password" class="form-control" id="validationTooltip05" name="password2"
 									placeholder="Repetir Contraseña" required maxlength="10">
+									<div id="validationTooltip05_2"></div>
 						</div>
 					  </div>
 

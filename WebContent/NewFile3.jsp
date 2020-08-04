@@ -212,7 +212,7 @@ body{
 			</div>
 <!--  FIN modal Comentarios -->
 <script>
- 
+document.addEventListener("DOMContentLoaded", function(){
  $(document).ready(function() {
      $.ajax({
             type:"GET",
@@ -250,6 +250,7 @@ body{
 				  $('#mycarousel').append(planeta); 	
           	  }); 
         });
+});
 });
  </script>
   
