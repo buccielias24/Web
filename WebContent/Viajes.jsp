@@ -25,7 +25,6 @@
 		     if(data.length!=0){
 		    	 var html = '<div class="card w-75" style="margin:auto; margin-top:10px"><div class="card-body"><div class="table-responsive"><table class="table table-striped">';
 		    	    html += '<tr>';
-		    	    var flag = 0;
 		    	    $.each(data[0], function(index, value){
 		    	        html += '<th>'+index+'</th>';
 		    	    });
@@ -36,7 +35,7 @@
 		    	            html += '<td>'+value.llegada+'</td>';
 		    	            html += '<td>'+value.origen.nombre+'</td>';
 		    	            html += '<td>'+value.destino.nombre+'</td>';
-		    	            html += '<td>'+value.astrobus.id+'</td>';
+		    	            html += '<td><a href="#">Reservar</a></td>';
 		    	        html += '<tr>';
 		    	     });
 		    	     html += '</table></div></div></div>';
@@ -58,6 +57,10 @@
 	font-family: 'Roboto';
 	font-size:22px;	
   }
+  .input-group-text{
+  background-color: white !important;
+  color:blue;
+  }
  </style>
  
   
@@ -75,7 +78,7 @@
   	     	 <div class="card-body"><h2>Buscador de Viajes</h2>	
 			  <form id="myform" action="/Web/vistaViaje" method="get"> 
 			   <div class="row">  
-				 <div class="col-md-6">
+				 <div class="col-md-2">
 				  <div class="input-group mb-3">
   				   <div class="input-group-prepend">
     			    <span class="input-group-text" id="inputGroup-sizing-default">Origen</span>
@@ -83,7 +86,7 @@
   				    <input name="from" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>  	
 				 </div>	
-				 <div class="col-md-6">
+				 <div class="col-md-2">
 			      <div class="input-group mb-3">
                    <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-default">Destino</span>
@@ -91,10 +94,35 @@
                     <input name="to" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                   </div>			
 				 </div>
-			 </div>		
-				 <div class="col-md-12" style="left: 0%;">
+				<div class="col-md-2">
+			      
+                   <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Salida</span>
+                   </div>
+                    <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                  		
+				 </div>
+				 <div class="col-md-2">
+			      <div class="input-group mb-3">
+                   <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Regreso</span>
+                   </div>
+                    <input name="to" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>			
+				 </div>
+				 <div class="col-md-2">
+			      <div class="input-group mb-3">
+                   <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Personas</span>
+                   </div>
+                    <input name="to" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                  </div>			
+				 </div>
+				 <div class="col-md-2" style="left: 0%;">
 				  <button class="btn btn-primary">Buscar y Buscar Fechas</button>
-    			 </div>   			    
+    			 </div> 
+    			   <input type="checkbox" id="vehicle1" name="vehicle1" value="Todavía no tengo fecha definida.">  
+			 </div>					    
   	        </form>
   	       </div>
 	    </div>

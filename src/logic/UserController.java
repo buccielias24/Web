@@ -19,13 +19,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import logic.ValidarCorreo;
 public class UserController {
 
 	private DataUser du;
-	private final String apikey = "42fa2e2d8069288df3335ea6668ec280";
+	private ValidarCorreo vu;
+//	private final String apikey = "42fa2e2d8069288df3335ea6668ec280";
 
 	public UserController() {
 		du = new DataUser();
+		vu = new ValidarCorreo();
 	}
 
 	public Ciudadano getById(Ciudadano ciud) {
@@ -53,37 +56,47 @@ public class UserController {
 		return validar;
 	}
 
-	public boolean validarNuevoEmail(Ciudadano c) {
-		boolean validar = false;
-		for (Ciudadano usuario : this.getAll()) {
-			if (usuario.getEmail().equalsIgnoreCase(c.getEmail())) {
-				validar = true;
-			}
-		}
-		return validar;
-	}
+//	public boolean validarNuevoEmail(Ciudadano c) {
+//		boolean validar = false;
+//		for (Ciudadano usuario : this.getAll()) {
+//			if (usuario.getEmail().equalsIgnoreCase(c.getEmail())) {
+//				validar = true;
+//			}
+//		}
+//		return validar;
+//	}
 
-	public JsonObject nuevoUsuario(Ciudadano c) {
+	public JsonObject nuevoUsuario(Ciudadano c) throws Exception {
 		JsonObject respuesta = new JsonObject();
-		if (!this.validarSintaxisUsuario(c.getUser())) {
-			respuesta.addProperty("error", "sintaxisUsuario");
+		if (!this.isStrongPassword(c.getPassword())) {
+			respuesta.addProperty("error", "notstrong");
 		} else {
-			if (this.validarNuevoUsuario(c)) {
-				respuesta.addProperty("error", "userexist");
+			if (!this.validarSintaxisUsuario(c.getUser())) {
+				respuesta.addProperty("error", "sintaxisUsuario");
 			} else {
-				if (this.validarNuevoEmail(c)) {
-					respuesta.addProperty("error", "usuario_mail");
+				if (this.validarNuevoUsuario(c)) {
+					respuesta.addProperty("error", "userexist");
 				} else {
-					respuesta = this.validarCorreo(c.getEmail());
-					if (respuesta.get("error").toString().equalsIgnoreCase("success")) {
-						this.addUser(c);
+					if (vu.validarNuevoEmail(c,this.getAll())) {
+						respuesta.addProperty("error", "usuario_mail");
+					} else {
+						respuesta = vu.checkEmail(c.getEmail());
+						if (respuesta.get("error").toString().equalsIgnoreCase("success")) {
+							this.addUser(c);
+						}
 					}
 				}
 			}
 		}
 		return respuesta;
 	}
+	
 
+	public boolean isStrongPassword(String passwd) {
+	      String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
+	      return (passwd.matches(pattern));
+	}
+	 
 	public boolean validarSintaxisUsuario(String usuario) {
 
 		boolean estadoUsuario = true;
@@ -96,35 +109,34 @@ public class UserController {
 					}
 				} 
 		}
-		System.out.println(estadoUsuario);
 		return estadoUsuario;
 	}
 
-	public JsonObject validarCorreo(String email) {
-
-		String estado_email = null;
-		try {
-			estado_email = this.checkEmail(email);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		JsonObject correo = new JsonObject();
-
-		Gson g = new Gson();
-		correo = g.fromJson(estado_email, JsonObject.class);
-
-		JsonObject respuesta = new JsonObject();
-
-		if (correo.get("smtp_check").toString().equalsIgnoreCase("true")) {
-			respuesta.addProperty("error", "success");
-		} else {
-			respuesta.addProperty("error", correo.get("smtp_check").toString());
-		}
-
-		return respuesta;
-	}
+//	public JsonObject validarCorreo(String email) {
+//
+//		String estado_email = null;
+//		try {
+//			estado_email = this.checkEmail(email);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		JsonObject correo = new JsonObject();
+//
+//		Gson g = new Gson();
+//		correo = g.fromJson(estado_email, JsonObject.class);
+//
+//		JsonObject respuesta = new JsonObject();
+//
+//		if (correo.get("smtp_check").toString().equalsIgnoreCase("true")) {
+//			respuesta.addProperty("error", "success");
+//		} else {
+//			respuesta.addProperty("error", correo.get("smtp_check").toString());
+//		}
+//
+//		return respuesta;
+//	}
 
 	public Boolean userExist(Ciudadano ciud) {
 		Ciudadano c = new Ciudadano();
@@ -180,32 +192,45 @@ public class UserController {
 		}
 	}
 
-	public String checkEmail(String email) throws Exception {
+//	public JsonObject checkEmail(String email) throws Exception {
+//
+//		String url = "https://apilayer.net/api/check?access_key=" + apikey + "&email=" + email + "&smtp=1&format=1";
+//
+//		URL urlobj = new URL(url);
+//
+//		HttpURLConnection con = (HttpURLConnection) urlobj.openConnection();
+//
+//		// optional default is GET
+//		con.setRequestMethod("GET");
+//
+//		// add request header
+//		con.setRequestProperty("User-Agent", "Mozilla/17.0");
+//
+//		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//		String inputLine;
+//		StringBuffer response = new StringBuffer();
+//
+//		while ((inputLine = in.readLine()) != null) {
+//			response.append(inputLine);
+//		}
+//		in.close();
+//
+//		// print result
+//		JsonObject correo = new JsonObject();
+//
+//		Gson g = new Gson();
+//		correo = g.fromJson(response.toString(), JsonObject.class);
+//
+//		JsonObject respuesta = new JsonObject();
+//
+//		if (correo.get("smtp_check").toString().equalsIgnoreCase("true")) {
+//			respuesta.addProperty("error", "success");
+//		} else {
+//			respuesta.addProperty("error", correo.get("smtp_check").toString());
+//		}
+//
+//		return respuesta;
 
-		String url = "https://apilayer.net/api/check?access_key=" + apikey + "&email=" + email + "&smtp=1&format=1";
-
-		URL urlobj = new URL(url);
-
-		HttpURLConnection con = (HttpURLConnection) urlobj.openConnection();
-
-		// optional default is GET
-		con.setRequestMethod("GET");
-
-		// add request header
-		con.setRequestProperty("User-Agent", "Mozilla/17.0");
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
-
-		// print result
-		return response.toString();
-
-	}
+//	}
 
 }

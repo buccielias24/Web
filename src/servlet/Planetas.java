@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +44,8 @@ public class Planetas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub	
 		HttpSession session=request.getSession(false);  
+		try {
+		if(request.getParameter("accion").equalsIgnoreCase("vista")) {
 		Ciudadano c=new Ciudadano();
         try {
             c = ((Ciudadano)session.getAttribute("user"));
@@ -97,7 +100,11 @@ public class Planetas extends HttpServlet {
         PrintWriter out =response.getWriter();  
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.println(ja);   
+        out.println(ja); 
+		}
+		}catch(Exception e) {
+		RequestDispatcher rd=request.getRequestDispatcher("/NewFile3.jsp");
+		rd.forward(request,response);}
         
  }
 

@@ -94,7 +94,7 @@ body{
      border-radius: 50%;
      position: relative;
      background-size: cover;
-     -webkit-animation: planet-rotation 50s linear infinite;
+     -webkit-animation: planet-rotation 28s linear infinite;
      margin:auto;
 }
 
@@ -216,7 +216,8 @@ document.addEventListener("DOMContentLoaded", function(){
  $(document).ready(function() {
      $.ajax({
             type:"GET",
-            url:"Planetas"
+            url:"Planetas",
+            data:"accion=vista"
         })
         .done(function (data) {
        	  data.pop();

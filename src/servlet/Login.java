@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.JsonObject;
+
 import entidades.Ciudadano;
 import logic.UserController;
 
@@ -56,7 +58,12 @@ public class Login extends HttpServlet {
 			{
 				misession.setAttribute("admin", true);
 			}
-		
+			 	PrintWriter out =response.getWriter();  
+		        response.setContentType("application/json");
+		        response.setCharacterEncoding("UTF-8");
+		        JsonObject respuesta=new JsonObject();
+		        respuesta.addProperty("login", "success");
+		        out.println(respuesta);
 			//RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");
 			//rd.forward(request,response);
 		}
@@ -65,8 +72,5 @@ public class Login extends HttpServlet {
 		    //rd.forward(request,response);
 		
 	  }
-		PrintWriter out =response.getWriter();  
-        response.setContentType("text/html;charset=UTF-8");
-        out.println("err_badpass");	
 	}
 }

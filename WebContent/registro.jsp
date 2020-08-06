@@ -45,7 +45,13 @@
 		    
 		    
 			var $form = $(this);
-		    $.post($form.attr("action"), $form.serialize(), function(response) {    
+		    $.post($form.attr("action"), $form.serialize(), function(response) {
+		     if(response.error=="notstrong")
+		    	 {
+		    	   $("#validationTooltip05").attr('class', 'form-control is-invalid');
+	    		   $("#validationTooltip05_2").attr('class', 'invalid-feedback');
+	    		   $("#validationTooltip05_2").append("Elige una contraseña más segura. Prueba con una combinación de letras, números y símbolos. Minimo 8 caracteres");
+		    	 }else{
 		    	if(response.error=="bad_pass")
 		    	  {
 		    	  $("#validationTooltip05").attr('class', 'form-control is-invalid');
@@ -84,7 +90,8 @@
 			    				   {
 			    				   	$('#myModal').modal('show');
 			    				   }		    					
-			    			}
+			    			}	    		 
+			    	 }
 		    	   	}
 		         }
 		      }

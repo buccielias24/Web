@@ -14,8 +14,10 @@
 <script type="text/javascript">
 		$(document).on("submit", "#form", function(event) {
 		    var $form = $(this);
-		    $.post($form.attr("action"), $form.serialize(), function(response) {    	
-		    	alert(response);
+		    $.post($form.attr("action"), $form.serialize(), function(response) {  
+		    	$('#myModal').modal('toggle'); 
+		    	alert(response.login);
+		    	
 		    });
 		    event.preventDefault(); 	    
 		});
